@@ -18,10 +18,10 @@ async function mailSend(args: string[]): Promise<void> {
       "subject", "text", "html", "html-file", "text-file",
       "template-id", "data", "data-file",
       "send-at", "batch-id", "category",
-      "attachment",
+      "attachment", "inline",
     ],
     boolean: ["sandbox"],
-    collect: ["to", "cc", "bcc", "category", "attachment"],
+    collect: ["to", "cc", "bcc", "category", "attachment", "inline"],
     alias: {
       t: "to",
       f: "from",
@@ -69,8 +69,10 @@ async function mailSend(args: string[]): Promise<void> {
   };
 
   const toAddresses = parseEmails(toList);
-  const ccAddresses = flags.cc ? parseEmails(flags.cc as string[]) : undefined;
-  const bccAddresses = flags.bcc ? parseEmails(flags.bcc as string[]) : undefined;
+  const ccList = (flags.cc as string[] | undefined) ?? [];
+  const bccList = (flags.bcc as string[] | undefined) ?? [];
+  const ccAddresses = ccList.length > 0 ? parseEmails(ccList) : undefined;
+  const bccAddresses = bccList.length > 0 ? parseEmails(bccList) : undefined;
 
   let dynamicTemplateData: Record<string, unknown> | undefined;
   if (flags.data) {
@@ -106,16 +108,44 @@ async function mailSend(args: string[]): Promise<void> {
   if (textContent) content.push({ type: "text/plain", value: textContent });
   if (htmlContent) content.push({ type: "text/html", value: htmlContent });
 
-  const attachments = [];
+  const mimeFromExt = (filename: string): string | undefined => {
+    const ext = filename.split(".").pop()?.toLowerCase();
+    const map: Record<string, string> = {
+      png: "image/png", jpg: "image/jpeg", jpeg: "image/jpeg",
+      gif: "image/gif", webp: "image/webp", svg: "image/svg+xml",
+      pdf: "application/pdf", txt: "text/plain", csv: "text/csv",
+      json: "application/json", html: "text/html",
+    };
+    return ext ? map[ext] : undefined;
+  };
+
+  const toBase64 = (bytes: Uint8Array): string => {
+    let binary = "";
+    const chunk = 0x8000;
+    for (let i = 0; i < bytes.length; i += chunk) {
+      binary += String.fromCharCode(...bytes.subarray(i, i + chunk));
+    }
+    return btoa(binary);
+  };
+
+  type Attachment = {
+    content: string;
+    filename: string;
+    type?: string;
+    disposition?: "inline" | "attachment";
+    content_id?: string;
+  };
+  const attachments: Attachment[] = [];
+
   if (flags.attachment) {
     for (const attachmentPath of flags.attachment as string[]) {
       try {
         const fileContent = await Deno.readFile(attachmentPath);
-        const base64Content = btoa(String.fromCharCode(...fileContent));
         const filename = attachmentPath.split("/").pop() || "attachment";
         attachments.push({
-          content: base64Content,
+          content: toBase64(fileContent),
           filename,
+          type: mimeFromExt(filename),
         });
       } catch {
         output.error(`Failed to read attachment: ${attachmentPath}`);
@@ -124,8 +154,31 @@ async function mailSend(args: string[]): Promise<void> {
     }
   }
 
+  // --inline path[:cid] — embeds with disposition=inline so HTML can use <img src="cid:...">
+  if (flags.inline) {
+    for (const spec of flags.inline as string[]) {
+      const [inlinePath, cidOverride] = spec.split(":");
+      try {
+        const fileContent = await Deno.readFile(inlinePath);
+        const filename = inlinePath.split("/").pop() || "inline";
+        const cid = cidOverride || filename.replace(/\.[^.]+$/, "");
+        attachments.push({
+          content: toBase64(fileContent),
+          filename,
+          type: mimeFromExt(filename),
+          disposition: "inline",
+          content_id: cid,
+        });
+      } catch {
+        output.error(`Failed to read inline attachment: ${inlinePath}`);
+        Deno.exit(1);
+      }
+    }
+  }
+
   const replyTo = flags["reply-to"] ? { email: flags["reply-to"] } : undefined;
-  const categories = flags.category as string[] | undefined;
+  const categoryList = (flags.category as string[] | undefined) ?? [];
+  const categories = categoryList.length > 0 ? categoryList : undefined;
   const sendAt = flags["send-at"] ? Math.floor(new Date(flags["send-at"]).getTime() / 1000) : undefined;
   const batchId = flags["batch-id"];
 
