@@ -15,12 +15,12 @@ Personal skills for [Claude Code](https://docs.anthropic.com/en/docs/claude-code
 
 ## Install
 
-Clone the repository, then copy the skill into the shared skills directory:
+Clone the repository, then symlink each skill so this repo stays the source of truth:
 
 ```bash
-git clone https://github.com/watzon/claude-code
-cp -R claude-code/skills/artifact ~/.agents/skills/
-cp -R claude-code/skills/durable-quality ~/.agents/skills/
+git clone https://github.com/watzon/claude-code ~/Projects/personal/claude-code
+ln -s ~/Projects/personal/claude-code/skills/artifact ~/.agents/skills/artifact
+ln -s ~/Projects/personal/claude-code/skills/durable-quality ~/.agents/skills/durable-quality
 ```
 
 `artifact` also needs the `here-now` skill:
