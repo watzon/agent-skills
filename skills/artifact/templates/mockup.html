@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><!-- SLOT: TITLE -->Mockup</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #ece8e1;
+      --ink: #171513;
+      --soft: #5a554e;
+      --line: rgba(23, 21, 19, 0.14);
+      --stage: #f7f4ee;
+      --accent: #2a4b7c;
+      --warn: #8a3b12;
+      --sans: "Avenir Next", "Segoe UI", sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        color-scheme: dark;
+        --bg: #11100e;
+        --ink: #f2eee6;
+        --soft: #b4aea3;
+        --line: rgba(242, 238, 230, 0.14);
+        --stage: #1a1815;
+        --accent: #8eb0e0;
+        --warn: #e08a55;
+      }
+    }
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #11100e;
+      --ink: #f2eee6;
+      --soft: #b4aea3;
+      --line: rgba(242, 238, 230, 0.14);
+      --stage: #1a1815;
+      --accent: #8eb0e0;
+      --warn: #e08a55;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--bg); color: var(--ink); }
+    body { font: 16px/1.45 var(--sans); min-height: 100vh; }
+    .question {
+      margin: 0;
+      padding: 0.7rem 1.1rem;
+      background: var(--ink);
+      color: var(--bg);
+      font-size: 0.92rem;
+    }
+    .question strong { font-weight: 650; }
+    .fake {
+      display: inline-block;
+      margin-left: 0.4rem;
+      padding: 0.05rem 0.4rem;
+      border: 1px solid currentColor;
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .stage { max-width: 52rem; margin: 0 auto; padding: 1.6rem 1.1rem 4rem; }
+    .canvas { background: var(--stage); border: 1px solid var(--line); min-height: 24rem; padding: 1.4rem; }
+    .switcher { display: flex; gap: 0.4rem; margin: 0 0 0.8rem; }
+    .switcher button {
+      border: 1px solid var(--line);
+      background: transparent;
+      color: inherit;
+      padding: 0.3rem 0.7rem;
+      cursor: pointer;
+    }
+    .switcher button[aria-pressed="true"] { background: var(--accent); color: var(--bg); border-color: transparent; }
+  </style>
+</head>
+<body>
+  <p class="question">
+    <strong><!-- SLOT: QUESTION - one sentence the page must prove -->What must this page prove?</strong>
+    <span class="fake"><!-- SLOT: FIDELITY -->sketch</span>
+  </p>
+  <main class="stage">
+    <!-- SLOT: STAGE - the working interaction. Label fake regions in the UI. -->
+    <div class="canvas">
+      <p>Build the smallest interaction that answers the question.</p>
+    </div>
+  </main>
+</body>
+</html>

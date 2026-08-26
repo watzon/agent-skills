@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><!-- SLOT: TITLE -->Dashboard</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f3f1ec;
+      --surface: #fffcf7;
+      --ink: #171513;
+      --mute: #5c574f;
+      --line: rgba(23, 21, 19, 0.12);
+      --accent: #1f4d3a;
+      --good: #1b6b3a;
+      --bad: #9a2b2b;
+      --hover: rgba(23, 21, 19, 0.04);
+      --sans: "Avenir Next", "Segoe UI", sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        color-scheme: dark;
+        --bg: #12110f;
+        --surface: #1c1a17;
+        --ink: #f3efe6;
+        --mute: #b6b0a4;
+        --line: rgba(243, 239, 230, 0.12);
+        --accent: #7dcaa8;
+        --good: #7dcaa8;
+        --bad: #e07a7a;
+        --hover: rgba(243, 239, 230, 0.05);
+      }
+    }
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #12110f;
+      --surface: #1c1a17;
+      --ink: #f3efe6;
+      --mute: #b6b0a4;
+      --line: rgba(243, 239, 230, 0.12);
+      --accent: #7dcaa8;
+      --good: #7dcaa8;
+      --bad: #e07a7a;
+      --hover: rgba(243, 239, 230, 0.05);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--bg); color: var(--ink); }
+    body { font: 15px/1.4 var(--sans); }
+    .page { max-width: 68rem; margin: 0 auto; padding: 1.6rem 1.1rem 3rem; display: grid; gap: 1rem; }
+    .top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+    h1 { font-size: 1.45rem; margin: 0; }
+    .scope { color: var(--mute); font-size: 0.92rem; }
+    .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: 0.8rem; }
+    .card { background: var(--surface); border: 1px solid var(--line); padding: 0.95rem 1rem; }
+    .kpi h2 { margin: 0; font-size: 0.78rem; font-weight: 550; color: var(--mute); letter-spacing: 0.03em; text-transform: uppercase; }
+    .kpi .value { font-size: 1.7rem; font-variant-numeric: tabular-nums; margin: 0.35rem 0 0.2rem; }
+    .delta { font-size: 0.82rem; color: var(--mute); }
+    .delta.up.good, .delta.down.good { color: var(--good); }
+    .delta.up.bad, .delta.down.bad { color: var(--bad); }
+    .delta.up:not(.good):not(.bad) { color: var(--good); }
+    .delta.down:not(.good):not(.bad) { color: var(--bad); }
+    .chart-primary h2, .breakdown h2 { margin: 0 0 0.7rem; font-size: 0.95rem; }
+    .plot { width: 100%; height: 17rem; }
+    table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    th, td { text-align: left; padding: 0.55rem 0.4rem; border-bottom: 1px solid var(--line); }
+    th { font-size: 0.75rem; font-weight: 550; color: var(--mute); text-transform: uppercase; letter-spacing: 0.03em; }
+    td.num, th.num { text-align: right; }
+    tbody tr:hover { background: var(--hover); }
+    footer.note { color: var(--mute); font-size: 0.78rem; text-align: center; }
+  </style>
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <h1><!-- SLOT: TITLE -->Dashboard title</h1>
+    <span class="scope"><!-- SLOT: SCOPE -->Last 30 days</span>
+  </header>
+
+  <!-- SLOT: KPI_TILES - 2-5 .kpi cards. Color deltas with good/bad when a decrease is the win. -->
+  <section class="kpis">
+    <article class="card kpi">
+      <h2>Metric</h2>
+      <div class="value">0</div>
+      <span class="delta up">▲ 0%</span>
+    </article>
+  </section>
+
+  <section class="card chart-primary">
+    <h2><!-- SLOT: CHART_TITLE -->Trend</h2>
+    <div class="plot" id="primary-chart"></div>
+  </section>
+
+  <section class="card breakdown">
+    <h2><!-- SLOT: BREAKDOWN_TITLE -->Breakdown</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th class="num">Value</th>
+          <th class="num">Share</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- SLOT: BREAKDOWN_ROWS -->
+        <tr><td>-</td><td class="num">0</td><td class="num">0%</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer class="note"><!-- SLOT: FOOTER_NOTE -->Source and timestamp</footer>
+</div>
+
+<!-- SLOT: PRIMARY_CHART_SPEC
+     JSON:
+       type: "line" | "bar" | "donut"  (line is default)
+       series: [{ name, color, points: [[x,y], ...] }]
+       x: { label?, ticks: [] }
+       y: { label?, min?, max? }
+     Escape </ as <\/ inside strings. -->
+<script type="application/json" id="primary-chart-spec">
+{
+  "type": "line",
+  "series": [
+    { "name": "REPLACE", "color": "var(--accent)", "points": [[0, 0], [1, 0], [2, 0]] }
+  ],
+  "x": { "ticks": ["-", "-", "-"] },
+  "y": {}
+}
+</script>
+<script>
+(function () {
+  const el = document.getElementById("primary-chart");
+  const raw = document.getElementById("primary-chart-spec");
+  const note = (msg) => {
+    const d = document.createElement("div");
+    d.textContent = msg;
+    d.style.cssText = "color:var(--mute);text-align:center;padding-top:6.5rem;";
+    el.appendChild(d);
+  };
+  let spec;
+  try { spec = JSON.parse(raw.textContent); }
+  catch (err) { note("Chart spec is not valid JSON"); return; }
+
+  const series = (spec.series || []).filter((s) => Array.isArray(s.points) && s.points.length);
+  if (!series.length) { note("No data"); return; }
+
+  const type = spec.type || "line";
+  const W = el.clientWidth || 800;
+  const H = el.clientHeight || 272;
+  const ns = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(ns, "svg");
+  svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+  svg.setAttribute("width", "100%");
+  svg.setAttribute("height", "100%");
+  svg.setAttribute("role", "img");
+  svg.setAttribute("aria-label", document.querySelector(".chart-primary h2").textContent);
+
+  const text = (x, y, str, anchor) => {
+    const t = document.createElementNS(ns, "text");
+    t.setAttribute("x", x);
+    t.setAttribute("y", y);
+    t.setAttribute("text-anchor", anchor);
+    t.setAttribute("font-size", "11");
+    t.setAttribute("fill", "var(--mute)");
+    t.textContent = str;
+    svg.appendChild(t);
+  };
+
+  if (type === "donut") {
+    const s = series[0];
+    const values = s.points.map((p) => Number(p[1]));
+    const total = values.reduce((a, b) => a + b, 0);
+    if (!total) { note("No data"); return; }
+    const cx = W / 2, cy = H / 2 - 8, r = Math.min(W, H) * 0.28;
+    let a0 = -Math.PI / 2;
+    const ticks = (spec.x || {}).ticks || [];
+    values.forEach((v, i) => {
+      const a1 = a0 + (v / total) * Math.PI * 2;
+      const large = a1 - a0 > Math.PI ? 1 : 0;
+      const p0 = [cx + r * Math.cos(a0), cy + r * Math.sin(a0)];
+      const p1 = [cx + r * Math.cos(a1), cy + r * Math.sin(a1)];
+      const path = document.createElementNS(ns, "path");
+      path.setAttribute("d", "M " + cx + " " + cy + " L " + p0[0] + " " + p0[1] + " A " + r + " " + r + " 0 " + large + " 1 " + p1[0] + " " + p1[1] + " Z");
+      const colors = s.colors || [];
+      path.setAttribute("fill", colors[i] || s.color || "var(--accent)");
+      path.setAttribute("opacity", String(0.55 + (i % 3) * 0.15));
+      svg.appendChild(path);
+      a0 = a1;
+    });
+    ticks.forEach((label, i) => text(16, 18 + i * 16, label, "start"));
+    el.appendChild(svg);
+    return;
+  }
+
+  const xLabel = (spec.x || {}).label;
+  const yLabel = (spec.y || {}).label;
+  const hasLegend = series.length > 1;
+  const pad = {
+    t: 12 + (yLabel ? 16 : 0) + (hasLegend ? 18 : 0),
+    r: 12,
+    b: 26 + (xLabel ? 16 : 0),
+    l: 46
+  };
+  const iw = W - pad.l - pad.r;
+  const ih = H - pad.t - pad.b;
+  const pts = series.flatMap((s) => s.points);
+  const xs = pts.map((p) => p[0]);
+  const ys = pts.map((p) => p[1]);
+  const xMin = Math.min.apply(null, xs);
+  const xMax = Math.max.apply(null, xs);
+  const yMin = spec.y && spec.y.min != null ? spec.y.min : Math.min(0, Math.min.apply(null, ys));
+  const yMax = spec.y && spec.y.max != null ? spec.y.max : Math.max.apply(null, ys) * 1.05;
+  const sx = (x) => pad.l + (xMax === xMin ? iw / 2 : (x - xMin) / (xMax - xMin) * iw);
+  const sy = (y) => pad.t + ih - (yMax === yMin ? ih / 2 : (y - yMin) / (yMax - yMin) * ih);
+
+  if (yLabel) text(0, 12, yLabel, "start");
+  if (hasLegend) {
+    let lx = pad.l;
+    const ly = (yLabel ? 16 : 0) + 13;
+    series.forEach((s) => {
+      const sw = document.createElementNS(ns, "rect");
+      sw.setAttribute("x", lx);
+      sw.setAttribute("y", ly - 9);
+      sw.setAttribute("width", 10);
+      sw.setAttribute("height", 10);
+      sw.setAttribute("fill", s.color || "var(--accent)");
+      svg.appendChild(sw);
+      text(lx + 14, ly, s.name || "", "start");
+      lx += 14 + String(s.name || "").length * 6.5 + 16;
+    });
+  }
+
+  const step = (yMax - yMin) / 4;
+  let dec = step > 0 && step < 1 ? Math.min(6, Math.ceil(-Math.log10(step)) + 1) : 0;
+  for (let i = 0; i <= 4; i++) {
+    const yv = yMin + (yMax - yMin) * i / 4;
+    const yp = sy(yv);
+    const ln = document.createElementNS(ns, "line");
+    ln.setAttribute("x1", pad.l);
+    ln.setAttribute("x2", W - pad.r);
+    ln.setAttribute("y1", yp);
+    ln.setAttribute("y2", yp);
+    ln.setAttribute("stroke", "var(--line)");
+    svg.appendChild(ln);
+    text(pad.l - 8, yp + 4, yv.toLocaleString(undefined, { maximumFractionDigits: dec }), "end");
+  }
+
+  const ticks = (spec.x || {}).ticks || [];
+  const tickY = H - (xLabel ? 22 : 8);
+  ticks.forEach((label, i, arr) => {
+    const xp = sx(xMin + (xMax - xMin) * i / Math.max(1, arr.length - 1));
+    text(xp, tickY, label, "middle");
+  });
+  if (xLabel) text(pad.l + iw / 2, H - 6, xLabel, "middle");
+
+  if (type === "bar") {
+    const groups = series[0].points.length;
+    const inner = iw / Math.max(1, groups);
+    const barW = inner / (series.length + 0.6);
+    series.forEach((s, si) => {
+      s.points.forEach((p, i) => {
+        const x = pad.l + inner * i + barW * si + barW * 0.3;
+        const y = sy(p[1]);
+        const rect = document.createElementNS(ns, "rect");
+        rect.setAttribute("x", x);
+        rect.setAttribute("y", y);
+        rect.setAttribute("width", Math.max(2, barW * 0.85));
+        rect.setAttribute("height", Math.max(0, sy(Math.min(0, yMin)) - y));
+        rect.setAttribute("fill", s.color || "var(--accent)");
+        svg.appendChild(rect);
+      });
+    });
+    el.appendChild(svg);
+    return;
+  }
+
+  series.forEach((s) => {
+    const d = s.points.map((p, i) => (i ? "L" : "M") + sx(p[0]) + "," + sy(p[1])).join(" ");
+    const path = document.createElementNS(ns, "path");
+    path.setAttribute("d", d);
+    path.setAttribute("fill", "none");
+    path.setAttribute("stroke", s.color || "var(--accent)");
+    path.setAttribute("stroke-width", "2");
+    path.setAttribute("stroke-linejoin", "round");
+    svg.appendChild(path);
+    const last = s.points[s.points.length - 1];
+    const dot = document.createElementNS(ns, "circle");
+    dot.setAttribute("cx", sx(last[0]));
+    dot.setAttribute("cy", sy(last[1]));
+    dot.setAttribute("r", "3.5");
+    dot.setAttribute("fill", s.color || "var(--accent)");
+    svg.appendChild(dot);
+  });
+  el.appendChild(svg);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><!-- SLOT: TITLE -->Table</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f3f1ec;
+      --card: #fffcf7;
+      --ink: #171513;
+      --mute: #5c574f;
+      --line: rgba(23, 21, 19, 0.12);
+      --strong: rgba(23, 21, 19, 0.22);
+      --stripe: rgba(23, 21, 19, 0.03);
+      --hover: rgba(23, 21, 19, 0.05);
+      --accent: #1f4d3a;
+      --sans: "Avenir Next", "Segoe UI", sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:where(:not([data-theme="light"])) {
+        --bg: #12110f;
+        --card: #1c1a17;
+        --ink: #f3efe6;
+        --mute: #b6b0a4;
+        --line: rgba(243, 239, 230, 0.12);
+        --strong: rgba(243, 239, 230, 0.22);
+        --stripe: rgba(243, 239, 230, 0.03);
+        --hover: rgba(243, 239, 230, 0.06);
+        --accent: #7dcaa8;
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #12110f;
+      --card: #1c1a17;
+      --ink: #f3efe6;
+      --mute: #b6b0a4;
+      --line: rgba(243, 239, 230, 0.12);
+      --strong: rgba(243, 239, 230, 0.22);
+      --stripe: rgba(243, 239, 230, 0.03);
+      --hover: rgba(243, 239, 230, 0.06);
+      --accent: #7dcaa8;
+    }
+    @media print {
+      :root {
+        --bg: #ffffff;
+        --card: #ffffff;
+        --ink: #171513;
+        --mute: #5c574f;
+        --line: rgba(23, 21, 19, 0.12);
+        --strong: rgba(23, 21, 19, 0.22);
+        --stripe: transparent;
+        --hover: transparent;
+        --accent: #1f4d3a;
+      }
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--bg); color: var(--ink); }
+    body { font: 15px/1.4 var(--sans); }
+    .wrap { max-width: 72rem; margin: 0 auto; padding: 1.5rem 1.1rem 3rem; }
+    header { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.9rem; }
+    h1 { font-size: 1.35rem; margin: 0; }
+    .meta { color: var(--mute); font-size: 0.9rem; }
+    .controls { display: flex; justify-content: space-between; align-items: center; gap: 0.8rem; margin-bottom: 0.6rem; }
+    .filter {
+      flex: 1;
+      max-width: 22rem;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: inherit;
+      padding: 0.45rem 0.65rem;
+    }
+    .count { color: var(--mute); font-size: 0.85rem; }
+    .table-scroll { background: var(--card); border: 1px solid var(--line); overflow: auto; max-height: 70vh; }
+    table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    th, td { text-align: left; padding: 0.5rem 0.65rem; border-bottom: 1px solid var(--line); }
+    th { position: sticky; top: 0; background: var(--card); font-size: 0.75rem; letter-spacing: 0.03em; text-transform: uppercase; color: var(--mute); cursor: pointer; user-select: none; }
+    th.sorted { color: var(--accent); }
+    th .arrow { margin-left: 0.35rem; font-size: 0.65rem; }
+    td.num, th.num { text-align: right; }
+    td.empty { text-align: center; color: var(--mute); padding: 1.6rem 0.8rem; }
+    tbody tr:nth-child(even) { background: var(--stripe); }
+    tbody tr:hover { background: var(--hover); }
+    footer.note { color: var(--mute); font-size: 0.78rem; margin-top: 0.8rem; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1><!-- SLOT: TITLE -->Table title</h1>
+    <span class="meta"><!-- SLOT: SCOPE -->All records</span>
+  </header>
+  <div class="controls">
+    <input class="filter" id="dt-filter" type="search" placeholder="Filter rows" autocomplete="off">
+    <span class="count" id="dt-count" aria-live="polite">0 rows</span>
+  </div>
+  <div class="table-scroll">
+    <table id="dt">
+      <thead><tr></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <footer class="note"><!-- SLOT: FOOTER_NOTE -->Source and timestamp</footer>
+</div>
+
+<!-- SLOT: COLUMNS - [{key, label, type: "text"|"num"}] -->
+<script type="application/json" id="dt-columns">
+[
+  { "key": "name", "label": "Name", "type": "text" },
+  { "key": "value", "label": "Value", "type": "num" }
+]
+</script>
+<!-- SLOT: ROWS - objects keyed by column keys. Missing is null. -->
+<script type="application/json" id="dt-rows">
+[
+  { "name": "Example", "value": 0 }
+]
+</script>
+<script>
+(function () {
+  const tbody = document.querySelector("#dt tbody");
+  const esc = (s) => String(s).replace(/[&<>"']/g, (ch) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  }[ch]));
+  let cols, allRows;
+  try {
+    cols = JSON.parse(document.getElementById("dt-columns").textContent);
+    allRows = JSON.parse(document.getElementById("dt-rows").textContent);
+    if (!Array.isArray(cols) || !cols.every((c) => c && typeof c.key === "string") ||
+        !Array.isArray(allRows) || !allRows.every((r) => r && typeof r === "object")) {
+      throw new Error("columns and rows must be arrays of objects");
+    }
+  } catch (err) {
+    tbody.innerHTML = '<tr><td class="empty">Data failed to load (' + esc(err.message) + ")</td></tr>";
+    return;
+  }
+
+  const thead = document.querySelector("#dt thead tr");
+  const filterEl = document.getElementById("dt-filter");
+  const countEl = document.getElementById("dt-count");
+  let sortKey = null;
+  let sortDir = 1;
+  const cell = (row, key) => Object.prototype.hasOwnProperty.call(row, key) ? row[key] : null;
+  const missing = (v, type) => v == null || String(v).trim() === "" ||
+    (type === "num" && (typeof v === "boolean" || !Number.isFinite(typeof v === "number" ? v : Number(v))));
+
+  cols.forEach((c) => {
+    const th = document.createElement("th");
+    if (c.type === "num") th.classList.add("num");
+    th.dataset.key = c.key;
+    th.scope = "col";
+    th.tabIndex = 0;
+    th.textContent = c.label;
+    const arrow = document.createElement("span");
+    arrow.className = "arrow";
+    arrow.setAttribute("aria-hidden", "true");
+    arrow.textContent = "▲";
+    th.appendChild(arrow);
+    const toggle = () => {
+      if (sortKey === c.key) sortDir = -sortDir;
+      else { sortKey = c.key; sortDir = 1; }
+      render();
+    };
+    th.addEventListener("click", toggle);
+    th.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+    });
+    thead.appendChild(th);
+  });
+
+  function render() {
+    const rawQ = filterEl.value.trim();
+    const q = rawQ.toLowerCase();
+    const textKeys = cols.filter((c) => c.type !== "num").map((c) => c.key);
+    let rows = !q ? allRows.slice() : allRows.filter((r) =>
+      textKeys.some((k) => String(cell(r, k) ?? "").toLowerCase().includes(q))
+    );
+    if (sortKey) {
+      const col = cols.find((c) => c.key === sortKey);
+      rows.sort((a, b) => {
+        const av = cell(a, sortKey);
+        const bv = cell(b, sortKey);
+        const am = missing(av, col.type);
+        const bm = missing(bv, col.type);
+        if (am || bm) return am - bm;
+        if (col.type === "num") return (Number(av) - Number(bv)) * sortDir;
+        return String(av).localeCompare(String(bv)) * sortDir;
+      });
+    }
+    thead.querySelectorAll("th").forEach((th) => {
+      const on = th.dataset.key === sortKey;
+      th.classList.toggle("sorted", on);
+      th.setAttribute("aria-sort", on ? (sortDir < 0 ? "descending" : "ascending") : "none");
+      th.querySelector(".arrow").textContent = on && sortDir < 0 ? "▼" : "▲";
+    });
+    if (!rows.length) {
+      tbody.innerHTML = '<tr><td class="empty" colspan="' + cols.length + '">' +
+        (rawQ ? "No rows match \"" + esc(rawQ) + "\"" : "No rows") + "</td></tr>";
+    } else {
+      tbody.innerHTML = rows.map((r) => "<tr>" + cols.map((c) => {
+        const v = cell(r, c.key);
+        const txt = c.type === "num" && typeof v === "number"
+          ? v.toLocaleString(undefined, { maximumFractionDigits: 6 })
+          : (v ?? "");
+        return "<td" + (c.type === "num" ? ' class="num"' : "") + ">" + esc(txt) + "</td>";
+      }).join("") + "</tr>").join("");
+    }
+    countEl.textContent = rows.length.toLocaleString() + (rows.length === 1 ? " row" : " rows") +
+      (q || rows.length !== allRows.length ? " of " + allRows.length.toLocaleString() : "");
+  }
+
+  filterEl.addEventListener("input", render);
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><!-- SLOT: TITLE - the reader's question -->How does it work?</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f3ec;
+      --ink: #1a1814;
+      --soft: #5e584e;
+      --line: rgba(26, 24, 20, 0.12);
+      --card: #fffaf1;
+      --accent: #0f5c4c;
+      --accent-soft: color-mix(in srgb, var(--accent) 12%, var(--bg));
+      --sans: "Avenir Next", "Segoe UI", sans-serif;
+      --mono: "IBM Plex Mono", "SF Mono", ui-monospace, monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        color-scheme: dark;
+        --bg: #12110e;
+        --ink: #f4efe4;
+        --soft: #b8b1a3;
+        --line: rgba(244, 239, 228, 0.12);
+        --card: #1c1a16;
+        --accent: #6dceb4;
+      }
+    }
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #12110e;
+      --ink: #f4efe4;
+      --soft: #b8b1a3;
+      --line: rgba(244, 239, 228, 0.12);
+      --card: #1c1a16;
+      --accent: #6dceb4;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--bg); color: var(--ink); }
+    body { font: 18px/1.55 var(--sans); }
+    .wrap { max-width: 42rem; margin: 0 auto; padding: 3.5rem 1.3rem 5rem; }
+    h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 0.8rem; }
+    .lede { font-size: 1.05rem; color: var(--soft); margin: 0 0 2.4rem; }
+    ol.steps { list-style: none; margin: 0; padding: 0; counter-reset: step; }
+    li.step { position: relative; padding: 0 0 2rem 3.4rem; }
+    li.step::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 0; top: 0;
+      width: 2.1rem; height: 2.1rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: var(--bg);
+      font: 700 0.95rem/2.1rem var(--sans);
+      text-align: center;
+    }
+    li.step h2 { margin: 0 0 0.5rem; font-size: 1.2rem; line-height: 2.1rem; }
+    .visual { background: var(--card); border: 1px solid var(--line); padding: 1rem; margin: 0.8rem 0; overflow: auto; }
+    .visual svg { display: block; max-width: 100%; height: auto; }
+    pre { margin: 0; font: 0.86rem/1.45 var(--mono); white-space: pre-wrap; }
+    .callout { color: var(--soft); border-left: 3px solid var(--accent); padding: 0.1rem 0 0.1rem 0.8rem; }
+    .sections .topic { margin: 0 0 2.2rem; padding-top: 1.2rem; border-top: 1px solid var(--line); }
+    .recap { margin-top: 2rem; padding-top: 1.2rem; border-top: 1px solid var(--line); }
+    .recap h2 { margin: 0 0 0.6rem; font-size: 1.1rem; }
+    @media (max-width: 640px) {
+      li.step { padding-left: 2.8rem; }
+      li.step::before { width: 1.8rem; height: 1.8rem; font-size: 0.85rem; line-height: 1.8rem; }
+      li.step h2 { line-height: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+<article class="wrap">
+  <header>
+    <h1><!-- SLOT: TITLE -->How does it work?</h1>
+    <p class="lede"><!-- SLOT: LEDE -->Two or three sentences: what the reader will understand, and why it matters.</p>
+  </header>
+
+  <!-- SLOT: BODY - keep exactly one flavor; delete the other wrapper -->
+  <ol class="steps">
+    <!-- SLOT: STEPS -->
+    <li class="step">
+      <h2>Step heading</h2>
+      <p>One idea in plain language.</p>
+      <div class="visual">
+        <pre>diagram or code</pre>
+      </div>
+    </li>
+  </ol>
+
+  <div class="sections">
+    <!-- SLOT: SECTIONS -->
+    <section class="topic">
+      <h2>Topic heading</h2>
+      <p>One or two short paragraphs.</p>
+      <div class="visual">
+        <pre>code or diagram</pre>
+      </div>
+    </section>
+  </div>
+
+  <section class="recap">
+    <h2>In short</h2>
+    <ul>
+      <!-- SLOT: RECAP -->
+      <li>Key takeaway.</li>
+    </ul>
+  </section>
+</article>
+</body>
+</html>
