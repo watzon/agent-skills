@@ -55,6 +55,7 @@ Unsure: go one tier up. The tiers are inference built on one vendor's practice (
 | Setting a brand where no design system exists | [design/index.md](design/index.md), [design/brand.md](design/brand.md) |
 | Making a logo or a mascot | [design/logo.md](design/logo.md), [design/mascot.md](design/mascot.md) |
 | Setting type, spacing, motion, or design tokens | [design/foundations.md](design/foundations.md) |
+| Building or reviewing buttons, inputs, icons, or other controls | [design/components.md](design/components.md) |
 | Writing UI text, docs, or reports | [anti-slop/copy.md](anti-slop/copy.md) |
 | Adding compatibility code, flags, settings, placeholders, or shown numbers | [anti-slop/product.md](anti-slop/product.md) |
 | Writing tests or proving a change works | [testing/index.md](testing/index.md) |
@@ -67,4 +68,4 @@ Unsure: go one tier up. The tiers are inference built on one vendor's practice (
 | Writing or fixing the project instruction file (always-loaded agent instructions) | [harness/instruction-files.md](harness/instruction-files.md) |
 | Auditing a repo for agent work | [harness/audit.md](harness/audit.md) |
 
-Every claim behind these files, with its label and confidence: [SOURCES.md](SOURCES.md), [sources/anti-slop.md](sources/anti-slop.md), [sources/design.md](sources/design.md), [sources/foundations.md](sources/foundations.md).
+Every claim behind these files, with its label and confidence: [SOURCES.md](SOURCES.md), [sources/anti-slop.md](sources/anti-slop.md), [sources/design.md](sources/design.md), [sources/foundations.md](sources/foundations.md), [sources/components.md](sources/components.md).

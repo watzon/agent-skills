@@ -74,6 +74,7 @@ Evidence behind [design/](../design/index.md); foundations evidence is in [found
 | Clear-space test | Common deliverable; not in the sources read | inference | 0.5 |
 | Logo hands off color, type, shape language to tokens | **No source maps a logo to tokens.** Color variants as sub-brands [20]; asymmetry signals motion [24] | inference | 0.45 to 0.6 |
 | Mascot: living character, supplementary, fit test, full-body and expression range | [19]; [20] | verified | 0.65 to 0.8 |
+| Targets at least 24 CSS px; non-text 3:1 | WCAG 2.2 SC 2.5.8 [42] and 1.4.11; see [components.md](components.md) | verified | 0.9 to 0.95 |
 | Expression without a face | [21] [22] | secondhand | 0.65 |
 
 ## Where people disagree

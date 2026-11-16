@@ -25,7 +25,7 @@ Copywriting beyond [anti-slop/copy.md](../anti-slop/copy.md) is out of scope her
    3. Choose one and log the rejects, one line each, with the reason tied to the audience and job. Compare the choice with the generic default you would produce for any similar page; revise where they match. Where the brief pins a choice, the brief wins; take risks only on what it leaves open.
 
    Variety comes from the subject and this forced comparison, never from random seeds or dealt directions.
-5. **Check the floor** ([floor-checks.md](floor-checks.md)). Any failure stops the work until fixed.
+5. **Check the floor** ([floor-checks.md](floor-checks.md)). Any failure stops the work until fixed. For buttons, inputs, and icons, run [components.md](components.md) too.
 6. **Build, then screenshot** at desktop and phone width. Compare with the brief, not with taste.
 7. **Report:** the decisions, their reasons, the rejects and why, and what would change the call.
 
