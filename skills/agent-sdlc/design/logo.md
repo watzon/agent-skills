@@ -29,29 +29,29 @@ Choose the kind from the brief. Minimal is a choice the brief makes, not a defau
 
 1. **Study.** List marks you admire for this brief and a few anti-references (a generic glyph, no idea, clip art, needs a gradient), each with a reason. For each admired mark: the idea in one sentence, how it is built (stroke, radius, module), what it leaves out, and whether it holds at 16 px. Look at the real marks if you can browse; otherwise work from memory and label the list "from memory". Check the anti-references against the [default-mark questions](floor-checks.md#default-mark-questions).
 2. **Diverge.** Write 20 to 30 rough concepts before drawing any finished SVG (a practitioner count, not a study). Each: the idea in one line, the brief line it serves, and why it is ownable, meaning this brand's and not any similar product's. Rough means a silhouette sketch or a line of text. No pass/fail gates here; they kill unusual ideas this early.
-3. **Narrow and build 4 to 8 variants** that differ in approach (kind, idea, construction), not in color or small tweaks. Drop any concept whose only idea is its shape. Build each in stages: silhouette, then construction, then detail, rendering and looking after each. State for each variant:
-   - **Construction:** one stroke weight (or two in a set ratio), one or two corner radii, a module unit (the stroke weight works), aligned terminals, consistent angles. Use equal divisions, regular polygons, or circle packing. Do not claim a golden ratio.
+3. **Narrow and build 4 to 8 variants** that differ in approach (kind, idea, construction), not in color or small tweaks. Drop any concept whose only idea is its shape. Build each in stages: silhouette, then construction, then detail, rendering and looking after each (inference: quality falls as complexity rises). State for each variant:
+   - **Construction vocabulary:** what this concept is built from, held consistent across the mark. A geometric mark names its stroke weights, radii, module, and angles; lettering names its tool, contrast, and stroke ends; a character or emblem names its line weight, shape language, and level of detail. Where geometry is used, prefer equal divisions, regular polygons, or circle packing. Do not claim a golden ratio.
    - **Optical corrections, in words:** for example "the circle overshoots the square by 1.5%, on purpose".
-   - **Detail budget:** how much detail the brief allows, and where it goes.
+   - **Detail budget:** how much detail the brief allows, and where it goes (inference).
 
    A simple mark states its idea and construction like any other. A generic glyph with no stated idea is the low-effort result.
 4. **Present and rank.** Show every variant at the same size in one view, on a light and a dark ground, plus a row at 32 and 16 px, using the host's visual tool ([logo-deliverables.md](logo-deliverables.md#present)). For each: the idea, its brief line, one line on concept (idea, ownability) and one on execution (construction, proportion, small size). Rank them with reasons; the owner decides. Do not treat your own aesthetic verdict as a gate: model judges did not reach majority agreement with designer panels (abstracts read).
 5. **Iterate or accept.** Iterate within the chosen approach; each change cites the brief.
 6. **Ship.** Run the gates below on the chosen mark and its responsive set, then build the [deliverables](logo-deliverables.md).
 
-Log every drop, at every step including iteration, with one line on why it lost (inference).
+Log every drop, at every step including iteration, in the [drop log](index.md#drop-log) (inference).
 
 ## Making it as an agent
 
 - **Draw SVG in code, then render and look.** You cannot see an SVG by reading its text. Render to PNG, view it, fix, render again. Nothing is shown unseen. Visual self-correction loops often fail, so look at each render yourself rather than trusting a loop.
-- **Keep a set consistent.** Check every path against the declared stroke and radii; generated sets drift.
+- **Keep a set consistent.** Check every path against the declared construction vocabulary; generated sets drift.
 - **Text:** use a real font whose licence allows logo use (inference, no licence text read); record the licence. Convert letters to outlines in the delivered SVG and check spelling letter by letter in the render.
 - **Image models give pixels** and may misspell text (inference). Use their output only as a sketch and redraw it as paths; automatic tracing gives messy nodes.
 - **Trademark clearance needs a person.** An agent's search is not clearance; flag the chosen mark for human or legal review before public use.
 
 ## Ship gates
 
-For the chosen mark and its responsive set only, not for exploration. The 4x reading, silhouette, and stroke rules are inference; the others come from practitioner sources ([sources/logo.md](../sources/logo.md)).
+For the chosen mark and its responsive set only, not for exploration. The 4x reading, silhouette, and stroke rules are inference; the others come from design guides ([sources/logo.md](../sources/logo.md)).
 
 | Gate | Pass when |
 |---|---|
@@ -81,6 +81,6 @@ For a full brand only; inference, no source maps a logo to tokens. Carry forward
 - [ ] 20 to 30 rough concepts exist, each with its idea, brief line, and why it is ownable.
 - [ ] 4 to 8 variants differing in approach were rendered, viewed, and shown together on light, dark, and small size, each with its construction, concept and execution lines; off-brief ones are flagged.
 - [ ] The variants are ranked with reasons and the owner chose.
-- [ ] Every drop is logged with its reason, including drops during iteration.
+- [ ] Every drop, including drops during iteration, is in the drop log with its reason.
 - [ ] The chosen mark and its responsive set pass every ship gate, with the renders kept.
 - [ ] Font licence recorded; human trademark review flagged before public use.

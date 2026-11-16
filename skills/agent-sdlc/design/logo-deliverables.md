@@ -7,8 +7,8 @@ Read when presenting logo variants, and when the owner has chosen a mark and it 
 1. **Lockups:** horizontal (primary) and stacked, each with its clear space and minimum size stated.
 2. **Mark alone and wordmark alone,** where the brand has both.
 3. **Small versions,** drawn for small sizes, not scaled down: fewer shapes, heavier strokes, no thin lines. Scaling the full mark down is the failure the sources name.
-4. **One-color and inverse** versions of each of the above.
-5. **App icon,** favicon set, social avatar, and share image (figures below).
+4. **One-color and inverse** versions of items 1 to 3.
+5. **App icon,** favicon set, social avatar, and share image, each to its own figures below.
 
 ## Figures
 
@@ -21,11 +21,11 @@ Platform figures change; check the current platform docs before shipping. Labels
 | Maskable web icon | The mark inside a central circle with a radius of 40% of the width |
 | iOS and macOS app icon | One 1024 px square, unmasked; the system rounds the corners and makes the smaller sizes. No baked shadow, bevel, or blur. Dark and tinted versions if the brand needs control over them; otherwise the system generates them |
 | Android app icon | Separate foreground and background layers at 108 dp, content inside the centred 66 dp; a monochrome layer for themed icons. Store listing: a 512 px square 32-bit PNG under 1024 KB, no rounded corners or shadow |
-| Windows app icon | An ICO with 16, 24, 32, 48, and 256 px images; unplated assets for light and dark themes |
+| Windows app icon | Unplated assets for light and dark themes; an ICO whose sizes you take from current platform documentation (16, 24, 32, 48, and 256 px is a secondhand list, not confirmed) |
 | Social avatar | The mark inside a central circle about 80% of the width; a circle crop removes about 21% of a square |
 | Share image | 1200 by 630 px, with alt text; 600 by 315 px at least |
 
-Draw the 16 and 32 px versions by hand from the small version; do not rely on automatic downscaling.
+Draw the 16 and 32 px versions of the square icon (or the small partner of a wordmark) by hand from the small version; do not rely on automatic downscaling. A wordmark is not drawn at 16 px: state its minimum size instead, as in the [small size gate](logo.md#ship-gates).
 
 ## Present
 
@@ -41,9 +41,9 @@ Draw the 16 and 32 px versions by hand from the small version; do not rely on au
 
 ## Done when
 
-- [ ] Every core-set item exists as a source file, in one-color and inverse versions.
-- [ ] Small versions were drawn, not scaled, and checked as real 16 and 32 px files.
+- [ ] Every core-set item exists as a source file; lockups, marks, wordmarks, and small versions also in one-color and inverse.
+- [ ] The square icon or small partner was drawn, not scaled, and checked as real 16 and 32 px files; each wordmark has a stated minimum size.
 - [ ] The favicon set includes a PNG or ICO at 48 px or more, not only SVG.
-- [ ] App icon, avatar, and share image meet the figures above, or the gap is named.
+- [ ] Favicon, app icon, avatar, and share image meet their own figures above, or the gap is named.
 - [ ] The set was presented in context with the host's visual tool.
 - [ ] The file list and the written specs are in the report.

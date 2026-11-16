@@ -12,7 +12,7 @@ Read when a product has no brand and you are at step 3 of the [design process](i
 
 1. **List the neighbors:** products the audience would compare this one with. Note what each looks and sounds like, so you know what to avoid matching. Study the real products (their sites, icons, and marks) if you can browse; otherwise work from memory. Label the list "studied" or "from memory".
 2. **Draft 3 to 5 brand directions in words.** Each: a position in one sentence, three brand words, the voice in one line, and one reference from outside software (a material, a trade, a place). Any two directions differ in position, not just in adjectives.
-3. **Choose one.** Write the reason, tied to the purpose and audience. Log each reject in one line with why.
+3. **Choose one.** Write the reason, tied to the purpose and audience. Log each reject in the [drop log](index.md#drop-log), one line with why.
 4. **Write the brief** (below). It is the reference every later design step is checked against.
 
 The counts here (directions, brand words, anti-references) are house defaults with no source; change them with a reason.
