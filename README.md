@@ -1,4 +1,4 @@
-# Claude Code skills
+# Agent skills
 
 Personal skills for [Claude Code](https://docs.anthropic.com/en/docs/claude-code).
 
@@ -9,6 +9,8 @@ Personal skills for [Claude Code](https://docs.anthropic.com/en/docs/claude-code
 | [artifact](./skills/artifact/) | Publish a report, explainer, dashboard, table, or mockup as a live here.now page |
 | [durable-quality](./skills/durable-quality/) | Standing quality baseline for AI-assisted coding: intent, proof, structure, ownership, and risk-scaled review |
 
+The `principle-*` skills are situational playbooks (root-cause fixes, idempotent operations, type-system discipline, and more). They are read on demand and never self-trigger.
+
 `artifact` routes the form, then loads `here-now` to host the page. Form rules live in `references/`. HTML shells live in `templates/`.
 
 `durable-quality` includes references, checklists, playbooks, and examples. Load it before writing code to prevent vibe rot and keep quality high.
@@ -18,9 +20,9 @@ Personal skills for [Claude Code](https://docs.anthropic.com/en/docs/claude-code
 Clone the repository, then symlink each skill so this repo stays the source of truth:
 
 ```bash
-git clone https://github.com/watzon/claude-code ~/Projects/personal/claude-code
-ln -s ~/Projects/personal/claude-code/skills/artifact ~/.agents/skills/artifact
-ln -s ~/Projects/personal/claude-code/skills/durable-quality ~/.agents/skills/durable-quality
+git clone https://github.com/watzon/agent-skills ~/Projects/personal/agent-skills
+ln -s ~/Projects/personal/agent-skills/skills/artifact ~/.agents/skills/artifact
+ln -s ~/Projects/personal/agent-skills/skills/durable-quality ~/.agents/skills/durable-quality
 ```
 
 `artifact` also needs the `here-now` skill:

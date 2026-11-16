@@ -1,22 +1,16 @@
 ---
 name: artifact
 version: 0.1.0
-description: >
-  Publish an artifact as a live here.now page. Use when the user asks for an
-  artifact, or when a report, explainer, dashboard, mockup, interactive
-  example, or visual walkthrough would land better as a URL than as a chat
-  reply. Load here-now to host it. Not for video, not for hosting files the
-  user already has, and not for a throwaway prototype that must live in the
-  repo.
+description: "Create self-contained interactive pages for reports, explainers, dashboards, and mockups. Use here.now for publishing when that host is selected."
 license: MIT
 compatibility: claude-code opencode cursor codex
 ---
 
 # Artifact
 
-An **artifact** is a self-contained page published with here.now. Chat is for talk. The artifact is the thing itself.
+This skill builds self-contained pages and provides a here.now publishing workflow.
 
-When a longer document, a visual, or something operable would serve better than a chat reply, build the page and publish it. Do not ask permission first unless the form is genuinely ambiguous.
+Use a page when it serves the requested deliverable. Preserve the user's chosen format and host. A request for an artifact does not by itself authorize publishing. Prepare and verify the local result first, then publish when authorized.
 
 ## Stay in chat when
 
@@ -26,13 +20,13 @@ When a longer document, a visual, or something operable would serve better than 
 - The user already has files and only wants them hosted. That is `here-now` alone.
 - The user wants a throwaway prototype next to production code. That is `prototype`.
 
-If the choice is close, publish.
+When the format is uncertain, use the request and existing context to choose a useful local deliverable.
 
 ## Steps
 
-**Done when** the publish directory has `index.html` at its root, no `SLOT` markers or placeholder copy remain, every control that looks live works, and the live `siteUrl` is printed on its own line.
+**Done when** the publish directory has `index.html` at its root, no `SLOT` markers or placeholder copy remain, every control that looks live works, and the requested output is available. For authorized publishing, verify and return the live `siteUrl`.
 
-1. Load `here-now` (`skill://here-now` or `~/.agents/skills/here-now/SKILL.md`). That skill owns hosting, credentials, slugs, claim URLs, and how you print the live link.
+1. For authorized here.now publishing, load `here-now` (`skill://here-now` or `~/.agents/skills/here-now/SKILL.md`). That skill owns hosting, credentials, slugs, claim URLs, and how you print the live link.
 2. Name the form in one line. Read only that form's reference, then copy its template:
 
    | Form | When | Read |
@@ -48,7 +42,7 @@ If the choice is close, publish.
 4. Write to a stable path so revisions update the same Site:
    - In a project: `./.artifacts/<short-name>/index.html`
    - Otherwise: `~/.herenow/artifacts/<short-name>/index.html`
-5. Publish with `here-now`:
+5. When publishing is authorized, publish with `here-now`:
 
    ```bash
    ~/.agents/skills/here-now/scripts/publish.sh {dir} --client opencode
@@ -58,6 +52,6 @@ If the choice is close, publish.
 
 Then one or two lines: what the page shows, and what is still fake or temporary. If the publish was anonymous, say it expires in 24 hours and share the claim URL byte-for-byte, the way `here-now` requires.
 
-Feedback edits the same files and republishes the same slug. When the user wants it built for real, turn the page plus their reactions into a short must / nice / cut list and wait for them to accept it.
+For authorized revisions to the published page, edit the same files and republish the same slug. When the user wants it built for real, turn the page plus their reactions into a short must / nice / cut list and wait for them to accept it.
 
 Shared records (a form, poll, checklist, or anything multiple viewers write) need here.now Site Data. Read https://here.now/docs after loading `here-now` before you invent a store.
