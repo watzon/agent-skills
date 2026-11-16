@@ -10,7 +10,7 @@ Evidence behind [design/logo.md](../design/logo.md), [design/logo-deliverables.m
 | Kinds of mark, including pictorial, emblem, geometric | Practice table; no study compares kinds on outcomes | inference | 0.5 |
 | Minimal is a choice, not a default | Six studies: more descriptive logos improved evaluations, less so for familiar brands [55]; simple flat logos raised consumption for non-prestige food and reversed for prestige food [54]; the simplest version of a responsive set was least helpful for recognition [53] | secondhand / verified abstract / verified abstract | 0.55 |
 | Complex marks allowed | Owner direction: newer models draw complex SVG well, and minimal-by-default produced bare marks in testing | owner | 0.55 |
-| Build in stages (silhouette, construction, detail), render each | A benchmark finds every model degrades as complexity rises [29] (abstract read); it does not test staging, so the stages are reasoned from it | owner + inference | 0.5 |
+| Build in stages (silhouette, construction, detail), render each | Reasoned from two findings, neither of which tests staging: every model degrades as complexity rises [29] (verified abstract), and visual self-correction loops are unreliable [57] [58] | inference | 0.5 |
 | Study admired marks (idea, construction, omissions, 16 px) and anti-references | Built from practice; no source tests it | inference | 0.5 to 0.55 |
 | Study real products or label "from memory" | Test feedback; no source | inference | 0.6 |
 | Diverge: 20 to 30 rough concepts before finished work | Thirty small thumbnails, a second sheet, then circle six [48]; sketch, set aside, then refine [49] | secondhand | 0.7 |
