@@ -1,6 +1,6 @@
 # Brand
 
-Read when a product has no brand and you are at step 3 of the [design process](index.md). The brand brief comes before the logo, the mascot, and the foundations; each of those is checked against it.
+Read when a product has no brand and you are at step 3 of the [design process](index.md). The brand brief comes before the logo, any mascot, and the foundations; each of those is checked against it.
 
 ## Inputs
 
@@ -10,10 +10,12 @@ Read when a product has no brand and you are at step 3 of the [design process](i
 
 ## Steps
 
-1. **List two or three neighbors:** products the audience would compare this one with. Note what each looks and sounds like, so you know what to avoid matching.
+1. **List the neighbors:** products the audience would compare this one with. Note what each looks and sounds like, so you know what to avoid matching.
 2. **Draft 3 to 5 brand directions in words.** Each: a position in one sentence, three brand words, the voice in one line, and one reference from outside software (a material, a trade, a place). Any two directions differ in position, not just in adjectives.
 3. **Choose one.** Write the reason, tied to the purpose and audience. Log each reject in one line with why.
 4. **Write the brief** (below). It is the reference every later design step is checked against.
+
+The counts here (directions, brand words, anti-references) are house defaults with no source; change them with a reason.
 
 ## The brief
 
@@ -28,18 +30,14 @@ One page. Each line is a decision with its reason.
 7. Rejected directions, one line each.
 8. What would change the call.
 
-## What the evidence supports, and what it does not
+## What not to use as a reason
 
-| Claim | Status | Use it as |
-|---|---|---|
-| Strategy and naming come before the identity | Practice standard; the logo reflects the company, not the reverse | The order of this process |
-| Simple marks are easier to recall and draw | A long-standing practitioner analysis, not a controlled study | A reason to keep marks simple |
-| Distinctive shapes carry recognition better than other assets | One recent study, abstract only | A weak reason; never quote a figure |
-| Brand archetypes (hero, sage, rebel) predict how a brand lands | Called pseudoscience by practitioners | Prompts for drafting directions, never a reason in the brief |
-| Statistics on how much color or a logo "raises recognition" | Circulating figures trace to no study | Do not cite. Any statistic in a brief needs a source |
-| Trend reports | Describe what designers show this year, not what works | Something to check the work is not merely following |
+- Brand archetypes (hero, sage, rebel): prompts for drafting directions only.
+- Statistics on how much color or a logo "raises recognition": the one traced so far came from no study. Any statistic in a brief needs a source.
+- Trend reports: use them to check the work is not merely following a trend, never as a reason.
+- Recognition figures from single studies: never quote a number.
 
-Details and links: [sources/design.md](../sources/design.md).
+Evidence status for each: [sources/design.md](../sources/design.md).
 
 ## Done when
 

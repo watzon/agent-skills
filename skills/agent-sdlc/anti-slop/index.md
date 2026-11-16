@@ -12,10 +12,14 @@ Read before you hand off any change, and when you review one. Slop is the unchos
 
 ## Mechanical checks
 
-Added lines only; set `BASE` to the commit the change branched from. A starting point; adapt the patterns to the project. Every hit needs a fix or a one-line reason.
+Added lines only, in tracked changes and in new untracked files (ignored files are skipped); set `BASE` to the commit the change branched from and run from the repo root. A starting point; adapt the patterns to the project. Every hit needs a fix or a one-line reason.
 
 ```sh
-sweep() { git diff -U0 "$BASE" -- . | perl -CSD -ne 'BEGIN { $p = shift } print if /^\+(?!\+\+)/ && /$p/i' "$1"; }
+sweep() {
+  { git diff -U0 "$BASE" -- .
+    git -c core.quotePath=false ls-files --others --exclude-standard | while IFS= read -r f; do git diff -U0 --no-index /dev/null "$f"; done
+  } | perl -CSD -ne 'BEGIN { $p = shift } print if /^\+(?!\+\+)/ && /$p/i' "$1"
+}
 sweep 'deprecat|legacy|backward|compat|shim|migrat|polyfill|removed|_unused'    # compat markers
 sweep 'coming soon|todo|wip|placeholder|lorem|example\.com|not implemented'   # unbuilt-feature leftovers in UI strings
 sweep '\bplease\b|thank you|\bsorry\b'                                     # courtesy words in UI text

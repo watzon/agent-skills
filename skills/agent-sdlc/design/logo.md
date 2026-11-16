@@ -4,10 +4,12 @@ Read when making or changing a logo, after the [brand brief](brand.md) exists. T
 
 ## Logo and mascot: decide per brand
 
-Neither comes first by rule. Some brands grew the logo out of an existing character; others drew the character from the logo's shapes. Decide from the brief:
+Neither comes first by rule. Some brands grew the logo out of an existing character; others drew the character from the logo's shapes. Decide from the brief, write the decision down, then work in its order:
 
-- **Character first** when a character already has equity, or the personality is outgoing and the character is the brand's main way to speak. Then the logo is the character, or a simplified head or silhouette of it.
-- **Logo first** in most new brands. A mascot, if any, comes later and borrows the logo's proportions and colors ([mascot.md](mascot.md)).
+- **No mascot** when the brief does not call for one. Make the logo only.
+- **Logo first:** make the logo, then a mascot that borrows its proportions and colors ([mascot.md](mascot.md)).
+- **Character first** when a character already has equity, or the personality is outgoing and the character is the brand's main way to speak. Design the character first ([mascot.md](mascot.md)), then draw the logo from it: a simplified head or silhouette.
+- **One asset:** the character is the logo. Design it once and run both the mascot steps and the logo tests on it.
 
 ## Choose the kind of mark
 
@@ -36,7 +38,7 @@ No study compares minimal marks with character marks on outcomes; this table is 
 - **Render it and look.** You cannot see an SVG by reading its text. Render each variant to PNG at the test sizes, view the image, fix, render again. No variant is shown unseen.
 - **Keep a set consistent.** Declare one stroke width and one corner radius for the set and check every path against them; generated sets drift.
 - **Text:** use a real font and convert the letters to outlines in the final SVG. Check spelling letter by letter in the render.
-- **Image models give pixels.** Their output is raster and often misspells text. Use it only as a sketch, then redraw it as clean paths; automatic tracing gives hundreds of messy nodes.
+- **Image models give pixels.** Their output is raster, and text in it may be misspelled (inference, no source read). Use it only as a sketch, then redraw it as clean paths; automatic tracing gives hundreds of messy nodes.
 - **Trademark clearance needs a person.** Generators can reproduce marks they were trained on. A search or similarity check by the agent is not clearance; flag the chosen mark for human or legal review before public use.
 
 ## Quality tests
@@ -54,6 +56,8 @@ Run on every variant before showing it, and again on the final.
 | Simplicity | Roughly under 50 nodes; well over 150 is an illustration, not a mark (rule of thumb) |
 | Optical | Round shapes overshoot slightly so they look the same size as flat ones; judge at 100% and 16 px |
 
+The silhouette and clear-space tests are convention with no source read (inference).
+
 ## Deliver
 
 SVG master with outlined text; PNG at 1024, 512, 256, 64, 32, 16 px; one-color and inverse versions; minimum size and clear space written down.
@@ -68,7 +72,7 @@ No source maps a logo to design tokens; this is inference. Carry forward to [fou
 
 ## Done when
 
-- [ ] The logo and mascot relationship was decided from the brief and written down.
+- [ ] The logo and mascot relationship was decided from the brief and written down, and the work followed its order.
 - [ ] 4 to 8 variants differing in approach were rendered, viewed, and shown in one grid on light, dark, and at small size, each with one line of reasoning.
 - [ ] The chosen mark passes every quality test, with the renders kept.
 - [ ] Rejected variants are logged.

@@ -45,6 +45,8 @@ These have no computed answer. Use the loop for each.
 
 ### The loop
 
+The loop's steps are inference; the checks it runs are sourced.
+
 1. Render the component at 2x device scale, in every state and every theme.
 2. Crop to the component with a small margin, icon and label in one crop.
 3. Look for: unequal visual padding, an off-center glyph or label, an icon heavier or lighter than the text, a gap that reads wider than the padding.
