@@ -1,6 +1,6 @@
 # Floor checks
 
-Read before handing off any UI change, and when reviewing one. These checks have an outside anchor (a standard or a render), so they apply to every design, whatever its style.
+Read before handing off any UI change, and when reviewing one; for a new logo, read only the default-mark questions. The checks have an outside anchor (a standard or a render), so they apply to every design, whatever its style.
 
 ## Checks
 
@@ -26,10 +26,17 @@ Last reviewed 2026-11-16. Review at each model release; the defaults move with e
 - Does every section need its own entrance animation, and every card a hover effect?
 - Are cards nested inside cards?
 
+## Default-mark questions
+
+For logos and icons. Last reviewed 2026-11-16; review at each model release. These came from agent test runs, not a prevalence study (inference). Each "yes" is a finding unless a brief line asks for that shape.
+
+- Is the mark a shield, a check mark, a pulse or heartbeat line, a hexagon, a single letter in a rounded square, or a generic mountain?
+- Could the mark belong to any product in the same category, with only the name swapped?
+
 ## Done when
 
 - [ ] Automated contrast output is in the handoff, for every theme.
 - [ ] Desktop and phone screenshots exist for every changed view, with no overflow or overlap.
 - [ ] Focus, reduced-motion, and target-size checks were done.
 - [ ] No invented content ships.
-- [ ] Each default-look question was answered for each changed view.
+- [ ] Each default-look question was answered for each changed view, and each default-mark question for each new mark.

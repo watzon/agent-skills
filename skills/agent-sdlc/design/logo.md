@@ -1,80 +1,86 @@
 # Logo
 
-Read when making or changing a logo, after the [brand brief](brand.md) exists. The brief is the reference: every variant and every change is checked against it.
+Read when making or changing a logo, after the [brand brief](brand.md) exists. The brief is the reference: every concept, variant, and change is checked against it. The ship set and how to present it: [logo-deliverables.md](logo-deliverables.md).
 
-## Logo and mascot: decide per brand
+## Logo and mascot: decide the order
 
-Neither comes first by rule. Some brands grew the logo out of an existing character; others drew the character from the logo's shapes. Decide from the brief, write the decision down, then work in its order:
+Whether a mascot fits is decided in [mascot.md](mascot.md). Write the decision down, then work in its order:
 
-- **No mascot** when the brief does not call for one. Make the logo only.
-- **Logo first:** make the logo, then a mascot that borrows its proportions and colors ([mascot.md](mascot.md)).
-- **Character first** when a character already has equity, or the personality is outgoing and the character is the brand's main way to speak. Design the character first ([mascot.md](mascot.md)), then draw the logo from it: a simplified head or silhouette.
-- **One asset:** the character is the logo. Design it once and run both the mascot steps and the logo tests on it.
+- **No mascot:** the logo only.
+- **Logo first:** the logo, then a mascot that borrows its proportions and colors.
+- **Character first:** the character already has equity or is the brand's main voice. Design it first, then draw the logo from it: a simplified head or silhouette.
+- **One asset:** the character is the logo. Run the mascot steps and the ship gates on it.
 
-## Choose the kind of mark
+## Kinds of mark
 
 | Kind | Fits when | Watch for |
 |---|---|---|
-| Wordmark | The name is short and distinctive, or cannot be drawn; reserved or technical personality | Generic type makes a generic brand; set it deliberately |
-| Symbol or monogram | The product has a clear reference point, or needs an app icon | Must survive 16 px and one color |
-| Combination | A new name that needs to be learned alongside a symbol | Each part must also work alone |
-| Personality-led or character | Outgoing, playful, consumer brands; the brief says so | Detail dies at small size; plan a simplified version |
+| Wordmark or lettering | The name is short and distinctive, or cannot be drawn | Set type alone is generic; draw or adjust the letters |
+| Lettermark or monogram | A long name; a square icon is needed | Needs its own small version |
+| Pictorial or descriptive | The product has a clear visual reference | Detail fills in when small; plan the small version |
+| Emblem or badge | Heritage, craft, a place | High detail budget; needs a separate icon |
+| Geometric constructed | Precision, systems | Looks generic without a stated construction |
+| Character | A mascot fits ([mascot.md](mascot.md)) | Needs a simplified small version |
+| Combination | A new name learned alongside a symbol | Each part must also work alone |
 
-No study compares minimal marks with character marks on outcomes; this table is judgment. One possible option among the variants is a character or mark that leans or sits off-centre to suggest motion. Treat it as one idea to try, not a rule: the evidence for it is unverified.
+Choose the kind from the brief. Minimal is a choice the brief makes, not a default: descriptive marks beat abstract ones in one set of studies, and the simplest version of a mark hurt recognition in another (secondhand and abstract only). Detailed, complex marks are fine when the brief calls for them; draw them in stages (step 3). A variant may use a kind the brief does not favour if it is flagged off-brief.
 
-## Make 4 to 8 variations
+## Process
 
-1. Make 4 to 8 variants. They differ in **approach** (kind of mark, concept, construction), not in color or small tweaks.
-2. Write one line of reasoning for each, tied to a line of the brief.
-3. Run the quality tests below on each before showing it. Drop or fix any that fail.
-4. Present all of them at the same size in one grid, on a light and a dark ground, plus a row at small size (32 and 16 px).
-5. The owner picks one, or asks for another round.
-6. Iterate within the chosen approach. Each change cites the brief. Or accept it as is.
-7. Log the rejected variants, one line each.
+1. **Study.** List marks you admire for this brief and a few anti-references (a generic glyph, no idea, clip art, needs a gradient), each with a reason. For each admired mark: the idea in one sentence, how it is built (stroke, radius, module), what it leaves out, and whether it holds at 16 px. Look at the real marks if you can browse; otherwise work from memory and label the list "from memory". Check the anti-references against the [default-mark questions](floor-checks.md#default-mark-questions).
+2. **Diverge.** Write 20 to 30 rough concepts before drawing any finished SVG (a practitioner count, not a study). Each: the idea in one line, the brief line it serves, and why it is ownable, meaning this brand's and not any similar product's. Rough means a silhouette sketch or a line of text. No pass/fail gates here; they kill unusual ideas this early.
+3. **Narrow and build 4 to 8 variants** that differ in approach (kind, idea, construction), not in color or small tweaks. Drop any concept whose only idea is its shape. Build each in stages: silhouette, then construction, then detail, rendering and looking after each. State for each variant:
+   - **Construction:** one stroke weight (or two in a set ratio), one or two corner radii, a module unit (the stroke weight works), aligned terminals, consistent angles. Use equal divisions, regular polygons, or circle packing. Do not claim a golden ratio.
+   - **Optical corrections, in words:** for example "the circle overshoots the square by 1.5%, on purpose".
+   - **Detail budget:** how much detail the brief allows, and where it goes.
 
-## How to make a logo as an agent
+   A simple mark states its idea and construction like any other. A generic glyph with no stated idea is the low-effort result.
+4. **Present and rank.** Show every variant at the same size in one view, on a light and a dark ground, plus a row at 32 and 16 px, using the host's visual tool ([logo-deliverables.md](logo-deliverables.md#present)). For each: the idea, its brief line, one line on concept (idea, ownability) and one on execution (construction, proportion, small size). Rank them with reasons; the owner decides. Do not treat your own aesthetic verdict as a gate: model judges did not reach majority agreement with designer panels (abstracts read).
+5. **Iterate or accept.** Iterate within the chosen approach; each change cites the brief.
+6. **Ship.** Run the gates below on the chosen mark and its responsive set, then build the [deliverables](logo-deliverables.md).
 
-- **Draw it as SVG in code.** Real vector paths, simple geometry. Models handle simple icons and break on complex layered marks.
-- **Render it and look.** You cannot see an SVG by reading its text. Render each variant to PNG at the test sizes, view the image, fix, render again. No variant is shown unseen.
-- **Keep a set consistent.** Declare one stroke width and one corner radius for the set and check every path against them; generated sets drift.
-- **Text:** use a real font and convert the letters to outlines in the final SVG. Check spelling letter by letter in the render.
-- **Image models give pixels.** Their output is raster, and text in it may be misspelled (inference, no source read). Use it only as a sketch, then redraw it as clean paths; automatic tracing gives hundreds of messy nodes.
-- **Trademark clearance needs a person.** Generators can reproduce marks they were trained on. A search or similarity check by the agent is not clearance; flag the chosen mark for human or legal review before public use.
+Log every drop, at every step including iteration, with one line on why it lost (inference).
 
-## Quality tests
+## Making it as an agent
 
-Run on every variant before showing it, and again on the final.
+- **Draw SVG in code, then render and look.** You cannot see an SVG by reading its text. Render to PNG, view it, fix, render again. Nothing is shown unseen. Visual self-correction loops often fail, so look at each render yourself rather than trusting a loop.
+- **Keep a set consistent.** Check every path against the declared stroke and radii; generated sets drift.
+- **Text:** use a real font whose licence allows logo use (inference, no licence text read); record the licence. Convert letters to outlines in the delivered SVG and check spelling letter by letter in the render.
+- **Image models give pixels** and may misspell text (inference). Use their output only as a sketch and redraw it as paths; automatic tracing gives messy nodes.
+- **Trademark clearance needs a person.** An agent's search is not clearance; flag the chosen mark for human or legal review before public use.
 
-| Test | Pass when |
+## Ship gates
+
+For the chosen mark and its responsive set only, not for exploration. The 4x reading, silhouette, and stroke rules are inference; the others come from practitioner sources ([sources/logo.md](../sources/logo.md)).
+
+| Gate | Pass when |
 |---|---|
-| Small size | Exported at 64, 32, and 16 px, it is still recognizable |
+| Small size | A square icon version, exported as a real 16 px PNG and viewed at 4x nearest-neighbour zoom: the main shape and its key detail are separate pixels, no stroke has gone grey or merged, and the silhouette matches the large mark. Check 32 and 64 px too. A wordmark is not judged at 16 px: state its minimum size or name the square partner used below it |
+| Small version | Any mark with thin strokes or fine detail has a separately drawn heavier or simplified version for small sizes |
 | One color | Solid black on white reads |
 | Inverse | Solid white on black reads |
-| No gradients | It works with no gradient, shadow, or transparency |
-| Silhouette | Filled solid, the outline still identifies it |
-| Clear space | A stated minimum clear space around it; nothing intrudes in mockups |
-| Simplicity | Roughly under 50 nodes; well over 150 is an illustration, not a mark (rule of thumb) |
-| Optical | Round shapes overshoot slightly so they look the same size as flat ones; judge at 100% and 16 px |
-
-The silhouette and clear-space tests are convention with no source read (inference).
-
-## Deliver
-
-SVG master with outlined text; PNG at 1024, 512, 256, 64, 32, 16 px; one-color and inverse versions; minimum size and clear space written down.
+| No gradients | It works with no gradient, shadow, or transparency; a textured master has a one-color fallback |
+| Silhouette | Filled solid, the outline still identifies it. For a stroke mark, fill the outer contour |
+| Clear space | Stated now, as a multiple of a unit inside the mark, drawn on the sheet. Held later: nothing intrudes in mockups |
+| Optical | Where round and flat parts must look the same size, the correction is made and recorded; judged at 100% and 16 px |
+| Vector | Real `<path>` elements, no `<image>` inside the SVG, no `<text>`. Strokes expanded to fills where a tool can; if not, the report says strokes are live |
+| Node count | Reported, not a gate |
 
 ## Hand off into tokens
 
-No source maps a logo to design tokens; this is inference. Carry forward to [foundations.md](foundations.md):
+For a full brand only; inference, no source maps a logo to tokens. Carry forward to [foundations.md](foundations.md):
 
-- **Color:** the mark already works in one color, so color is a choice. Take 2 to 4 colors from it and give each a role.
-- **Type:** pick families that match the mark's construction and the brief's words; record why.
-- **Shape language:** corner radius, stroke weight, and curve from the mark set the UI's radii, icon stroke, and border weight.
+- **Color:** take colors from the brief's outside reference (a material, trade, or place), checked against the mark on light and dark. A mark built to work in one color does not supply a palette.
+- **Type:** families that match the mark's construction and the brief's words, with the reason.
+- **Shape language:** the mark's corner radius, stroke weight, and curve set the UI's radii, icon stroke, and border weight.
 
 ## Done when
 
-- [ ] The logo and mascot relationship was decided from the brief and written down, and the work followed its order.
-- [ ] 4 to 8 variants differing in approach were rendered, viewed, and shown in one grid on light, dark, and at small size, each with one line of reasoning.
-- [ ] The chosen mark passes every quality test, with the renders kept.
-- [ ] Rejected variants are logged.
-- [ ] Human trademark review is flagged before public use.
-- [ ] Color, type, and shape decisions were handed to the foundations.
+- [ ] The mascot decision and the work order are written down.
+- [ ] The study lists admired marks and anti-references with reasons, labeled studied or from memory.
+- [ ] 20 to 30 rough concepts exist, each with its idea, brief line, and why it is ownable.
+- [ ] 4 to 8 variants differing in approach were rendered, viewed, and shown together on light, dark, and small size, each with its construction, concept and execution lines; off-brief ones are flagged.
+- [ ] The variants are ranked with reasons and the owner chose.
+- [ ] Every drop is logged with its reason, including drops during iteration.
+- [ ] The chosen mark and its responsive set pass every ship gate, with the renders kept.
+- [ ] Font licence recorded; human trademark review flagged before public use.

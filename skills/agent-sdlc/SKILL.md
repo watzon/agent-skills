@@ -1,6 +1,6 @@
 ---
 name: agent-sdlc
-description: "Use when planning, delegating, writing, testing, reviewing, or handing off code, or when setting up a repo for agents."
+description: "Use when planning, delegating, writing, testing, reviewing, or handing off code; designing UI, a brand, or a logo; or setting up a repo for agents."
 license: MIT
 ---
 
@@ -35,7 +35,8 @@ Unsure: go one tier up. The tiers are inference built on one vendor's practice (
 | Orchestrator / project manager: you plan and hand work to others | [roles/coordinator.md](roles/coordinator.md), [delegation/index.md](delegation/index.md), [delegation/brief.md](delegation/brief.md), [spec/index.md](spec/index.md), [handoff/index.md](handoff/index.md) |
 | Senior developer: hard, ambiguous, or design-heavy work | [roles/implementer.md](roles/implementer.md), [spec/design-note.md](spec/design-note.md), [writing-code/index.md](writing-code/index.md), [writing-code/comments.md](writing-code/comments.md), [testing/index.md](testing/index.md), [review/index.md](review/index.md), [review/checklist.md](review/checklist.md), [anti-slop/index.md](anti-slop/index.md), [handoff/index.md](handoff/index.md); building UI: [design/index.md](design/index.md) |
 | Junior developer: well-specified routine work | [roles/implementer.md](roles/implementer.md), [writing-code/index.md](writing-code/index.md), [writing-code/comments.md](writing-code/comments.md), [testing/index.md](testing/index.md), [review/checklist.md](review/checklist.md), [anti-slop/index.md](anti-slop/index.md), [handoff/index.md](handoff/index.md); building UI: [design/index.md](design/index.md) |
-| Designer: UI, brand, or visual work | [design/index.md](design/index.md), [design/floor-checks.md](design/floor-checks.md); new brand: [design/brand.md](design/brand.md), [design/logo.md](design/logo.md), [design/mascot.md](design/mascot.md), [design/foundations.md](design/foundations.md); [anti-slop/copy.md](anti-slop/copy.md), [anti-slop/index.md](anti-slop/index.md), [handoff/index.md](handoff/index.md) |
+| Designer: UI or visual work | [design/index.md](design/index.md), [design/floor-checks.md](design/floor-checks.md), [anti-slop/copy.md](anti-slop/copy.md), [anti-slop/index.md](anti-slop/index.md); controls: [design/components.md](design/components.md); a new brand: the next row, then [design/foundations.md](design/foundations.md) |
+| Designer: logo or brand only | [design/index.md](design/index.md) (scope and report), [design/brand.md](design/brand.md), [design/logo.md](design/logo.md), [design/logo-deliverables.md](design/logo-deliverables.md); a mascot: [design/mascot.md](design/mascot.md); writing text: [anti-slop/copy.md](anti-slop/copy.md) |
 | Reviewer | [roles/reviewer.md](roles/reviewer.md), [review/index.md](review/index.md), [review/checklist.md](review/checklist.md), [anti-slop/index.md](anti-slop/index.md), [failure-modes/index.md](failure-modes/index.md) |
 | QA / verifier | [roles/verifier.md](roles/verifier.md), [review/index.md](review/index.md), [testing/index.md](testing/index.md) |
 | Researcher | [roles/researcher.md](roles/researcher.md), [harness/index.md](harness/index.md) |
@@ -53,7 +54,7 @@ Unsure: go one tier up. The tiers are inference built on one vendor's practice (
 | Debugging, or building steps that retry, resume, or run in sequence | [principles/operations.md](principles/operations.md) |
 | Building or changing UI | [design/index.md](design/index.md), [design/floor-checks.md](design/floor-checks.md) |
 | Setting a brand where no design system exists | [design/index.md](design/index.md), [design/brand.md](design/brand.md) |
-| Making a logo or a mascot | [design/logo.md](design/logo.md), [design/mascot.md](design/mascot.md) |
+| Making a logo or a mascot | [design/logo.md](design/logo.md), [design/logo-deliverables.md](design/logo-deliverables.md), [design/mascot.md](design/mascot.md) |
 | Setting type, spacing, motion, or design tokens | [design/foundations.md](design/foundations.md) |
 | Building or reviewing buttons, inputs, icons, or other controls | [design/components.md](design/components.md) |
 | Writing UI text, docs, or reports | [anti-slop/copy.md](anti-slop/copy.md) |
@@ -68,4 +69,4 @@ Unsure: go one tier up. The tiers are inference built on one vendor's practice (
 | Writing or fixing the project instruction file (always-loaded agent instructions) | [harness/instruction-files.md](harness/instruction-files.md) |
 | Auditing a repo for agent work | [harness/audit.md](harness/audit.md) |
 
-Every claim behind these files, with its label and confidence: [SOURCES.md](SOURCES.md), [sources/anti-slop.md](sources/anti-slop.md), [sources/design.md](sources/design.md), [sources/foundations.md](sources/foundations.md), [sources/components.md](sources/components.md).
+Every claim behind these files, with its label and confidence: [SOURCES.md](SOURCES.md), [sources/anti-slop.md](sources/anti-slop.md), [sources/design.md](sources/design.md), [sources/logo.md](sources/logo.md), [sources/foundations.md](sources/foundations.md), [sources/components.md](sources/components.md).

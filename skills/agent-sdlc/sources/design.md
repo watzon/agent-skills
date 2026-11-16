@@ -1,6 +1,6 @@
 # Sources: design
 
-Evidence behind [design/](../design/index.md); foundations evidence is in [foundations.md](foundations.md). Labels and confidence as in [SOURCES.md](../SOURCES.md). Research pass: 2026-11-16. No controlled study compares a design process or anti-slop skill with a plain baseline on user preference, accessibility, or task success; the evidence is originality benchmarks, vendor galleries, and practitioner skills.
+Evidence behind [design/](../design/index.md); foundations evidence is in [foundations.md](foundations.md), logo evidence in [logo.md](logo.md). Labels and confidence as in [SOURCES.md](../SOURCES.md). Research pass: 2026-11-16. No controlled study compares a design process or anti-slop skill with a plain baseline on user preference, accessibility, or task success; the evidence is originality benchmarks, vendor galleries, and practitioner skills.
 
 ## Why a process, not a ban list
 
@@ -26,6 +26,7 @@ Evidence behind [design/](../design/index.md); foundations evidence is in [found
 | 4 No random seeds or dealt directions | See disagreements | inference | 0.6 |
 | 6 Screenshot at desktop and phone width | [7]; [1] critique step | verified, vendor | 0.75 |
 | 7 Report direction, reasons, rejects | Decision brief pattern [6] | secondhand | 0.6 |
+| Logo-only scope; a design report instead of the code report | Test feedback: a logo task loaded about ten files and a code report format | inference | 0.6 |
 
 ## Floor checks (design/floor-checks.md)
 
@@ -48,7 +49,7 @@ Evidence behind [design/](../design/index.md); foundations evidence is in [found
 | An undrawable name moves the mark to the product's reference | "The word 'next' is not depictable"; the mark used the product's cube [11] | verified | 0.85 |
 | The brief is the reference the mark is checked against | [10] [11] | secondhand / verified | 0.75 |
 | Draft 3 to 5 brand directions, log rejects | Carried from the forced-divergence step; no brand-specific source | inference | 0.6 |
-| List the neighbors before drafting directions | No source; it feeds the position line | inference | 0.5 |
+| List the neighbors before drafting directions; label them studied or from memory | No source; it feeds the position line | inference | 0.5 |
 | Counts: three brand words, two anti-references | No source; house defaults | inference | 0.4 |
 | Simplicity aids recall | Rand's analysis: easy to draw, drawable after a glance [12] | verified (practitioner, not a study) | 0.8 |
 | Distinctive shapes carry recognition best | 2026 study, title and abstract only (403) [18] | secondhand | 0.5 |
@@ -56,28 +57,9 @@ Evidence behind [design/](../design/index.md); foundations evidence is in [found
 | Trend reports describe what is shown, not what works | [23] [47] read as trend lists | inference | 0.7 |
 | Rejected folklore: "color increases brand recognition by 80%" | Earliest source a 2001 leaflet; the study it cites lacks the figure [17]. Not used in any rule | secondhand | 0.8 |
 
-## Logo and mascot (design/logo.md, design/mascot.md)
+## Logo, mascot, deliverables
 
-| Claim | Basis | Label | Conf. |
-|---|---|---|---|
-| Mascot-first and logo-first both exist; decide per brand (no mascot, logo first, character first, one asset) | A museum mascot from 1977 became the logo, then the identity [20]; a browser mascot drawn from the existing logo [21] | verified / secondhand | 0.6 |
-| 4 to 8 variants, differing in approach | Owner direction. **No source supports 4 to 8**: sources cluster at 1 to 3 (three: "safe, adventurous, scary" [13]; one: Rand, and a 2026 designer [13] [14]). Choice overload averages near zero across 50 experiments and appears when options are hard to compare [15]; so the rule makes them comparable: differ in approach, same size, one grid, one line of reasoning each | owner + secondhand | 0.55 |
-| Show on light and dark and at small size, same size, in a grid | Consistent practitioner advice, no study [32] | vendor | 0.5 |
-| Iterate within the chosen approach, citing the brief | [14] | secondhand | 0.6 |
-| Kind-of-mark table (wordmark, symbol, combination, character) | No study compares minimal and character marks; mascot fit test from [19] | inference + verified | 0.5 |
-| Off-centre or leaning character as one option | Owner observation; sources show asymmetry and type "leaning forward" [23] [24], nothing on off-centre characters | inference | 0.3 |
-| SVG by code; complex marks break; mixed weights and radii in sets; the model cannot see its own render | [28]; every model degrades with complexity [29] | vendor / verified abstract | 0.7 |
-| Image models output raster; tracing gives messy nodes; image-to-SVG models exist | [28]; [30] unread | vendor + inference | 0.6 |
-| Text in generated images often misspelled | Common observation; no source read in this pass | inference | 0.5 |
-| Clearance needs a person; AI search is not clearance | [31] | verified | 0.85 |
-| Tests: 16/32/64 px, one color, inverse, no gradients, optical overshoot, deliverables | [25]; [26] [27] snippets | verified | 0.7 to 0.8 |
-| Silhouette test | Convention; no study | inference | 0.5 |
-| Node count under about 50 | [25] rule of thumb | verified (rule of thumb) | 0.4 |
-| Clear-space test | Common deliverable; not in the sources read | inference | 0.5 |
-| Logo hands off color, type, shape language to tokens | **No source maps a logo to tokens.** Color variants as sub-brands [20]; asymmetry signals motion [24] | inference | 0.45 to 0.6 |
-| Mascot: living character, usually supplementary, fit test ("probably isn't going to fit" an introverted company), full-body and expression range sheet | [19]; [20]. The listed emotions and extra views are examples, not sourced | verified + inference | 0.65 to 0.8 |
-| Targets at least 24 CSS px; non-text 3:1 | WCAG 2.2 SC 2.5.8 [42] and 1.4.11; see [components.md](components.md) | verified | 0.9 to 0.95 |
-| Expression without a face | [21] [22] | secondhand | 0.65 |
+Moved to [logo.md](logo.md).
 
 ## Where people disagree
 
@@ -87,7 +69,7 @@ Evidence behind [design/](../design/index.md); foundations evidence is in [found
 - **Rule counts.** Published counts for the same skills disagree (57 to 67); do not quote one.
 - **Brand or logo first.** Strategy first [10] [11]; some designers fix type and color first and draw the mark inside them. Resolved: the brief first, the mark checked against it.
 - **Identify or charm.** "Designed to identify" [11] vs mascot practice, where charm is the point [19]. Resolved: a mascot must still identify.
-- **Option count.** One [14], three [13], 4 to 8 (owner, no source). The skill follows the owner and makes the options easy to compare.
+- **Option count:** see [logo.md](logo.md).
 - **Random or dealt directions.** Some skills deal directions from a catalog by seed, or log draws so consecutive builds differ [6] [9]. Considered and rejected: no measured effect (confidence 0.3 to 0.35), and variety here comes from the subject and the forced comparison instead.
 
 ## Gaps
@@ -96,8 +78,7 @@ Evidence behind [design/](../design/index.md); foundations evidence is in [found
 - One vendor's gallery and catalog are private; vendor figures are qualitative.
 - Not read: several brand and design-system skills, component-library guidance, full texts of [9], the original prevalence scan, homogeneity papers.
 - Type-scale ratios and the 8-point spacing convention are unverified here; the token format is checked in [foundations.md](foundations.md).
-- Unread: two logo simplicity and complexity studies (titles only), archetype studies, the image-to-SVG paper [30], full texts of [11] [18] [23], the strategy book behind [10].
-- No source supports 4 to 8 logo options, maps a logo to tokens, or compares agent-made and human-made logos.
+- Unread: a logo complexity study (title only), archetype studies, the image-to-SVG paper [30], full texts of [11] [18] [23], the strategy book behind [10]. Logo gaps are in [logo.md](logo.md).
 
 ## References
 

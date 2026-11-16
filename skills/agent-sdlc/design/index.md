@@ -9,15 +9,16 @@ Copywriting beyond [anti-slop/copy.md](../anti-slop/copy.md) is out of scope her
 - **Small visual fix:** skip to step 5. One contrast check, one state check, one screenshot.
 - **New product with no design system:** run every step. Brand comes first, then the logo and any mascot in the order the brief sets, then foundations.
 - **New surface in a product that has a system:** step 1, then step 4 for layout.
+- **Logo or brand only:** steps 2 and 3.1 to 3.3, then the [logo deliverables](logo-deliverables.md) and the report. No foundations, layouts, or page screenshots unless asked.
 
 ## Steps
 
 1. **Existing design system? Follow it and stop designing.** If tokens, a style guide, a component library, or a design file exist, use them. Do not invent new colors, fonts, or spacing. Go to step 4 if a new layout is needed, else step 5.
-2. **Get the purpose and the name.** Purpose, audience, primary job, and the one action. If the purpose is open, propose it in one line and continue; ask one question only if the answer changes the work. Get a project name before visual work: the name shapes the brand and the logo. A working name is fine; note that a rename redoes the logo.
+2. **Get the purpose.** Purpose, audience, primary job, and the one action. If the purpose is open, propose it in one line and continue; ask one question only if the answer changes the work. A new brand also needs a name first ([brand.md](brand.md)).
 3. **Build the identity, in order.** Each step reads the one before it.
    1. Brand brief ([brand.md](brand.md)).
    2. Decide the logo and mascot relationship from the brief ([logo.md](logo.md)): logo first, character first, one asset, or no mascot.
-   3. Make them in that order: the logo as 4 to 8 variations the owner picks from ([logo.md](logo.md)); the mascot, if any ([mascot.md](mascot.md)).
+   3. Make them in that order: the logo, from a wide set of rough concepts down to 4 to 8 finished variants the owner picks from ([logo.md](logo.md)); the mascot, if any ([mascot.md](mascot.md)).
    4. Foundations: color, type, spacing, radii, measure, density, imagery, video, motion, tokens ([foundations.md](foundations.md)).
 4. **Directions, where a surface still needs them.** For a new page or screen whose layout the system does not settle:
    1. Write the content hierarchy with real copy before any visual choice.
@@ -27,16 +28,32 @@ Copywriting beyond [anti-slop/copy.md](../anti-slop/copy.md) is out of scope her
    Variety comes from the subject and this forced comparison, never from random seeds or dealt directions.
 5. **Check the floor** ([floor-checks.md](floor-checks.md)). Any failure stops the work until fixed. For buttons, inputs, and icons, run [components.md](components.md) too.
 6. **Build, then screenshot** at desktop and phone width. Compare with the brief, not with taste.
-7. **Report:** the decisions, their reasons, the rejects and why, and what would change the call.
+7. **Report** in the format below.
 
 ## Use lists as questions
 
 A list of known default looks is useful as questions, not bans: "Does this numbering encode a sequence?" lasts longer than "no numbered markers". The lists go stale with each model release ([floor-checks.md](floor-checks.md)).
 
+## Design report
+
+The code report in [handoff/index.md](../handoff/index.md) does not fit design work. Report instead, in about 12 lines:
+
+1. **Outcome:** done, partial, or blocked, and which scope (fix, surface, full brand, logo only).
+2. **Where:** the view in the host's visual tool, and the paths of the source files.
+3. **Decisions** with their reasons, each tied to a brief line.
+4. **Options shown,** ranked with reasons; the owner's choice, or that it is pending.
+5. **Drops:** every rejected option, one line each with why.
+6. **Checks:** the gates or floor checks run, with their evidence (renders, contrast output).
+7. **Not verified:** trademark, font licence, platform previews, anything else.
+8. **Decisions needed** from the owner, and what would change the call.
+
 ## Done when
 
-- [ ] An existing system was followed, or steps 2 and 3 produced a brand brief, a written logo and mascot decision, a chosen logo, and foundations.
+Check the items that apply to the scope.
+
+- [ ] An existing system was followed, or the brand brief, the written logo and mascot decision, and the chosen logo exist.
+- [ ] Full brand: foundations exist, and every color, typeface, and spacing value traces to the brief or the system.
+- [ ] Logo only: the deliverables set exists; no layout or foundations work was added.
 - [ ] Every new surface layout had 3 to 5 directions drafted and the rejects logged with reasons.
-- [ ] Every color, typeface, and spacing value traces to the brief or the system.
-- [ ] Floor checks pass, with screenshots at both widths.
-- [ ] The report names the decisions, reasons, rejects, and what would change them.
+- [ ] UI work: floor checks pass, with screenshots at both widths.
+- [ ] The report follows the design report format.
