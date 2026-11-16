@@ -1,6 +1,6 @@
 ---
 name: agent-sdlc
-description: "Software lifecycle for AI coding agents, split into stages, roles, and principles that load on demand. Use when specifying, designing, implementing, testing, reviewing, integrating, releasing, or handing off a code change; when splitting work or writing a brief for another agent; when deciding how deep to test or review; or when auditing or hardening a repository. Works with or without role-specific agents."
+description: "Read before writing, changing, reviewing, testing, or handing off code, before delegating work to another agent, and before auditing a repo."
 license: MIT
 ---
 
