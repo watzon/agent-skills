@@ -35,7 +35,7 @@ Unsure: go one tier up. The tiers are inference built on one vendor's practice (
 | Orchestrator / project manager: you plan and hand work to others | [roles/coordinator.md](roles/coordinator.md), [delegation/index.md](delegation/index.md), [delegation/brief.md](delegation/brief.md), [spec/index.md](spec/index.md), [handoff/index.md](handoff/index.md) |
 | Senior developer: hard, ambiguous, or design-heavy work | [roles/implementer.md](roles/implementer.md), [spec/design-note.md](spec/design-note.md), [writing-code/index.md](writing-code/index.md), [writing-code/comments.md](writing-code/comments.md), [testing/index.md](testing/index.md), [review/index.md](review/index.md), [review/checklist.md](review/checklist.md), [anti-slop/index.md](anti-slop/index.md), [handoff/index.md](handoff/index.md); building UI: [design/index.md](design/index.md) |
 | Junior developer: well-specified routine work | [roles/implementer.md](roles/implementer.md), [writing-code/index.md](writing-code/index.md), [writing-code/comments.md](writing-code/comments.md), [testing/index.md](testing/index.md), [review/checklist.md](review/checklist.md), [anti-slop/index.md](anti-slop/index.md), [handoff/index.md](handoff/index.md); building UI: [design/index.md](design/index.md) |
-| Designer: UI, brand, or visual work | [design/index.md](design/index.md), [design/floor-checks.md](design/floor-checks.md), [anti-slop/copy.md](anti-slop/copy.md), [anti-slop/index.md](anti-slop/index.md), [handoff/index.md](handoff/index.md) |
+| Designer: UI, brand, or visual work | [design/index.md](design/index.md), [design/floor-checks.md](design/floor-checks.md); new brand: [design/brand.md](design/brand.md), [design/logo.md](design/logo.md), [design/mascot.md](design/mascot.md), [design/foundations.md](design/foundations.md); [anti-slop/copy.md](anti-slop/copy.md), [anti-slop/index.md](anti-slop/index.md), [handoff/index.md](handoff/index.md) |
 | Reviewer | [roles/reviewer.md](roles/reviewer.md), [review/index.md](review/index.md), [review/checklist.md](review/checklist.md), [anti-slop/index.md](anti-slop/index.md), [failure-modes/index.md](failure-modes/index.md) |
 | QA / verifier | [roles/verifier.md](roles/verifier.md), [review/index.md](review/index.md), [testing/index.md](testing/index.md) |
 | Researcher | [roles/researcher.md](roles/researcher.md), [harness/index.md](harness/index.md) |
@@ -52,7 +52,9 @@ Unsure: go one tier up. The tiers are inference built on one vendor's practice (
 | Choosing types, data structures, or boundaries | [principles/design.md](principles/design.md) |
 | Debugging, or building steps that retry, resume, or run in sequence | [principles/operations.md](principles/operations.md) |
 | Building or changing UI | [design/index.md](design/index.md), [design/floor-checks.md](design/floor-checks.md) |
-| Setting a brand, logo, or design tokens where no system exists | [design/brand.md](design/brand.md), [design/foundations.md](design/foundations.md) |
+| Setting a brand where no design system exists | [design/index.md](design/index.md), [design/brand.md](design/brand.md) |
+| Making a logo or a mascot | [design/logo.md](design/logo.md), [design/mascot.md](design/mascot.md) |
+| Setting type, spacing, motion, or design tokens | [design/foundations.md](design/foundations.md) |
 | Writing UI text, docs, or reports | [anti-slop/copy.md](anti-slop/copy.md) |
 | Adding compatibility code, flags, settings, placeholders, or shown numbers | [anti-slop/product.md](anti-slop/product.md) |
 | Writing tests or proving a change works | [testing/index.md](testing/index.md) |
@@ -65,4 +67,4 @@ Unsure: go one tier up. The tiers are inference built on one vendor's practice (
 | Writing or fixing the project instruction file (always-loaded agent instructions) | [harness/instruction-files.md](harness/instruction-files.md) |
 | Auditing a repo for agent work | [harness/audit.md](harness/audit.md) |
 
-Every claim behind these files, with its label and confidence: [SOURCES.md](SOURCES.md), [sources/anti-slop.md](sources/anti-slop.md), [sources/design.md](sources/design.md).
+Every claim behind these files, with its label and confidence: [SOURCES.md](SOURCES.md), [sources/anti-slop.md](sources/anti-slop.md), [sources/design.md](sources/design.md), [sources/foundations.md](sources/foundations.md).
