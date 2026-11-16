@@ -9,6 +9,7 @@ Read when declaring work done, reporting to a coordinator or person, or judging 
 - Tests, typecheck, and lint ran, with the commands and output shown.
 - Review done at the tier's depth; no open blocking findings.
 - The diff stays inside the spec. Docs and comments touched by the change are still true.
+- The anti-slop sweep ran on the diff, with output ([anti-slop/index.md](../anti-slop/index.md)).
 - Rollback noted for T2 and up.
 
 Never claim success for incomplete work. Partial is fine when labeled partial.
