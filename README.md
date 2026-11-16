@@ -6,6 +6,7 @@ Personal skills for [Claude Code](https://docs.anthropic.com/en/docs/claude-code
 
 | Skill | Description |
 |---|---|
+| [agent-sdlc](./skills/agent-sdlc/) | Lifecycle for AI coding agents: a small router to per-stage, role, principle, failure-mode, and audit files read on demand |
 | [artifact](./skills/artifact/) | Publish a report, explainer, dashboard, table, or mockup as a live here.now page |
 | [durable-quality](./skills/durable-quality/) | Standing quality baseline for AI-assisted coding: intent, proof, structure, ownership, and risk-scaled review |
 
