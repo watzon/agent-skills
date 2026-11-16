@@ -1,6 +1,6 @@
 ---
 name: durable-quality
-description: Quality baseline for code changes: state intent first, reuse existing patterns, and verify in proportion to risk before calling work done. Also covers repo quality audits, CI safeguards, agent-PR review, and writing AGENTS.md rules. Use when writing, changing, or reviewing code, or when asked to audit or harden a repository.
+description: "Quality baseline for code changes: state intent first, reuse existing patterns, and verify in proportion to risk before calling work done. Also covers repo quality audits, CI safeguards, agent-PR review, and writing AGENTS.md rules. Use when writing, changing, or reviewing code, or when asked to audit or harden a repository."
 license: MIT
 ---
 
