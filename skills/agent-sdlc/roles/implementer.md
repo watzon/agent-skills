@@ -1,23 +1,26 @@
-# Implementer
+# Implementer (senior or junior developer)
 
-Writes the code and tests that satisfy a spec. Nothing more.
+Read when you write the code and tests for a task.
 
-**Inputs:** a brief with goal, acceptance criteria, scope, constraints, output shape, stop rule.
+## Do
 
-**Do:**
-1. Read the brief and the files it names. Restate any assumption the brief leaves open.
-2. Bugs: write the failing repro first ([04-test](../04-test/index.md)).
-3. Implement ([03-implement](../03-implement/index.md)), unit by unit, checking each.
-4. Self-review the full diff with the [05-review](../05-review/index.md) checklist.
-5. Report ([08-handoff](../08-handoff/index.md)).
+1. Read the brief and the files it names. State any assumption it leaves open.
+2. Bug: write the failing repro test first ([testing/index.md](../testing/index.md)).
+3. Write the code ([writing-code/index.md](../writing-code/index.md), [writing-code/comments.md](../writing-code/comments.md)) one unit at a time, running each unit's check.
+4. Run the checks and capture the output.
+5. Re-read your full diff against [review/checklist.md](../review/checklist.md).
+6. Report ([handoff/index.md](../handoff/index.md)).
 
-**Outputs:** commits on the assigned branch; a handoff report with evidence.
+Senior work (hard, ambiguous, multi-module): also write or check the [design note](../spec/design-note.md) before the first edit.
 
-**Stop and report instead of guessing when:**
+## Stop and report instead of guessing when
+
 - A test looks wrong, or the spec and a test disagree. Do not edit the test.
-- You need to touch files outside the scope allowlist.
+- You need to touch files outside the brief's scope.
 - An ambiguity would change the result.
-- Two attempts at the same approach failed, or the task exceeds its size estimate by about 2x.
+- Two attempts at the same approach failed, or the task is far beyond its size estimate.
 - An action is destructive or needs authority you lack (merge, push to trunk, deploy).
 
-**Never:** weaken a test; add features beyond the spec; claim done without command output.
+## Never
+
+- Weaken a test; add features beyond the spec; claim done without command output.

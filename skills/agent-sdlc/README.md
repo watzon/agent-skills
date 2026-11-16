@@ -1,42 +1,48 @@
 # agent-sdlc
 
-A software lifecycle skill for AI coding agents. It covers spec, design, implementation, testing, review, integration, release, and handoff, plus roles, delegation, engineering principles, failure modes, and repo audits.
+A software lifecycle skill for AI coding agents: spec, writing code, testing, review, delegation, integration, release, handoff, and the repo harness that enforces the rules.
 
-The content is written for agents: imperative, short, and checkable. `SKILL.md` is a small router (under 80 lines). An agent loads it, picks its risk tier, and reads only the directory for its current step. It assumes no particular agent runtime, vendor, or named roles.
+The files are written for agents: imperative, short, and checkable. `SKILL.md` is a router (under 80 lines) with a short overview of the flow and risk tiers, a "read by role" table, and a "read by task" table. Every file it names is one link away; no file links to a file the router does not also list. The skill assumes no particular agent runtime, vendor, or named roles.
+
+## Point to it from your project
+
+Skills trigger unreliably from their description alone. Paste these two lines into the project's always-loaded instructions (`AGENTS.md`, `CLAUDE.md`, or equivalent):
+
+```markdown
+## Development lifecycle
+Before you plan, delegate, write, test, review, or hand off code, read the agent-sdlc skill (SKILL.md) and the files it lists for your role.
+```
 
 ## Layout
 
 ```
-SKILL.md          router, always-rules, risk tiers T0-T3
-SOURCES.md        evidence behind the defaults, with confidence labels
-01-spec/ ... 08-handoff/   one directory per stage; index.md = steps, artifact, done-when
-05-review/code-health.md   second-pass review for T2+
-roles/            coordinator, implementer, reviewer, verifier, researcher; mapping when no roles exist
-delegation/       one agent vs many, splitting, brief template
-principles/       one file per principle, each opening with its "Apply when..." trigger
-failure-modes/    signals, checks, and guards for common agent failures
-audit/            repo scorecard, CI/ownership harness, writing AGENTS.md
+SKILL.md                 router: flow, tiers, always-rules, role and task tables
+SOURCES.md               every rule's basis, label, and confidence; disagreements; gaps
+spec/                    index.md (sizing, criteria, sessions), design-note.md
+writing-code/            index.md (diffs, names, dead code, commits), comments.md
+testing/                 index.md (repro tests, test guarding, evidence, which tests pay)
+review/                  index.md (process, rounds, size), checklist.md
+roles/                   coordinator, implementer, reviewer, verifier, researcher
+delegation/              index.md (one agent or many, one writer), brief.md
+integrate-release/       index.md (merging, parallel workspaces, thin release notes)
+handoff/                 index.md (definition of done, report)
+harness/                 index.md (hooks, CI, sandbox, injection), instruction-files.md, audit.md
+principles/              design.md, operations.md
+failure-modes/           index.md
 ```
 
-Why this cut: stages answer "what do I do now", roles answer "what is my job", and principles answer "how do I think about this". Each is read on its own trigger. The agent-PR gate lives in `05-review` (a reviewer needs it during review), and `audit/` links to it instead of copying it.
+## Evidence
 
-## Sources
+Each rule traces to a row in `SOURCES.md` with a label (verified, secondhand, vendor, inference) and a confidence. Where a rule rests on inference, the file says so. The risk tiers, the three-round review cap, and the release section are defaults, not findings. Change them when your own results disagree.
 
-Merged and condensed from:
-- `durable-quality` and its references (this repo): standing rules, proof ladder, review checklists, audit scorecard, harness and agent-rules playbooks. The T0-T5 proof ladder was folded into T0-T3: old T3 (parsers, state machines) went to T2, and old T4-T5 went to T3.
-- The 12 `principle-*` skills (this repo): one file each, tightened, with links to missing skills removed and overlap resolved by linking.
-- The hub skills `agent-sdlc` (draft) and `multi-agent-orchestration`: tiers, stages, review rules, round caps, failure modes, handoff format, delegation rules, brief shape.
-- A research report on agent SDLC practice: sourced claims and confidence labels, kept in `SOURCES.md`.
-- `principles/behavior.md` paraphrases the four ideas (think before coding, simplicity, surgical changes, goal-driven execution) from the `karpathy-guidelines` skill by forrestchang/multica-ai (https://github.com/multica-ai/andrej-karpathy-skills), which draws on Andrej Karpathy's observations on LLM coding pitfalls. That repo declares MIT in its README and skill frontmatter but ships no LICENSE file with a copyright notice, so the text here is our own wording, not a copy.
-
-## Confidence
-
-The tiers, round cap, and review-size limits are defaults, not findings. Their basis and confidence are in `SOURCES.md`. Claims labeled inference are reasoning, not evidence. Change the numbers when your own results disagree.
+The research behind this revision covered roles and orchestration, writing code, testing, review, spec and planning, integration and harness, and skill design. Earlier material came from the `durable-quality` and `principle-*` skills in this repo. The simplicity and surgical-change ideas in `writing-code/` draw on Andrej Karpathy's observations on LLM coding pitfalls, as collected in the `karpathy-guidelines` skill (multica-ai/andrej-karpathy-skills); that repo ships no LICENSE file, so the wording here is our own.
 
 ## Extending
 
-- New stage or topic: add a directory with `index.md` that opens with a one-line "Read when..." trigger and ends with a checkable "Done when" list. Add one row to the router table.
-- New principle: add `principles/<name>.md` opening with "Apply when...", then a row in `principles/index.md`.
-- Keep files under about 120 lines. Link to an existing file instead of repeating its point.
-- No agent names, product names, or employer material in the skill files.
-- Validate: `SKILL.md` frontmatter must parse as YAML (quote values containing a colon), and every router link must resolve.
+- Put key rules first, keep the rule count per file low, write in the imperative, and give the reason for any rule that is not obvious.
+- Keep files under about 120 lines. Open each with a "Read when..." line and end with a checkable "Done when" list.
+- Add every new file to the router with its exact path. Keep references one level deep.
+- Add a `SOURCES.md` row for every non-obvious rule. Label inference as inference. Do not invent numbers.
+- No agent names, product names in rules, or personal or employer material.
+- Validate: frontmatter parses as YAML (quote values that contain a colon); every relative link resolves.
+- Test triggering and file use on the models you run, including small ones, before and after a change.

@@ -6,7 +6,7 @@ Personal skills for [Claude Code](https://docs.anthropic.com/en/docs/claude-code
 
 | Skill | Description |
 |---|---|
-| [agent-sdlc](./skills/agent-sdlc/) | Lifecycle for AI coding agents: a small router to per-stage, role, principle, failure-mode, and audit files read on demand |
+| [agent-sdlc](./skills/agent-sdlc/) | Lifecycle for AI coding agents: a router that sends each role or task to a few short, sourced files (spec, writing code, testing, review, delegation, harness) |
 | [artifact](./skills/artifact/) | Publish a report, explainer, dashboard, table, or mockup as a live here.now page |
 | [durable-quality](./skills/durable-quality/) | Standing quality baseline for AI-assisted coding: intent, proof, structure, ownership, and risk-scaled review |
 
@@ -22,9 +22,12 @@ Clone the repository, then symlink each skill so this repo stays the source of t
 
 ```bash
 git clone https://github.com/watzon/agent-skills ~/Projects/personal/agent-skills
+ln -s ~/Projects/personal/agent-skills/skills/agent-sdlc ~/.agents/skills/agent-sdlc
 ln -s ~/Projects/personal/agent-skills/skills/artifact ~/.agents/skills/artifact
 ln -s ~/Projects/personal/agent-skills/skills/durable-quality ~/.agents/skills/durable-quality
 ```
+
+For `agent-sdlc`, also paste the two-line pointer from [its README](./skills/agent-sdlc/README.md#point-to-it-from-your-project) into each project's `AGENTS.md` or `CLAUDE.md`, so agents find it.
 
 `artifact` also needs the `here-now` skill:
 

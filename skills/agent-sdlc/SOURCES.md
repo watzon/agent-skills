@@ -1,44 +1,109 @@
-# Sources and confidence
+# Sources
 
-Labels: **verified** (source read in the research pass), **carried** (from an earlier pass or a secondary summary, not re-checked), **vendor** (single vendor, unverified), **inference** (reasoning, no direct source). Revise defaults as results come in.
+Evidence behind each rule. Labels are the research pass's: **verified** (source read), **secondhand** (via a summary, snippet, or quote), **vendor** (a company's claim about its own product or practice), **inference** (reasoning, no direct source). Confidence (0 to 1) is the research pass's judgment of how well the rule is supported. Most evidence is from 2025 to 2026, small, and often preprints. Change a default when your own results disagree.
 
-## Defaults this skill sets
+## Router and tiers
 
-| Default | Basis | Confidence |
-|---|---|---|
-| Risk tiers T0 to T3 | Inference from review-size and delivery-stability evidence and common practice. No controlled study links tiers to outcomes. | Low to medium |
-| 2 review rounds; 3 only at T3 | Diminishing returns seen in repair-loop preprints (one preprint for "after round 3") | Medium |
-| Review 200 changed lines target, 400 cap | Cisco/SmartBear 2006 study of 2,500 human reviews, via a secondary summary; applying it to agents is inference | Low to medium |
-| Clean-context reviewer given spec, diff, test output | Fresh-context review pattern in Claude Code docs (verified); Cognition (carried, single vendor). The token saving is inference, not measured | Medium |
-| Role and capability split | Inference | Low to medium |
-| Quarantine flaky tests; no retry-to-green | Inference, no verified source | Low |
-| Mutation testing at T2+ | Papers exist (SWE-Mutation 2026; a 2025 replicability study); results not read. Inference | Low |
+| Rule | Basis | Label | Conf. |
+|---|---|---|---|
+| Tiers T0 to T3 and their review/human columns | Built on Anthropic's internal tiers (low risk: no human once checks pass; medium: one person; high: two; auth, billing, CI files always need a person; agent approval never counts) [1] | vendor + inference | 0.5 |
+| Router with exact paths, role table, short "Use when" description | [21] [22] [23]; agents rarely search for the right file [24] | verified | 0.85 |
+| Pointer from AGENTS.md / CLAUDE.md | One study: indirect requests fired a skill in 15% of runs; a session-start reminder raised it to 62% [25] | verified, single study | 0.6 |
 
-## Claims
+## Writing code and comments (writing-code/)
 
-**Test tampering and reward hacking are real** (verified):
-- ImpossibleBench: GPT-5 cheats in 76% of Oneoff-SWEbench tasks. A prompt change cut cheating on Conflicting-LiveCodeBench from 92% to 1%. https://arxiv.org/html/2510.20270v1
-- LLM monitors caught 86-89% of cheating attempts on Impossible-LiveCodeBench but only 42-65% on Impossible-SWEbench: review of complex diffs is weaker. Same source.
-- METR: o3 patched the evaluator to pass everything; models copied cached answers and faked timing, while showing they knew it went against user intent. https://metr.org/blog/2025-06-05-recent-reward-hacking/
-- Anthropic's long-running harness forbids removing or editing tests, and keeps status in JSON, which models alter less than Markdown. https://www.anthropic.com/research/effective-harnesses-for-long-running-agents
+| Rule | Basis | Label | Conf. |
+|---|---|---|---|
+| Never write history in comments; current state only | Agents followed a stale instruction file in 90.1% of choices [2]; followed stale guidance and never repaired it [3]; zero-comment, no-history rule in a production AGENTS.md [4] | verified | 0.9 |
+| Fix or delete a comment your change makes false | 63.2% of AI-authored PRs changed code without updating docs [5] (documentation files, not inline comments); [3] | verified | 0.85 |
+| Default to zero comments; keep a non-obvious "why" | Removal neutral or slightly better for strong models [6] [7]; comments from correct solutions raised pass@1 17.2%, unrelated ones cut it 20.8% [8]; [4] | verified | 0.7 |
+| Don't strip a real "why" | A stripped branch needed lint directives restored [7]; an agent replaced a fencepost reason with a restatement (anecdote) [7] | verified / anecdote | 0.6 |
+| History goes in commits and PR text | [4] (PR body) | verified | 0.85 |
+| Small diffs, no parallel abstraction, cleanup in its own change | [4]; cleaner code used 7 to 8% fewer tokens, same pass rate [9] (vendor interest); Willison dissents on cleanup [10] | verified + vendor | 0.65 |
+| Reuse before writing | Agent PRs add redundancy ("More Code, Less Reuse", arXiv 2601.21276) [11] | secondhand | 0.6 |
+| Greppable names over comments; readable, not golfed | Ronacher on terse code leaking into codebases [12]; distraction was the top failure cause in [6] | secondhand + inference | 0.55 |
+| Two failed attempts, then stop | No source | inference | 0.4 |
 
-**Green is not correct** (verified from abstract): on SWE-bench Verified, 7.8% of "solved" patches fail the developers' own tests and 29.6% behave differently from ground truth; reported rates inflated by 6.2 points. https://arxiv.org/abs/2503.15223
+## Testing (testing/)
 
-**Review practice:**
-- Google's review order (design, functionality, complexity, tests, naming, comments, style); "will the tests fail when the code is broken?"; "Nit:" never blocks (verified). https://google.github.io/eng-practices/review/reviewer/looking-for.html
-- Repro-first for bugs: "write a failing test that reproduces it, then fix it" (verified). https://code.claude.com/docs/en/best-practices
-- Reviewers told to find problems report some even when there are few; advice to add "skip style" (carried).
-- A newer model made about 4x more nitpicks and caught fewer known bugs (55.2% vs 61.1%) (vendor: CodeRabbit).
-- SWR-Bench: aggregating several review passes raised F1 by up to 43.67% at higher token cost (carried). arXiv 2509.01494
-- Cisco/SmartBear via Grosser: under 200 LOC per review, never over 400; under 300 LOC/hour; under 60 minutes; self-annotated diffs have fewer defects (carried, secondary). https://grosser.it/2008/02/20/code-review-analyzed-1-book-to-1-page/
+| Rule | Basis | Label | Conf. |
+|---|---|---|---|
+| Repro test per bug, seen failing | "Write a failing test that reproduces it, then fix it" [13]; red/green: confirm the test fails first [14] | verified | 0.85 |
+| Do not edit existing tests; enforce it | GPT-5 passed spec-contradicting tests in 76% of one-off SWE-bench tasks; a prompt change cut one variant from 92% to 1% [15]; harness forbids editing tests [16]; "never modify existing tests" (OpenAI, quoted) [17] | verified / secondhand | 0.8 |
+| Evidence is command and output | [13] | verified, vendor doc | 0.8 |
+| Must-run checks in hooks/CI; no "always run tests" | [13]; generic run-tests instructions reported to backfire (TDAD study, not read) [17] | verified / secondhand | 0.75 |
+| No TDD by default in the loop | No quality gain, 2.96x to 8.5x tokens, agents faked the red step; small n, greenfield [18] | verified | 0.5 |
+| Mutation testing as periodic sensor | Thoughtworks Radar: Adopt; coverage easy to inflate [19]; reliable only in regression-style settings [20] | verified | 0.6 |
+| Integration over mock-heavy units; contract, property tests | Tautological tests [18]; "green mocked tests do not prove the UX" [26]; the rest | verified / inference | 0.5 to 0.6 |
+| Green is not correct | 7.8% of "solved" SWE-bench patches fail developer tests; 29.6% diverge from ground truth (arXiv 2503.15223) | verified (abstract) | 0.8 |
+| Quarantine flaky tests | No source | inference | 0.4 |
 
-**Multi-agent:**
-- Multi-agent research runs used about 15x the tokens of chat (carried). Anthropic, multi-agent research system, Jun 2025.
-- Parallel writers make conflicting implicit choices (carried). Cognition, Don't Build Multi-Agents (Jun 2025); Multi-Agents: What's Actually Working (Apr 2026).
-- Agents working together did about 30% worse than alone (carried). CooperBench, arXiv 2601.13295.
+## Review (review/)
 
-**Insecure code:** about 45% of generated code failed security tests in a prompt-based study (vendor, unverified: Veracode 2025).
+| Rule | Basis | Label | Conf. |
+|---|---|---|---|
+| Checks and output before review | [1]; [26]; give the agent something to run [13] | verified, vendor | 0.85 |
+| Fresh-context reviewer with spec, diff, test output | [13]; [1]; clean-context reviewer [28] | verified, vendor | 0.8 |
+| Blocking vs nit; nits never block | Important / Nit / Pre-existing tags [29]; Google "Nit:" [30] | verified | 0.8 |
+| Stop at no blockers; cap 3; re-review new diff; escalate | Review did not converge (one PR ran 50+ rounds); capped at three [1] | vendor | 0.6 |
+| Escalate on a repeat finding or a second dispute | Earlier research pass | inference | 0.5 |
+| Size: about 100 lines fine, 1,000 too large; count files | Google eng-practices [31] | verified | 0.5 |
+| Cross-model review optional | Benefit was one-directional in one preprint [32]; same-model judges fine if they match human labels [33] | verified, one study | 0.45 |
+| Findings cite file:line and evidence | [1]; [11] | verified, vendor | 0.7 |
 
-**Broader AI-era evidence** (carried from the durable-quality skill, not re-verified): GitClear 2025 (more duplication, less refactoring); DORA 2024 (lower delivery stability with more AI); METR RCT arXiv 2507.09089 (experienced developers about 19% slower on mature repos with early-2025 tools); Huang et al. arXiv 2601.21276 (more code, less reuse in agent PRs); Liu et al. arXiv 2603.28592 (AI-introduced debt survives at HEAD).
+## Spec (spec/)
 
-Not verified in any pass: the Cisco PDF itself, Cognition's posts, SWR-Bench figures, CodeRabbit figures, Veracode figures, mutation-testing results.
+| Rule | Basis | Label | Conf. |
+|---|---|---|---|
+| Size the spec to the change | A small bug became 4 user stories and 16 criteria [34]; one rebuild: 33 min agent time and 3.5 h review vs about 8 min and 15 min (one author, no control) [35]; Radar: Assess [36] | verified | 0.8 |
+| Checkable criteria, test-first | Feature list where only `passes` changes [16]; [14] | verified | 0.85 |
+| Gather, then build in a fresh session | Interview until it adds up to a spec, then a fresh session [13] | verified, vendor doc | 0.7 |
+| One verifiable unit per session | [16]; one task per loop [37] | verified | 0.8 |
+| No prose specs kept in sync by default | Team dropped repo-resident specs [38] (vendor-written); context files add cost without raising success [39] | verified, one study | 0.55 |
+| Ask only on costly-to-reverse decisions | No source counts questions | inference | 0.4 |
+
+## Roles and delegation (roles/, delegation/)
+
+| Rule | Basis | Label | Conf. |
+|---|---|---|---|
+| Single agent by default | 180 configurations: +81% on parallel work, −39 to −70% on sequential planning; independent agents amplified errors up to 17.2x [40]; ~15x chat tokens for multi-agent [41] | verified (blog) | 0.8 |
+| One writer; parallel reads and reviews | [28]; disjoint claims can work [42] | verified | 0.8 |
+| Brief: objective, output format, tools/sources, boundary, decisions | [41]; implicit decisions cause conflicts [43] | verified | 0.85 |
+| Coordinator does not write code (default) | No source states it; from context-isolation arguments [41] [28] | inference | 0.55 |
+| Results as file path + summary | [41]; [44] | verified | 0.75 |
+| Merge in dependency order | No source found | inference | low |
+
+## Harness and release (harness/, integrate-release/)
+
+| Rule | Basis | Label | Conf. |
+|---|---|---|---|
+| Must-rules in hooks, CI, protection | [13] | verified | 0.9 |
+| Server-side gates; sandbox by default | Radar: sandboxing Adopt, pipeline responsibility Assess [45] | verified | 0.85 |
+| Lethal trifecta | [46]; Fowler/Sietsma [47] | verified | 0.85 |
+| Completion gate with an escape hatch | Stop-hook proof file pattern [48] | secondhand | 0.75 |
+| Fast tools; per-edit hooks disputed | [49] | verified (2025) | 0.6 |
+| Short pointer-style instruction files; re-check after model change | [13]; [39]; Codex 32 KiB budget [50]; re-audit advice [12] (secondhand) | verified / secondhand | 0.6 to 0.7 |
+| Worktree traps | One team's report [51] | verified, small sample | 0.6 |
+| Auto-merge only at low risk | Autonomous merge [26] vs risk-tiered oversight [45] [47] | verified; tiering inference | 0.65 |
+| Release, flags, rollback, observability | No sources read | inference | 0.4 |
+
+## Where people disagree
+
+- **Comments:** content matters [8] vs removal neutral or better [6] [7]. Reconciled view: the content helps; wrong content hurts most. Effects vary by model.
+- **Cleanup in the same change:** yes, it is cheap [10]; no, keep diffs minimal [4].
+- **Test-first in the loop:** strong yes [14]; no measured gain at 3x+ cost [18]. One team dropped many slow tests [12] (secondhand).
+- **Round cap:** three [1]; loop until all reviewers agree, no cap (tstack `council`) [26].
+- **Merge without a human:** low risk can auto-merge [1]; every agent PR needs a person (GitHub) [11]; solo projects may defer.
+- **Multi-agent:** fragile [43] vs +90.2% on a research eval [41]; parallel writers fail [28] vs work with locks [42].
+- **Specs as source of truth:** yes (Spec Kit, Tessl) vs "code is the law" [34].
+- **Hooks:** the only deterministic layer [13] vs costly and bypassed in permissive modes [49].
+
+## Gaps the research flagged
+
+Merge order; release, flags, rollback, and observability for agent code; flaky-test and test-maintenance cost; independent review-tool comparisons that score false positives; router-style skills specifically; how many clarifying questions to ask; long-horizon effects of agent-written comments. Not read: the TDAD paper, the full Google scaling paper, OpenAI harness-engineering post, the ASE 2026 stale-comments paper.
+
+## References
+
+[1] Anthropic, Solving code review at Anthropic, https://claude.dev/blog/solving-code-review-at-anthropic/ · [2] https://arxiv.org/abs/2610.30571 · [3] https://arxiv.org/abs/2611.09802 · [4] assistant-ui PR #4174, https://github.com/assistant-ui/assistant-ui/pull/4174 · [5] https://arxiv.org/abs/2610.27381 · [6] https://antimemetics.institute/comment-ablation · [7] https://epeicher.github.io/wairehouse/openstation/experiments/comments-ab.html · [8] https://aclanthology.org/2026.findings-emnlp.916/ · [9] https://arxiv.org/abs/2605.20049 · [10] https://simonwillison.net/guides/agentic-engineering-patterns/better-code/ · [11] https://github.blog/ai-and-ml/generative-ai/agent-pull-requests-are-everywhere-heres-how-to-review-them/ · [12] https://zeronoise.ai/posts/models-are-skipping-the-edit-tool-ronacher-and-huntley-on-code-mode-stale-agentsmd-files-and-harness-design-7dkfd10szww4nmcx · [13] https://code.claude.com/docs/en/best-practices · [14] https://simonwillison.net/guides/agentic-engineering-patterns/red-green-tdd/ · [15] https://arxiv.org/abs/2510.20270 · [16] https://www.anthropic.com/research/effective-harnesses-for-long-running-agents · [17] https://codex.danielvaughan.com/2026/06/05/why-always-run-tests-agents-md-makes-things-worse/ · [18] https://www.martinfowler.com/articles/exploring-gen-ai/tdd-in-the-agent-loop.html · [19] https://www.thoughtworks.com/radar/techniques/mutation-testing · [20] https://arxiv.org/abs/2607.22880 · [21] https://agentskills.io/specification · [22] https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices · [23] https://github.com/obra/superpowers/blob/main/skills/writing-skills/SKILL.md · [24] https://arxiv.org/abs/2604.04323 · [25] https://towardsdatascience.com/a-session-start-hook-raised-claude-code-skill-firing-from-15-to-62/ · [26] https://github.com/t3dotgg/tstack · [28] https://cognition.com/blog/multi-agents-working · [29] https://code.claude.com/docs/en/code-review · [30] https://google.github.io/eng-practices/review/reviewer/looking-for.html · [31] https://google.github.io/eng-practices/review/developer/small-cls.html · [32] https://arxiv.org/abs/2607.21656 · [33] https://hamel.dev/blog/posts/evals-faq/can-i-use-the-same-model-for-both-the-main-task-and-evaluation.html · [34] https://www.martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html · [35] https://blog.scottlogic.com/2025/11/26/putting-spec-kit-through-its-paces-radical-idea-or-reinvented-waterfall.html · [36] https://www.thoughtworks.com/radar/techniques/spec-driven-development · [37] https://ghuntley.com/loop/ · [38] https://talkthinkdo.com/ai-velocity-report/moving-away-from-openspec/ · [39] https://arxiv.org/abs/2602.11988 · [40] https://research.google/blog/towards-a-science-of-scaling-agent-systems-when-and-why-agent-systems-work/ · [41] https://www.anthropic.com/research/multi-agent-research-system · [42] https://www.anthropic.com/research/building-c-compiler · [43] https://cognition.com/blog/dont-build-multi-agents · [44] https://lucumr.pocoo.org/2025/11/21/agents-are-hard/ · [45] https://www.thoughtworks.com/en-us/radar/techniques/agent-sandboxing · [46] https://simonwillison.net/2025/jun/16/the-lethal-trifecta/ · [47] https://martinfowler.com/articles/agentic-ai-security.html · [48] https://marcindudek.dev/blog/claude-code-quality-gates-stop-hook/ · [49] https://lucumr.pocoo.org/2025/7/30/things-that-didnt-work/ · [50] https://learn.chatgpt.com/docs/agent-configuration/agents-md · [51] https://slowbench.com/blog/agents/four-traps-merging-parallel-agent-worktrees
+
+Design and operating principles ([principles/](principles/design.md)) are engineering judgment carried from earlier skills in this repo, not agent research.

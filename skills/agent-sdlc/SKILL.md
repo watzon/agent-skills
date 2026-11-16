@@ -1,53 +1,63 @@
 ---
 name: agent-sdlc
-description: "Read before writing, changing, reviewing, testing, or handing off code, before delegating work to another agent, and before auditing a repo."
+description: "Use when planning, delegating, writing, testing, reviewing, or handing off code, or when setting up a repo for agents."
 license: MIT
 ---
 
 # Agent SDLC
 
-This file is a router. Read only the files your current step needs. Project instructions and the user's intent override this skill.
+This file is a router. Read only the files listed for your role or task. Project instructions and the person's intent override this skill.
+
+## The flow
+
+Spec → write code → test → review and verify → integrate → hand off. Size every step to the risk of the change. A typo needs only the checks; an auth change needs every step and a person.
+
+| Tier | Examples | Spec | Tests | Review | Human |
+|---|---|---|---|---|---|
+| T0 | Typo, docs, comment | None | Existing checks | Checks only | No |
+| T1 | Local bug fix, internal refactor | Intent + criteria | Repro test per bug | One fresh-context review | No |
+| T2 | Public interface, data shape, concurrency, multi-file | + design note | + integration test on the changed path | Fresh-context review against the spec | One person, where available |
+| T3 | Auth, permissions, money, personal data, migrations, deletes, CI, release | + design note | + negative tests | Fresh-context review, security focus | Required |
+
+Unsure: go one tier up. The tiers are inference built on one vendor's practice ([SOURCES.md](SOURCES.md)).
 
 ## Always
 
-- Pick a risk tier before starting (table below). Unsure: go one tier up.
-- Never delete, weaken, or special-case a test to get green. If a test looks wrong, stop and report it.
-- Evidence over claims: command output, a test that failed before and passes after, the diff.
-- Stay inside the spec. Put unrelated findings in the report, not the diff.
-- Follow the environment's rules on who may merge, push, deploy, or delete.
+- Run the checks and show the command and its output. "Done" or "tests pass" is not evidence.
+- Never delete, weaken, or skip a test to get green. If a test looks wrong, stop and report it.
+- Stay inside the task. Report unrelated findings; do not fix them in this diff.
+- Follow the environment's rules on who may push, merge, deploy, or delete.
 
-## Risk tiers
+## Read by role
 
-| Tier | Examples | Tests | Review | Human |
-|---|---|---|---|---|
-| T0 | Typos, comments, docs | None new; lint | CI only | No |
-| T1 | Local bugfix, internal refactor | Repro + regression | 1 clean-context reviewer, max 2 rounds | No |
-| T2 | Public interface, data shape, concurrency, parsers, multi-file | + integration, contract, or property tests | Against spec and design note, max 2 rounds; different model or human spot check | Optional |
-| T3 | Auth, permissions, PII, money, migrations, deletes, infra | + adversarial and negative tests; staged rollout | Security-focused, max 3 rounds | Required |
+| You are acting as | Read, in order |
+|---|---|
+| Orchestrator / project manager: you plan and hand work to others | [roles/coordinator.md](roles/coordinator.md), [delegation/index.md](delegation/index.md), [delegation/brief.md](delegation/brief.md), [spec/index.md](spec/index.md) |
+| Senior developer: hard, ambiguous, or design-heavy work | [roles/implementer.md](roles/implementer.md), [spec/design-note.md](spec/design-note.md), [writing-code/index.md](writing-code/index.md), [writing-code/comments.md](writing-code/comments.md), [testing/index.md](testing/index.md), [review/index.md](review/index.md) |
+| Junior developer: well-specified routine work | [roles/implementer.md](roles/implementer.md), [writing-code/index.md](writing-code/index.md), [writing-code/comments.md](writing-code/comments.md), [testing/index.md](testing/index.md) |
+| Reviewer | [roles/reviewer.md](roles/reviewer.md), [review/index.md](review/index.md), [review/checklist.md](review/checklist.md) |
+| QA / verifier | [roles/verifier.md](roles/verifier.md), [review/index.md](review/index.md), [testing/index.md](testing/index.md) |
+| Researcher | [roles/researcher.md](roles/researcher.md) |
+| A single agent with no roles | [spec/index.md](spec/index.md), [writing-code/index.md](writing-code/index.md), [testing/index.md](testing/index.md), [review/index.md](review/index.md), [handoff/index.md](handoff/index.md) |
 
-Tiers are inference, confidence low to medium. See [SOURCES.md](SOURCES.md).
-
-Minimum path: T0 implement, integrate. T1 adds spec (short), test, review, handoff. T2 adds design, and release if users see it. T3 runs every stage.
-
-## Stages
+## Read by task
 
 | If you are... | Read |
 |---|---|
-| Turning a request into acceptance criteria | [01-spec/index.md](01-spec/index.md) |
-| Choosing data shapes, interfaces, or a plan (T2+) | [02-design/index.md](02-design/index.md) |
-| Writing or changing code | [03-implement/index.md](03-implement/index.md) |
-| Writing tests or proving behavior | [04-test/index.md](04-test/index.md) |
-| Reviewing a diff, yours or another agent's | [05-review/index.md](05-review/index.md) |
-| Merging branches or combining parallel work | [06-integrate/index.md](06-integrate/index.md) |
-| Shipping to users: changelog, rollout, rollback | [07-release/index.md](07-release/index.md) |
-| Declaring done or writing a report | [08-handoff/index.md](08-handoff/index.md) |
+| Turning a request or bug into work you can check | [spec/index.md](spec/index.md) |
+| Changing an interface, a data shape, or several modules | [spec/design-note.md](spec/design-note.md) |
+| Writing or changing code | [writing-code/index.md](writing-code/index.md) |
+| Writing, keeping, or deleting a comment | [writing-code/comments.md](writing-code/comments.md) |
+| Choosing types, data structures, or boundaries | [principles/design.md](principles/design.md) |
+| Debugging, or building steps that retry, resume, or run in sequence | [principles/operations.md](principles/operations.md) |
+| Writing tests or proving a change works | [testing/index.md](testing/index.md) |
+| Reviewing a diff, or deciding review is done | [review/index.md](review/index.md), [review/checklist.md](review/checklist.md) |
+| Splitting work or briefing another agent | [delegation/index.md](delegation/index.md), [delegation/brief.md](delegation/brief.md) |
+| Merging, combining parallel work, or releasing | [integrate-release/index.md](integrate-release/index.md) |
+| Declaring done, reporting, or judging a report | [handoff/index.md](handoff/index.md) |
+| Seeing a warning sign: weakened test, scope creep, a loop | [failure-modes/index.md](failure-modes/index.md) |
+| Setting up hooks, CI, sandboxing, or agents that read untrusted text | [harness/index.md](harness/index.md) |
+| Writing or fixing AGENTS.md / CLAUDE.md | [harness/instruction-files.md](harness/instruction-files.md) |
+| Auditing a repo for agent work | [harness/audit.md](harness/audit.md) |
 
-## Roles, delegation, and the rest
-
-| If you are... | Read |
-|---|---|
-| Acting as a role, or assigning roles when none are named | [roles/index.md](roles/index.md) |
-| Splitting work or writing a brief for another agent | [delegation/index.md](delegation/index.md) |
-| Choosing a principle for the situation (debugging, types, refactors...) | [principles/index.md](principles/index.md) |
-| Seeing a warning sign: weakened test, scope creep, a loop that won't converge | [failure-modes/index.md](failure-modes/index.md) |
-| Auditing a repo, adding CI safeguards, or writing AGENTS.md rules | [audit/index.md](audit/index.md) |
+Every claim behind these files, with its label and confidence: [SOURCES.md](SOURCES.md).

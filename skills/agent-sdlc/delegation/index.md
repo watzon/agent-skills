@@ -1,56 +1,42 @@
 # Delegation
 
-Read when work could be split across agents, or before handing any task to another agent.
+Read when work could be split across agents, or before handing any task to another agent. Brief template: [brief.md](brief.md).
 
-## One agent or many
+## Rules
 
-Default to one agent. Add agents only when they buy something:
-- **Breadth:** independent searches, reading many files, comparing options.
-- **Clean-context review or verification.**
-- **A cheaper tier** for routine, well-specified work.
+1. **One agent by default.** Add workers only when the work is independent, parallel, and too big for one context. Multi-agent setups help on parallel work and hurt on sequential work, and they cost far more tokens. Most coding has fewer parallel parts than research.
+2. **Delegate to protect context.** The main reason to hand off is to keep exploration out of your own context and get back a short result.
+3. **One writer.** One agent writes a given file or module at a time. Parallelize reading, searching, reviewing, and verifying freely. Parallel writers make conflicting hidden choices even when the text merges cleanly. Split writing only along disjoint files, each claimed by one worker.
+4. **Every brief is complete.** The worker sees none of your context. It gets the objective, the output format, the tools and sources to use or avoid, and the task boundary, plus the done-when check and the decisions already made ([brief.md](brief.md)).
+5. **Right amount of context.** Writers get the full decision record. Read-only workers get the question and its constraints. (The split is inference.) Point to files and commits for anything that must be exact; summaries lose detail.
+6. **Results come back as files.** Workers write output to a file and return the path and a short summary. Failed attempts: one line each.
+7. **Accept evidence, not claims.** Check the diff, the test output, the repro that now passes.
 
-Before spawning, ask: could one agent do this in about the same time? If yes, don't. Multi-agent runs cost far more tokens than one agent (about 15x chat in one vendor measurement, [SOURCES.md](../SOURCES.md)). Most coding work has fewer parallel parts than research.
+## When there are no named roles
 
-## Writes stay single-threaded
-
-- One writer per file, module, or interface at a time. Parallel writers make conflicting hidden decisions even when the text merges cleanly.
-- Parallelize reading, searching, and reviewing freely.
-- Split writing only along disjoint files, or along an interface fixed in advance. If two tasks must touch one file, run them in sequence.
+- **Generic or identical agents:** put the role in each brief. Give reviewer and verifier a fresh agent with the spec and diff, not the author's context.
+- **One agent only:** play the roles in sequence. Spec, implement, then re-read the diff as a reviewer against the criteria, then run it as a verifier. At T1+, prefer a fresh context for the review.
+- A weaker agent often does not know when to escalate. Every brief states its stop rule.
 
 ## Splitting
 
-1. List the units of work and what each depends on.
-2. Fix shared decisions first (names, data shapes, interfaces, style) and put them in every brief that needs them.
+1. List the units and what each depends on.
+2. Fix shared decisions first (names, data shapes, interfaces, style) and copy them into each brief that needs them.
 3. Give each unit one owner, one isolated workspace, and one branch.
-4. Size each unit for one review (about 200 changed lines, 400 at most).
-5. Give each task a size expectation and a retry cap.
-
-## Context and cost
-
-- The worker sees nothing of your conversation. Write a full brief: [brief.md](brief.md).
-- Pass decisions and pointers, not transcripts. For anything that must be exact, point to the file, line, or commit; summaries lose detail.
-- Don't delegate what a single search answers.
-- Cheap tiers for reading and routine edits; the strongest tier for planning, review, and hard bugs.
-
-## Collecting results
-
-- Accept evidence, not claims: diff, test output, a repro that now passes.
-- At most two fix-and-recheck rounds per task, then escalate to a stronger agent or a person.
-- Integrate in dependency order and test the combined result ([06-integrate](../06-integrate/index.md)).
+4. Size each unit for one review, and give it a size expectation and a retry cap.
+5. Combine results in dependency order and test the combined result ([integrate-release/index.md](../integrate-release/index.md)). No source sets a merge order; this one is inference.
 
 ## Anti-patterns
 
+- Many agents for a task one agent could finish in about the same time.
 - Parallel writers on shared code.
-- More hand-offs than work; each one loses detail.
-- Telephone-game summaries that drop constraints.
+- Assuming the worker shares your state, or that it will report discoveries without being asked.
 - Retry loops with no cap.
-- Many agents for a simple task.
 - A verifier that only reads the author's report.
 
 ## Done when
 
-- [ ] Each delegated task is worth an extra agent (breadth, clean context, or cheaper tier).
+- [ ] Each extra agent buys parallel breadth, clean context, or a cheaper tier for routine work.
 - [ ] No two tasks write the same file at the same time.
 - [ ] Shared decisions are fixed and copied into every brief that needs them.
-- [ ] Every brief has all six parts from [brief.md](brief.md).
-- [ ] Each task has a size expectation, a retry cap, and a stop rule.
+- [ ] Every brief is complete per [brief.md](brief.md), including a stop rule.

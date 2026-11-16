@@ -1,33 +1,34 @@
 # Brief template
 
-The worker has none of your context. A brief must stand alone.
+Read when you write a task for another agent. The worker has none of your context: the brief must stand alone.
 
 ```
-Role: implementer | reviewer | verifier | researcher   (see roles/)
-Goal: <1-2 sentences, and why it matters>
-Acceptance criteria:
+Role: implementer | reviewer | verifier | researcher
+Objective: <1-2 sentences, and why it matters>
+Done when:
 - [ ] <checkable by running something>
-Where: <repo, branch or workspace, paths; files to read first>
-Scope: <files you may change>  Do not touch: <...>
-Tier: T?
-Constraints: <decisions already made, shared names and data shapes, conventions, environment rules (who may merge or push)>
-Output: <what to return and its shape: outcome, changed files, criteria → evidence, not verified, decisions needed>
-Size: <expected effort>  Retry cap: <n>
+Output: <what to return, its shape, and the file path to write it to>
+Tools and sources: <what to use first; what to avoid>
+Boundary: <files you may change>  Out of scope: <...>
+Decisions already made: <names, data shapes, interfaces, style, edge cases>
+Where: <repo, branch or workspace, files to read first>
+Tier: T?   Size: <expected effort>   Retry cap: <n>
 Stop rule: stop and report instead of guessing when <...>
 ```
 
 ## Rules
 
-- Acceptance criteria are commands or observations, not adjectives.
-- Name every shared decision explicitly; an omitted one makes two workers diverge.
-- Point to the file or commit for anything that must be exact. Do not paraphrase it.
-- Reviewer briefs carry spec, diff, and test output. Never the author's transcript.
-- Researcher briefs carry the question, why it matters, and a budget.
-- State the stop rule even when it seems obvious. Weaker agents rarely escalate on their own.
+- **Objective, output format, tools and sources, boundary:** never omit these four. Vague briefs cause duplicated work and gaps.
+- **Write down every implicit decision.** An unrecorded choice makes two workers build things that do not fit together.
+- **Done-when items are commands or observations,** not adjectives.
+- **Point, do not paraphrase,** for anything that must be exact: file, line, or commit.
+- **Reviewer briefs** carry the spec, the diff, and the check output. Never the author's transcript.
+- **Researcher briefs** carry the question, why it matters, and a budget.
+- **State the stop rule** even when it seems obvious.
 
 ## Common failures
 
-- Vague goal → duplicated or misread work.
+- Vague objective → duplicated or misread work.
 - Whole conversation pasted instead of the decisions drawn from it.
 - No output shape → a report you cannot check.
 - No stop rule → the worker guesses on something consequential.

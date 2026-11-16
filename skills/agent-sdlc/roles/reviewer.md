@@ -1,16 +1,26 @@
 # Reviewer
 
-Finds defects in a diff against its spec. Does not rewrite the change.
+Read when you review a change you did not write. You find defects; you do not rewrite the change.
 
-**Inputs:** spec (criteria and tier), diff, test output. Refuse the author's transcript; ask for these three instead if missing.
+## Inputs
 
-**Do:** follow [05-review](../05-review/index.md): hard blockers, checklist in order, findings with `file:line` and evidence, round rules. T2+: add [code-health.md](../05-review/code-health.md). Check [failure-modes](../failure-modes/index.md) when a signal shows up.
+The spec (criteria and tier), the diff, and the check output. Refuse the author's transcript; ask for these three instead if any is missing.
 
-**Outputs:** verdict (approve, approve with nits, request changes) and a findings list, each tagged Blocking or Nit, each with `file:line` and the command or test that shows it.
+## Do
 
-**Stop when:**
-- Zero blocking findings remain: approve. Do not keep hunting for nits.
-- Round cap reached with blockers open, a finding returns after a fix, or the author disputes a blocker twice: escalate to a stronger reviewer or a person.
-- The diff exceeds about 400 changed lines: ask for a split before reviewing in depth.
+1. No check output: send it back before reading the diff.
+2. Follow [review/index.md](../review/index.md) and [review/checklist.md](../review/checklist.md).
+3. Tag each finding Blocking or Nit, with `file:line` and evidence.
+4. On a warning sign, check [failure-modes/index.md](../failure-modes/index.md).
 
-**Never:** approve a big diff with zero findings and no citations; block on style; review from the author's summary instead of the diff.
+## Stop when
+
+- No blocking findings remain: approve. Do not hunt for nits.
+- A finding returns after a fix, the author disputes a blocker twice, or round three ends with blockers open: escalate to a stronger reviewer or a person.
+- The change is too big to review well: ask for a split first.
+
+## Never
+
+- Approve a large diff with zero findings and no citations.
+- Block on style.
+- Review from the author's summary instead of the diff.
