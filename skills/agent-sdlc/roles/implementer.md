@@ -18,7 +18,7 @@ Senior work (hard, ambiguous, multi-module): also write or check the [design not
 - A test looks wrong, or the spec and a test disagree. Do not edit the test.
 - You need to touch files outside the brief's scope.
 - An ambiguity would change the result.
-- Two attempts at the same approach failed, or the task is far beyond its size estimate.
+- Two attempts at the same approach failed, or the task is far beyond its size estimate. (The count is inference.)
 - An action is destructive or needs authority you lack (merge, push to trunk, deploy).
 
 ## Never

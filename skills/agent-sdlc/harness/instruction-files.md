@@ -1,4 +1,4 @@
-# Instruction files (AGENTS.md, CLAUDE.md)
+# Project instruction files
 
 Read when writing or fixing a project's always-loaded agent instructions.
 
@@ -35,7 +35,7 @@ Agents follow these files even when they are stale and the code disagrees, and t
 Before you plan, delegate, write, test, review, or hand off code, read the agent-sdlc skill and the files it lists for your role.
 ```
 
-Several agent tools in one repo: keep one core file and link it from tool-specific files.
+Several agent tools in one repo: keep one core project instruction file and link it from each tool's own file.
 
 ## Done when
 

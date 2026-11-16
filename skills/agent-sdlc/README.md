@@ -33,7 +33,7 @@ failure-modes/           index.md
 
 ## Evidence
 
-Each rule traces to a row in `SOURCES.md` with a label (verified, secondhand, vendor, inference) and a confidence. Where a rule rests on inference, the file says so. The risk tiers, the three-round review cap, and the release section are defaults, not findings. Change them when your own results disagree.
+Each rule traces to a row in `SOURCES.md` with a label (verified, secondhand, vendor, inference) and a confidence. Rules that rest mainly on inference are marked in their file; templates, checklists, and the principles files are engineering defaults, as `SOURCES.md` notes. The risk tiers, the three-round review cap, and the release section are defaults, not findings. Change them when your own results disagree.
 
 The research behind this revision covered roles and orchestration, writing code, testing, review, spec and planning, integration and harness, and skill design. Earlier material came from the `durable-quality` and `principle-*` skills in this repo. The simplicity and surgical-change ideas in `writing-code/` draw on Andrej Karpathy's observations on LLM coding pitfalls, as collected in the `karpathy-guidelines` skill (multica-ai/andrej-karpathy-skills); that repo ships no LICENSE file, so the wording here is our own.
 

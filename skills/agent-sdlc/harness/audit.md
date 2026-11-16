@@ -8,7 +8,7 @@ Build commands; CI system and required checks; branch protection; how to run a s
 
 ## Scorecard
 
-Score each area **M** missing, **W** weak, **S** solid. Cite a path or evidence for every score.
+Score each area **M** missing, **W** weak, **S** solid. Cite a path or evidence for every score. The areas and severities are engineering defaults (inference).
 
 | Area | Solid means |
 |---|---|

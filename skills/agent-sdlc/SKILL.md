@@ -6,7 +6,7 @@ license: MIT
 
 # Agent SDLC
 
-This file is a router. Read only the files listed for your role or task. Project instructions and the person's intent override this skill.
+This file is a router. Read the files listed for your role or task. When a file you read links to another for a step you are doing, read that one too. Project instructions and the person's intent override this skill.
 
 ## The flow
 
@@ -32,12 +32,12 @@ Unsure: go one tier up. The tiers are inference built on one vendor's practice (
 
 | You are acting as | Read, in order |
 |---|---|
-| Orchestrator / project manager: you plan and hand work to others | [roles/coordinator.md](roles/coordinator.md), [delegation/index.md](delegation/index.md), [delegation/brief.md](delegation/brief.md), [spec/index.md](spec/index.md) |
-| Senior developer: hard, ambiguous, or design-heavy work | [roles/implementer.md](roles/implementer.md), [spec/design-note.md](spec/design-note.md), [writing-code/index.md](writing-code/index.md), [writing-code/comments.md](writing-code/comments.md), [testing/index.md](testing/index.md), [review/index.md](review/index.md) |
-| Junior developer: well-specified routine work | [roles/implementer.md](roles/implementer.md), [writing-code/index.md](writing-code/index.md), [writing-code/comments.md](writing-code/comments.md), [testing/index.md](testing/index.md) |
-| Reviewer | [roles/reviewer.md](roles/reviewer.md), [review/index.md](review/index.md), [review/checklist.md](review/checklist.md) |
+| Orchestrator / project manager: you plan and hand work to others | [roles/coordinator.md](roles/coordinator.md), [delegation/index.md](delegation/index.md), [delegation/brief.md](delegation/brief.md), [spec/index.md](spec/index.md), [handoff/index.md](handoff/index.md) |
+| Senior developer: hard, ambiguous, or design-heavy work | [roles/implementer.md](roles/implementer.md), [spec/design-note.md](spec/design-note.md), [writing-code/index.md](writing-code/index.md), [writing-code/comments.md](writing-code/comments.md), [testing/index.md](testing/index.md), [review/index.md](review/index.md), [review/checklist.md](review/checklist.md), [handoff/index.md](handoff/index.md) |
+| Junior developer: well-specified routine work | [roles/implementer.md](roles/implementer.md), [writing-code/index.md](writing-code/index.md), [writing-code/comments.md](writing-code/comments.md), [testing/index.md](testing/index.md), [review/checklist.md](review/checklist.md), [handoff/index.md](handoff/index.md) |
+| Reviewer | [roles/reviewer.md](roles/reviewer.md), [review/index.md](review/index.md), [review/checklist.md](review/checklist.md), [failure-modes/index.md](failure-modes/index.md) |
 | QA / verifier | [roles/verifier.md](roles/verifier.md), [review/index.md](review/index.md), [testing/index.md](testing/index.md) |
-| Researcher | [roles/researcher.md](roles/researcher.md) |
+| Researcher | [roles/researcher.md](roles/researcher.md), [harness/index.md](harness/index.md) |
 | A single agent with no roles | [spec/index.md](spec/index.md), [writing-code/index.md](writing-code/index.md), [testing/index.md](testing/index.md), [review/index.md](review/index.md), [handoff/index.md](handoff/index.md) |
 
 ## Read by task
@@ -57,7 +57,7 @@ Unsure: go one tier up. The tiers are inference built on one vendor's practice (
 | Declaring done, reporting, or judging a report | [handoff/index.md](handoff/index.md) |
 | Seeing a warning sign: weakened test, scope creep, a loop | [failure-modes/index.md](failure-modes/index.md) |
 | Setting up hooks, CI, sandboxing, or agents that read untrusted text | [harness/index.md](harness/index.md) |
-| Writing or fixing AGENTS.md / CLAUDE.md | [harness/instruction-files.md](harness/instruction-files.md) |
+| Writing or fixing the project instruction file (always-loaded agent instructions) | [harness/instruction-files.md](harness/instruction-files.md) |
 | Auditing a repo for agent work | [harness/audit.md](harness/audit.md) |
 
 Every claim behind these files, with its label and confidence: [SOURCES.md](SOURCES.md).

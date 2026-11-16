@@ -10,7 +10,7 @@ Read when reviewing a diff (your own, another agent's, or a pull request), or wh
 4. **Every finding cites `file:line` and evidence:** a command, a test, or a reproduction. A finding without evidence is a hypothesis and does not block.
 5. **Stop when no blocking findings remain.** Do not keep hunting for nits; a reviewer told to find problems will report some.
 6. **Hard cap: three rounds.** After the first round, re-review only the new diff. Do not repeat findings already given; name the bug class, not one line.
-7. **Escalate** to a stronger reviewer or a person when the same finding returns after a fix, the author disputes a blocking finding twice, or the cap is reached with blockers open. At the cap, step back and reconsider the approach or scope rather than patching again.
+7. **Escalate** to a stronger reviewer or a person when the same finding returns after a fix, the author disputes a blocking finding twice, or the cap is reached with blockers open. At the cap, step back and reconsider the approach or scope rather than patching again. (The repeat and dispute triggers are inference.)
 
 ## How to read the diff
 

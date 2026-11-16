@@ -19,7 +19,7 @@ Read when turning a request, issue, or bug report into work you can check.
 5. **Ask only when a wrong guess is costly to reverse.** Otherwise state the assumption and continue. If a request has two readings, name both. (Inference; no source counts questions.)
 6. **Push back** when a simpler approach meets the goal. Say so before building.
 7. **Do not keep prose specs in the repo by default.** They go stale and agents follow stale text. Code and tests are the source of truth; the spec ends up in the commit message or PR description. Keep a living plan with a decision log only for multi-session work, and update it when discovery changes the plan.
-8. **If reviewing the spec would take longer than reviewing the code, the spec is too big.**
+8. **If reviewing the spec would take longer than reviewing the code, the spec is too big.** (Inference from one overhead case study.)
 
 ## Template
 
