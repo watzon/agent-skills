@@ -2,6 +2,8 @@
 
 Evidence behind each rule. Labels are the research pass's: **verified** (source read), **secondhand** (via a summary, snippet, or quote), **vendor** (a company's claim about its own product or practice), **inference** (reasoning, no direct source). Confidence (0 to 1) is the research pass's judgment of how well the rule is supported. Most evidence is from 2025 to 2026, small, and often preprints. Change a default when your own results disagree.
 
+Anti-slop and design evidence is split out: [sources/anti-slop.md](sources/anti-slop.md) and [sources/design.md](sources/design.md).
+
 ## Router and tiers
 
 | Rule | Basis | Label | Conf. |

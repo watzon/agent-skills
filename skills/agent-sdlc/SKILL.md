@@ -33,12 +33,13 @@ Unsure: go one tier up. The tiers are inference built on one vendor's practice (
 | You are acting as | Read, in order |
 |---|---|
 | Orchestrator / project manager: you plan and hand work to others | [roles/coordinator.md](roles/coordinator.md), [delegation/index.md](delegation/index.md), [delegation/brief.md](delegation/brief.md), [spec/index.md](spec/index.md), [handoff/index.md](handoff/index.md) |
-| Senior developer: hard, ambiguous, or design-heavy work | [roles/implementer.md](roles/implementer.md), [spec/design-note.md](spec/design-note.md), [writing-code/index.md](writing-code/index.md), [writing-code/comments.md](writing-code/comments.md), [testing/index.md](testing/index.md), [review/index.md](review/index.md), [review/checklist.md](review/checklist.md), [handoff/index.md](handoff/index.md) |
-| Junior developer: well-specified routine work | [roles/implementer.md](roles/implementer.md), [writing-code/index.md](writing-code/index.md), [writing-code/comments.md](writing-code/comments.md), [testing/index.md](testing/index.md), [review/checklist.md](review/checklist.md), [handoff/index.md](handoff/index.md) |
-| Reviewer | [roles/reviewer.md](roles/reviewer.md), [review/index.md](review/index.md), [review/checklist.md](review/checklist.md), [failure-modes/index.md](failure-modes/index.md) |
+| Senior developer: hard, ambiguous, or design-heavy work | [roles/implementer.md](roles/implementer.md), [spec/design-note.md](spec/design-note.md), [writing-code/index.md](writing-code/index.md), [writing-code/comments.md](writing-code/comments.md), [testing/index.md](testing/index.md), [review/index.md](review/index.md), [review/checklist.md](review/checklist.md), [anti-slop/index.md](anti-slop/index.md), [handoff/index.md](handoff/index.md); building UI: [design/index.md](design/index.md) |
+| Junior developer: well-specified routine work | [roles/implementer.md](roles/implementer.md), [writing-code/index.md](writing-code/index.md), [writing-code/comments.md](writing-code/comments.md), [testing/index.md](testing/index.md), [review/checklist.md](review/checklist.md), [anti-slop/index.md](anti-slop/index.md), [handoff/index.md](handoff/index.md); building UI: [design/index.md](design/index.md) |
+| Designer: UI, brand, or visual work | [design/index.md](design/index.md), [design/floor-checks.md](design/floor-checks.md), [anti-slop/copy.md](anti-slop/copy.md), [anti-slop/index.md](anti-slop/index.md), [handoff/index.md](handoff/index.md) |
+| Reviewer | [roles/reviewer.md](roles/reviewer.md), [review/index.md](review/index.md), [review/checklist.md](review/checklist.md), [anti-slop/index.md](anti-slop/index.md), [failure-modes/index.md](failure-modes/index.md) |
 | QA / verifier | [roles/verifier.md](roles/verifier.md), [review/index.md](review/index.md), [testing/index.md](testing/index.md) |
 | Researcher | [roles/researcher.md](roles/researcher.md), [harness/index.md](harness/index.md) |
-| A single agent with no roles | [spec/index.md](spec/index.md), [writing-code/index.md](writing-code/index.md), [testing/index.md](testing/index.md), [review/index.md](review/index.md), [handoff/index.md](handoff/index.md) |
+| A single agent with no roles | [spec/index.md](spec/index.md), [writing-code/index.md](writing-code/index.md), [testing/index.md](testing/index.md), [review/index.md](review/index.md), [anti-slop/index.md](anti-slop/index.md), [handoff/index.md](handoff/index.md) |
 
 ## Read by task
 
@@ -50,14 +51,18 @@ Unsure: go one tier up. The tiers are inference built on one vendor's practice (
 | Writing, keeping, or deleting a comment | [writing-code/comments.md](writing-code/comments.md) |
 | Choosing types, data structures, or boundaries | [principles/design.md](principles/design.md) |
 | Debugging, or building steps that retry, resume, or run in sequence | [principles/operations.md](principles/operations.md) |
+| Building or changing UI | [design/index.md](design/index.md), [design/floor-checks.md](design/floor-checks.md) |
+| Setting a brand, logo, or design tokens where no system exists | [design/brand.md](design/brand.md), [design/foundations.md](design/foundations.md) |
+| Writing UI text, docs, or reports | [anti-slop/copy.md](anti-slop/copy.md) |
+| Adding compatibility code, flags, settings, placeholders, or shown numbers | [anti-slop/product.md](anti-slop/product.md) |
 | Writing tests or proving a change works | [testing/index.md](testing/index.md) |
 | Reviewing a diff, or deciding review is done | [review/index.md](review/index.md), [review/checklist.md](review/checklist.md) |
 | Splitting work or briefing another agent | [delegation/index.md](delegation/index.md), [delegation/brief.md](delegation/brief.md) |
 | Merging, combining parallel work, or releasing | [integrate-release/index.md](integrate-release/index.md) |
-| Declaring done, reporting, or judging a report | [handoff/index.md](handoff/index.md) |
+| Declaring done, reporting, or judging a report | [anti-slop/index.md](anti-slop/index.md), [handoff/index.md](handoff/index.md) |
 | Seeing a warning sign: weakened test, scope creep, a loop | [failure-modes/index.md](failure-modes/index.md) |
 | Setting up hooks, CI, sandboxing, or agents that read untrusted text | [harness/index.md](harness/index.md) |
 | Writing or fixing the project instruction file (always-loaded agent instructions) | [harness/instruction-files.md](harness/instruction-files.md) |
 | Auditing a repo for agent work | [harness/audit.md](harness/audit.md) |
 
-Every claim behind these files, with its label and confidence: [SOURCES.md](SOURCES.md).
+Every claim behind these files, with its label and confidence: [SOURCES.md](SOURCES.md), [sources/anti-slop.md](sources/anti-slop.md), [sources/design.md](sources/design.md).

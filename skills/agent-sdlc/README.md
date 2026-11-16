@@ -1,6 +1,6 @@
 # agent-sdlc
 
-A software lifecycle skill for AI coding agents: spec, writing code, testing, review, delegation, integration, release, handoff, and the repo harness that enforces the rules.
+A software lifecycle skill for AI coding agents: spec, writing code, design, testing, review, anti-slop checks, delegation, integration, release, handoff, and the repo harness that enforces the rules.
 
 The files are written for agents: imperative, short, and checkable. `SKILL.md` is a router (under 80 lines) with a short overview of the flow and risk tiers, a "read by role" table, and a "read by task" table. Every file it names is one link away; no file links to a file the router does not also list. The skill assumes no particular agent runtime, vendor, or named roles.
 
@@ -29,6 +29,9 @@ handoff/                 index.md (definition of done, report)
 harness/                 index.md (hooks, CI, sandbox, injection), instruction-files.md, audit.md
 principles/              design.md, operations.md
 failure-modes/           index.md
+anti-slop/               index.md (pre-handoff sweep), copy.md, product.md
+design/                  index.md (process), floor-checks.md, brand.md and foundations.md (round 2 stubs)
+sources/                 anti-slop.md, design.md (evidence split out of SOURCES.md)
 ```
 
 ## Evidence

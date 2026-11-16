@@ -21,6 +21,7 @@ Read during a review, after the check output is in hand ([index.md](index.md)). 
 7. **One critical path,** traced end to end through the diff.
 8. **Comments.** Any comment that narrates history or is now false is a finding ([writing-code/comments.md](../writing-code/comments.md)).
 9. **Design and complexity** (T2 and up), below.
+10. **Slop.** The anti-slop sweep output is present and its judgment checks hold ([anti-slop/index.md](../anti-slop/index.md)).
 
 ## Design and complexity (T2 and up)
 
