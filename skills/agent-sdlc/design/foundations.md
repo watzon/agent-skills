@@ -20,7 +20,7 @@ The same brand sets different values for different kinds of product. These are s
 
 | Topic | Floor (a standard; check it) | House default (change with a reason) | Judgment (the brand chooses) |
 |---|---|---|---|
-| Color | Normal text 4.5:1, large text 3:1; boundaries and meaningful icons 3:1 ([floor-checks.md](floor-checks.md)) | 4 to 6 roles (ground, surface, text, muted, border, status) plus one accent (inference) | Which colors, taken from the logo |
+| Color | Normal text 4.5:1, large text 3:1; boundaries and meaningful icons 3:1 ([floor-checks.md](floor-checks.md)) | 4 to 6 roles (ground, surface, text, muted, border, status) plus one accent (inference) | Which colors: from the brief's outside reference, checked against the logo |
 | Typography | None | Prose body 16 px on the web; reading-heavy products 18 to 20 px (secondhand, 0.6) | One or two families with roles and a fallback stack; a type scale with a named ratio. No rule exists for pairing; write why |
 | Line height | Prose at least 1.5 (WCAG 1.4.8, AAA) | None | Heading leading |
 | Measure | Prose under about 80 characters per line (WCAG 1.4.8, AAA) | Target 60 to 75; below about 45 reads choppy (practitioner sources). Measure the rendered text: a `ch` unit is the width of "0", not an average letter | Where the column sits on the page |

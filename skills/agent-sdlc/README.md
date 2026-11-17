@@ -1,6 +1,6 @@
 # agent-sdlc
 
-A software lifecycle skill for AI coding agents: spec, writing code, design, testing, review, anti-slop checks, delegation, integration, release, handoff, and the repo harness that enforces the rules.
+A software lifecycle skill for AI coding agents: spec, writing code, design (UI, brand, and logo), testing, review, anti-slop checks, delegation, integration, release, handoff, and the repo harness that enforces the rules.
 
 The files are written for agents: imperative, short, and checkable. `SKILL.md` is a router (under 80 lines) with a short overview of the flow and risk tiers, a "read by role" table, and a "read by task" table. Every file it names is one link away; no file links to a file the router does not also list. The skill assumes no particular agent runtime, vendor, or named roles.
 
@@ -10,7 +10,7 @@ Skills trigger unreliably from their description alone. Paste these two lines in
 
 ```markdown
 ## Development lifecycle
-Before you plan, delegate, write, test, review, or hand off code, read the agent-sdlc skill (SKILL.md) and the files it lists for your role.
+Before you plan, delegate, write, test, review, or hand off code, or design UI, a brand, or a logo, read the agent-sdlc skill (SKILL.md) and the files it lists for your role.
 ```
 
 ## Layout
@@ -30,8 +30,8 @@ harness/                 index.md (hooks, CI, sandbox, injection), instruction-f
 principles/              design.md, operations.md
 failure-modes/           index.md
 anti-slop/               index.md (pre-handoff sweep), copy.md, product.md
-design/                  index.md (process), floor-checks.md, brand.md, logo.md, mascot.md, foundations.md, components.md
-sources/                 anti-slop.md, design.md, foundations.md, components.md (evidence split out of SOURCES.md)
+design/                  index.md (process, scope, report), floor-checks.md, brand.md, logo.md, logo-deliverables.md, mascot.md, foundations.md, components.md
+sources/                 anti-slop.md, design.md, logo.md, foundations.md, components.md (evidence split out of SOURCES.md)
 ```
 
 ## Evidence

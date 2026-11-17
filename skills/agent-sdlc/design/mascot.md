@@ -15,8 +15,8 @@ Read when the [brand brief](brand.md) calls for a character, or someone asks for
 
 ## Design it
 
-1. **Silhouette first.** Filled solid, it is recognizable. Test as for the logo.
-2. **Scale.** A full-body version, and a simple head or icon version that passes the logo's small-size and one-color tests.
+1. **Silhouette first.** Filled solid, it is recognizable, as in the logo's ship gates ([logo.md](logo.md#ship-gates)).
+2. **Scale.** A full-body version, and a simple head or icon version that passes the small-size and one-color gates.
 3. **Expression range.** Plan the emotions the product needs before the final, for example happy, neutral, concerned, error, and success. Expression can come from eyes, posture, or movement; a face is optional.
 4. **Range sheet** before the final: the full body, the expression range, and the small version, on one sheet. Add other views, such as front and side, if the product needs them.
 5. **Tie it to the logo:** shared proportions, colors, and stroke or corner style. In a character-first brand the logo takes these from the mascot.
@@ -24,5 +24,5 @@ Read when the [brand brief](brand.md) calls for a character, or someone asks for
 ## Done when
 
 - [ ] A brief line says why the brand has a mascot, and whether it is supplementary or primary.
-- [ ] The silhouette and small version pass the logo quality tests.
+- [ ] The silhouette and small version pass the logo's ship gates.
 - [ ] A range sheet with the expressions exists before the mascot is final.
