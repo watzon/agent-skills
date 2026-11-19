@@ -48,7 +48,7 @@ Anti-slop and design evidence is split out: [sources/anti-slop.md](sources/anti-
 | Checks and output before review | [1]; [26]; give the agent something to run [13] | verified, vendor | 0.85 |
 | Fresh-context reviewer with spec, diff, test output | [13]; [1]; clean-context reviewer [27] | verified, vendor | 0.8 |
 | Blocking vs nit; nits never block | Important / Nit / Pre-existing tags [28]; Google "Nit:" [29] | verified | 0.8 |
-| Stop at no blockers; cap 3; re-review new diff; escalate | Review did not converge (one PR ran 50+ rounds); capped at three [1] | vendor | 0.6 |
+| Stop at no blockers; cap 3; re-review new diff after the first few passes; escalate | Review did not converge (one PR ran 50+ rounds); capped at three [1] | vendor | 0.6 |
 | Escalate on a repeat finding or a second dispute | Earlier research pass | inference | 0.5 |
 | Size: about 100 lines fine, 1,000 too large; count files | Google eng-practices [30] | verified | 0.5 |
 | Cross-model review optional | Benefit was one-directional in one preprint [31]; same-model judges fine if they match human labels [32] | verified, one study | 0.45 |

@@ -15,7 +15,8 @@ Read when work could be split across agents, or before handing any task to anoth
 ## When there are no named roles
 
 - **Generic or identical agents:** put the role in each brief. Give reviewer and verifier a fresh agent with the spec and diff, not the author's context.
-- **One agent only:** play the roles in sequence. Spec, implement, then re-read the diff as a reviewer against the criteria, then run it as a verifier. At T1+, prefer a fresh context for the review. Apply the same savings to your own checks: focused tests while working, re-check only what changed since your last check, full gate once at the end ([testing/index.md](../testing/index.md)).
+- **One agent only:** play the roles in sequence. Spec, implement, then re-read the diff as a reviewer against the criteria, then run it as a verifier. At T1+, your own review does not count as the independent one: start a fresh-context reviewer (a new session given only spec, diff, and output) if the environment allows. If it does not, record "independent review: not met" and hand the change to a person ([review/index.md](../review/index.md)).
+- A single agent also runs the two-round check on itself ([roles/coordinator.md](../roles/coordinator.md)) and pauses for a person when it needs a decision it cannot make. Same savings on its own checks: focused tests while working, re-check from the delta and widen per [review/index.md](../review/index.md), the row's gates on the final candidate ([testing/index.md](../testing/index.md)).
 - A weaker agent often does not know when to escalate. Every brief states its stop rule.
 
 ## Splitting
@@ -33,6 +34,7 @@ Read when work could be split across agents, or before handing any task to anoth
 - Assuming the worker shares your state, or that it will report discoveries without being asked.
 - Retry loops with no cap.
 - A cold, full re-verify after every fix round, or verifying each stacked slice while earlier ones still change.
+- A delta-only re-verify after a fix to shared code, which never runs the unchanged consumers.
 - A verifier that only reads the author's report.
 
 ## Done when

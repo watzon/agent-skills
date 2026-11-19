@@ -13,7 +13,7 @@ Boundary: <files you may change>  Out of scope: <...>
 Decisions already made: <names, data shapes, interfaces, style, edge cases>
 Where: <repo, branch or commit range, files and project notes to read first>
 Tier: T?   Gates: <row from testing/index.md>   Size: <expected effort>   Retry cap: <n>
-Re-verify only: <commit range since last round; prior findings, or a path to them>
+Re-verify from: <commit range since last round; prior findings or a path to them; shared behavior changed or rebased: yes/no>
 Stop rule: stop and report instead of guessing when <...>
 ```
 
