@@ -36,5 +36,5 @@ Every criterion has a pass or fail with evidence. Report failures; do not fix th
 
 - [ ] Each criterion has a command, pass or fail, and the output tail.
 - [ ] Each bug fix was reverted locally and its repro test seen failing.
-- [ ] The full row ran on the final candidate; a re-verify states its scope: delta, widened (to what), or re-baselined.
+- [ ] The round's required evidence is recorded; the full row is required at final handoff. A re-verify states its scope: delta, widened (to what), or re-baselined.
 - [ ] Each failure is a finding with repro steps, or a known issue confirmed on the base and still shown as failed.

@@ -8,7 +8,7 @@ Read when merging a branch, combining work from parallel agents, or shipping a c
 2. **One writer per branch or workspace.** Parallel agents read and review; they do not write the same branch.
 3. **Update onto current trunk.** Resolve conflicts by understanding both sides; never by dropping the other side's tests.
 4. **Combine in dependency order:** shared types and interfaces first, then their users, with focused checks on each intermediate combination. (Inference; no source sets a merge order.)
-5. **Run the repository's configured integration gate on the final combined candidate,** not only on each branch alone. Anything that actually lands on trunk along the way runs its required gates first. A failed gate means fix, then rerun on the new candidate; other reruns follow [testing/index.md](../testing/index.md#which-gates-run-when). (Inference: no source tested full-suite-at-integration against alternatives.)
+5. **Run the configured integration gate on the exact candidate that will land,** not only on each branch alone. If that candidate differs from the one verified at final handoff, satisfy the applicable final-handoff row on it first; this applies to anything that lands on trunk along the way. Gates and reruns follow [testing/index.md](../testing/index.md#which-gates-run-when). (Inference: no source tested full-suite-at-integration against alternatives.)
 6. **Verify stacked work once it is stable.** Each author runs focused checks on its slice. Review and verify the stable combined candidate in full once its branches stop changing, not each slice while earlier ones still move; a change below invalidates the checks above it. (Owner observation plus inference.)
 7. **Land only** with green checks and zero open blocking findings.
 8. **Auto-merge only in the lowest-risk tier,** with proof and a rollback path. Otherwise a person approves. (Tier design is inference; practice differs, see [SOURCES.md](../SOURCES.md).)
@@ -37,7 +37,7 @@ Each session does one unit, commits with a clear message, updates the progress f
 ## Done when
 
 - [ ] You had authority to land, or stopped at a ready branch and reported it.
-- [ ] The integration gate passed on the final combined candidate, with output captured; anything landed earlier passed its required gates.
+- [ ] The integration gate passed on the exact candidate that landed, with output captured; if it differed from the final-handoff candidate, the applicable row passed on it too, and anything landed earlier did the same.
 - [ ] No open blocking findings.
 - [ ] Stacked work was verified in full as a combined candidate after its branches stopped changing.
 - [ ] Workspaces you created are removed or listed, with no unapplied commits lost.

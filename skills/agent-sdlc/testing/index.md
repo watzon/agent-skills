@@ -24,20 +24,20 @@ The lead picks the row and states it in the brief; a single agent picks its own.
 | Styling, tokens, UI copy (T0 to T1) | Lint, typecheck, and build for the touched package; focused tests for touched components; one look at each changed screen. |
 | Small logic (T1) | Typecheck, lint, and build for the touched package; focused tests; the repro test. |
 | Shared code, interfaces, security-sensitive (T2 to T3) | The above, plus the package or affected suite, an integration test on the changed path, negative tests at T3. |
-| Release or merge to trunk | The repo's configured integration gate on the final combined candidate, and nothing beyond it. |
+| Release or merge to trunk | The configured integration gate on the exact candidate that will land, per [Before landing](#which-gates-run-when). |
 
 ## Which gates run when
 
 | Step | Evidence |
 |---|---|
 | While working, and each intermediate or fix round | Scoped: focused tests for the changed files, plus the affected consumers when the [widening rule](../review/index.md#rules) (review rule 7) applies. Not the full row. |
-| Final handoff | The full selected row on the final candidate. Typecheck, lint, and build run here, as part of the row. |
-| Before landing | The repo's configured integration gate on the final combined candidate. No extra checks: if the gate leaves out typecheck, lint, or build, the final handoff row must have run them on this same candidate. |
+| Final handoff | The full selected row on the final candidate: the applicable checks from the selected row run here. |
+| Before landing | Run the configured integration gate on the exact candidate that will land. If that candidate differs from the one verified at final handoff, satisfy the applicable final-handoff row on the new candidate before landing. Count equivalent checks run by the integration gate; run only what it does not cover. Do not repeat valid checks on an unchanged candidate. Required CI policy takes precedence. |
 
 Reruns, on any step:
 - A failed check means fix it, then rerun on the new candidate. Never rerun a failed check without a fix.
 - A run that was interrupted or inconclusive and produced no result may be rerun on the unchanged candidate.
-- Otherwise, no rerun on an unchanged candidate. A changed candidate gets the evidence of the step it is at.
+- Otherwise, no rerun on an unchanged candidate. A changed candidate gets the evidence of the step it is at; at landing, that is the Before landing row above.
 - Required CI policy always takes precedence over these rules.
 
 ## For whoever sets up the repo
@@ -52,7 +52,7 @@ Reruns, on any step:
 | Test | Verdict |
 |---|---|
 | Repro test per bug | Always. Highest return. |
-| Typecheck, lint, build | In every row except docs-only, so they run at final handoff, not as an extra landing step. Cheap and deterministic. |
+| Typecheck, lint, build | In every row except docs-only. Where the selected row includes them, they run at final handoff, not as an extra landing step. Cheap and deterministic. |
 | Integration or end-to-end on a critical path | Worth it where users or money depend on the path; costly to maintain. (Inference.) |
 | Contract test at a module boundary agents change | Useful. (Inference; no source found.) |
 | Property or fuzz test | For large input spaces: parsers, codecs, permission matrices. (Inference; no recent evidence.) |
@@ -83,6 +83,6 @@ The project keeps a short known-issues list. Each entry: the check, its signatur
 - [ ] Each new test fails with the change reverted.
 - [ ] Each acceptance criterion has a test or a recorded command, with output captured.
 - [ ] Runs while working and on intermediate and fix rounds were scoped and low-parallelism.
-- [ ] The full row ran at final handoff, the configured integration gate before landing, and required CI as configured.
+- [ ] The full row ran at final handoff, the configured integration gate on the exact landing candidate (plus the applicable row if that candidate changed), and required CI as configured.
 - [ ] Each failed check was fixed before its rerun; nothing reran on an unchanged candidate unless the earlier run gave no result.
 - [ ] Each failure is a finding, or a known-issues entry confirmed failing the same way on the base.
