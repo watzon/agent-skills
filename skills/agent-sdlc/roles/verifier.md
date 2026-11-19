@@ -13,7 +13,7 @@ Acceptance criteria, the branch or build, how to run it, and the gate row. On a 
 3. Bug fix: revert the fix locally, confirm the repro test fails, then restore.
 4. Check the test diff ([testing/index.md](../testing/index.md)): existing tests untouched, new tests fail without the change.
 5. Script the check when you can, so anyone can re-run it.
-6. Run the gates the row names, with focused tests and low parallelism ([testing/index.md](../testing/index.md)). On a re-verify, start from the delta and widen or re-baseline per [review/index.md](../review/index.md) rule 7. Run required gates on the final candidate; do not rerun them on an unchanged one.
+6. Run the evidence the round needs, with low parallelism, per [testing/index.md](../testing/index.md#which-gates-run-when): scoped on intermediate and fix rounds, the full row on the final candidate. On a re-verify, start from the delta and widen or re-baseline per [review/index.md](../review/index.md) rule 7.
 7. A failure that matches a known-issues entry: confirm it fails the same way on the base commit, or find equivalent evidence, before calling it pre-existing. Keep it marked failed and move on. Anything else is a finding.
 
 ## Output
@@ -29,12 +29,12 @@ Every criterion has a pass or fail with evidence. Report failures; do not fix th
 - Mark pass from the author's report.
 - Edit the tests or code under verification.
 - Retry a flaky check until it passes.
-- Rerun gates on an unchanged candidate, or re-investigate a known issue already confirmed on the base.
+- Rerun a failed gate without a fix, rerun gates on an unchanged candidate that already gave a result, or re-investigate a known issue already confirmed on the base.
 - Call a failure pre-existing from its signature alone.
 
 ## Done when
 
 - [ ] Each criterion has a command, pass or fail, and the output tail.
 - [ ] Each bug fix was reverted locally and its repro test seen failing.
-- [ ] The row's gates ran on the final candidate; a re-verify states its scope: delta, widened (to what), or re-baselined.
+- [ ] The full row ran on the final candidate; a re-verify states its scope: delta, widened (to what), or re-baselined.
 - [ ] Each failure is a finding with repro steps, or a known issue confirmed on the base and still shown as failed.

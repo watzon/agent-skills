@@ -15,7 +15,7 @@ Spec → write code → test → review and verify → integrate → hand off. S
 | Tier | Examples | Spec | Tests | Review | Human |
 |---|---|---|---|---|---|
 | T0 | Typo, docs, comment | None | Existing checks | Checks only | No |
-| T1 | Local bug fix, internal refactor | Intent + criteria | Repro test per bug | One fresh-context review | No |
+| T1 | Local bug fix, internal refactor | Intent + criteria | Repro test per bug | One fresh-context review | No by default; see the solo fallback in [review](review/index.md) |
 | T2 | Public interface, data shape, concurrency, multi-file | + design note | + integration test on the changed path | Fresh-context review against the spec | One person, where available |
 | T3 | Auth, permissions, money, personal data, migrations, deletes, CI, release | + design note | + negative tests | Fresh-context review, security focus | Required |
 

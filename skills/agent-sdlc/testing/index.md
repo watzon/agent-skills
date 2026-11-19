@@ -10,13 +10,13 @@ Tests are the feedback loop that stops "looks done" from being accepted. Keep th
 2. **Do not edit existing tests to make them pass.** Agents delete, weaken, or special-case failing tests, especially when spec and tests disagree. If a test looks wrong, stop and report it with evidence. A justified change to an existing test goes in its own commit with the reason.
 3. **Evidence is the command and its output:** what you ran, the exit code, the relevant tail. Never "tests pass".
 4. **A new test must fail when the code is broken.** Would it still pass with the fix reverted, or the core logic inverted? Then it proves nothing.
-5. **Focused while working; the row's gates on the final candidate.** While working, run only the tests that cover the change: the changed files, their package, or related test files. If the repo has an affected-tests mode, use it. Before handoff, run the gates of the selected row (below) on the final candidate. Before landing, run the integration gate (usually the CI suite) on the final combined candidate. If a gate fails or the candidate changes, rerun the required gates on the new candidate. "Once" means no redundant run on an unchanged candidate, not one attempt.
+5. **Scoped while iterating; the full row once, at final handoff.** Which gates run at each step, and when to rerun, is set in [Which gates run when](#which-gates-run-when). Other files link there.
 6. **Green is not correct.** Check behavior against each acceptance criterion. Exercise the real feature path where you can; mocked tests do not prove the user path works.
 7. **Low parallelism.** Cap test workers at a few (house default: 2 to 4). Never default to all cores or a high fixed count. Several agents often share one machine, and full-parallel runs can exhaust its memory and stall them all.
 
 ## Gates by change type
 
-The lead picks the row and states it in the brief; a single agent picks its own. The selected row is the default for local work and for review. Required hooks and CI always run as configured and take precedence over the row. Unsure: take the stricter row. Rows are a house default (inference).
+The lead picks the row and states it in the brief; a single agent picks its own. The selected row is what runs at final handoff. Required hooks and CI always run as configured and take precedence over the row. Unsure: take the stricter row. Rows are a house default (inference).
 
 | Change | Gates that run |
 |---|---|
@@ -24,7 +24,21 @@ The lead picks the row and states it in the brief; a single agent picks its own.
 | Styling, tokens, UI copy (T0 to T1) | Lint, typecheck, and build for the touched package; focused tests for touched components; one look at each changed screen. |
 | Small logic (T1) | Typecheck, lint, and build for the touched package; focused tests; the repro test. |
 | Shared code, interfaces, security-sensitive (T2 to T3) | The above, plus the package or affected suite, an integration test on the changed path, negative tests at T3. |
-| Release or merge to trunk | The integration gate on the final combined candidate; rerun if it fails or the candidate changes. |
+| Release or merge to trunk | The repo's configured integration gate on the final combined candidate, and nothing beyond it. |
+
+## Which gates run when
+
+| Step | Evidence |
+|---|---|
+| While working, and each intermediate or fix round | Scoped: focused tests for the changed files, plus the affected consumers when the [widening rule](../review/index.md#rules) (review rule 7) applies. Not the full row. |
+| Final handoff | The full selected row on the final candidate. Typecheck, lint, and build run here, as part of the row. |
+| Before landing | The repo's configured integration gate on the final combined candidate. No extra checks: if the gate leaves out typecheck, lint, or build, the final handoff row must have run them on this same candidate. |
+
+Reruns, on any step:
+- A failed check means fix it, then rerun on the new candidate. Never rerun a failed check without a fix.
+- A run that was interrupted or inconclusive and produced no result may be rerun on the unchanged candidate.
+- Otherwise, no rerun on an unchanged candidate. A changed candidate gets the evidence of the step it is at.
+- Required CI policy always takes precedence over these rules.
 
 ## For whoever sets up the repo
 
@@ -38,7 +52,7 @@ The lead picks the row and states it in the brief; a single agent picks its own.
 | Test | Verdict |
 |---|---|
 | Repro test per bug | Always. Highest return. |
-| Typecheck, lint, build | In every row except docs-only. Cheap and deterministic. |
+| Typecheck, lint, build | In every row except docs-only, so they run at final handoff, not as an extra landing step. Cheap and deterministic. |
 | Integration or end-to-end on a critical path | Worth it where users or money depend on the path; costly to maintain. (Inference.) |
 | Contract test at a module boundary agents change | Useful. (Inference; no source found.) |
 | Property or fuzz test | For large input spaces: parsers, codecs, permission matrices. (Inference; no recent evidence.) |
@@ -68,6 +82,7 @@ The project keeps a short known-issues list. Each entry: the check, its signatur
 - [ ] No existing test was deleted, weakened, or skipped; any change has its own commit and reason.
 - [ ] Each new test fails with the change reverted.
 - [ ] Each acceptance criterion has a test or a recorded command, with output captured.
-- [ ] Runs while working were focused and low-parallelism.
-- [ ] The row's gates and required CI ran on the final candidate; none reran on an unchanged candidate.
+- [ ] Runs while working and on intermediate and fix rounds were scoped and low-parallelism.
+- [ ] The full row ran at final handoff, the configured integration gate before landing, and required CI as configured.
+- [ ] Each failed check was fixed before its rerun; nothing reran on an unchanged candidate unless the earlier run gave no result.
 - [ ] Each failure is a finding, or a known-issues entry confirmed failing the same way on the base.

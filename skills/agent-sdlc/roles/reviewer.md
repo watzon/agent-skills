@@ -28,7 +28,7 @@ The spec (criteria and tier), the diff, and the check output. Refuse the author'
 
 ## Done when
 
-- [ ] Spec, diff, and the row's gate output were in hand before you read the diff.
+- [ ] Spec, diff, and the round's gate output ([testing/index.md](../testing/index.md#which-gates-run-when)) were in hand before you read the diff.
 - [ ] Each finding is tagged Blocking or Nit, with `file:line` and evidence.
 - [ ] A re-review checked every prior finding and states its scope: delta, widened (to what), or re-baselined.
 - [ ] The verdict is approve, approve with nits, request changes, or escalate, with the reason.
