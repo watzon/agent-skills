@@ -9,8 +9,9 @@ Read when merging a branch, combining work from parallel agents, or shipping a c
 3. **Update onto current trunk.** Resolve conflicts by understanding both sides; never by dropping the other side's tests.
 4. **Combine in dependency order:** shared types and interfaces first, then their users, testing the combined result after each merge. (Inference; no source sets a merge order.)
 5. **Run the repository's configured integration gate on the combined result,** not only on each branch alone. (Inference: no source tested full-suite-at-integration against alternatives.)
-6. **Land only** with green checks and zero open blocking findings.
-7. **Auto-merge only in the lowest-risk tier,** with proof and a rollback path. Otherwise a person approves. (Tier design is inference; practice differs, see [SOURCES.md](../SOURCES.md).)
+6. **Verify stacked work once it is stable.** For stacked or sequential branches, each author runs focused tests on its slice. Review and verify the stack as a whole once its branches stop changing, not each slice while earlier ones still move; a change below invalidates the checks above it. (Owner observation plus inference.)
+7. **Land only** with green checks and zero open blocking findings.
+8. **Auto-merge only in the lowest-risk tier,** with proof and a rollback path. Otherwise a person approves. (Tier design is inference; practice differs, see [SOURCES.md](../SOURCES.md).)
 
 ## Parallel workspaces
 
@@ -38,5 +39,6 @@ Each session does one unit, commits with a clear message, updates the progress f
 - [ ] You had authority to land, or stopped at a ready branch and reported it.
 - [ ] The integration gate passed on the combined result, with output captured.
 - [ ] No open blocking findings.
+- [ ] Stacked work was verified once, as a stack, after its branches stopped changing.
 - [ ] Workspaces you created are removed or listed, with no unapplied commits lost.
 - [ ] User-facing changes have a changelog line and rollback steps.

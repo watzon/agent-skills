@@ -9,8 +9,10 @@ Read when reviewing a diff (your own, another agent's, or a pull request), or wh
 3. **Blocking or nit.** Blocking: wrong against the spec, security or data loss, failing or weakened tests, weakened CI, broken integration. Nit: style, taste, naming preference. Nits never block. Pre-existing problems are reported, not blocked on.
 4. **Every finding cites `file:line` and evidence:** a command, a test, or a reproduction. A finding without evidence is a hypothesis and does not block.
 5. **Stop when no blocking findings remain.** Do not keep hunting for nits; a reviewer told to find problems will report some.
-6. **Hard cap: three rounds.** After the first round, re-review only the new diff. Do not repeat findings already given; name the bug class, not one line.
-7. **Escalate** to a stronger reviewer or a person when the same finding returns after a fix, the author disputes a blocking finding twice, or the cap is reached with blockers open. At the cap, step back and reconsider the approach or scope rather than patching again. (The repeat and dispute triggers are inference.)
+6. **Hard cap: three rounds. Re-verify the delta.** A re-review gets the commit range since the last round and the prior findings, so it does not re-derive them. Check only the new commits, each prior finding, and the gates that touch the changed files ([testing/index.md](../testing/index.md)). The full gate runs once, in the final round. Do not repeat findings already given; name the bug class, not one line. A single agent re-checking its own work does the same.
+7. **Two failed rounds on one item: the lead steps in** before a third, per [roles/coordinator.md](../roles/coordinator.md). (Owner observation plus inference.)
+8. **Stacks are verified once they are stable,** not slice by slice ([integrate-release/index.md](../integrate-release/index.md)).
+9. **Escalate** to a stronger reviewer or a person when the same finding returns after a fix, the author disputes a blocking finding twice, or the cap is reached with blockers open. At the cap, step back and reconsider the approach or scope rather than patching again. (The repeat and dispute triggers are inference.)
 
 ## How to read the diff
 
@@ -40,3 +42,4 @@ Approve, approve with nits, or request changes, plus the findings list. Each fin
 - [ ] Every finding has a severity, `file:line`, and evidence.
 - [ ] Zero open blocking findings, or the change is escalated.
 - [ ] No more than three rounds were used.
+- [ ] Each re-review covered only the delta and the prior findings; the full gate ran only in the final round.

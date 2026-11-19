@@ -4,7 +4,7 @@ Read when you prove or disprove that a change works by running it. The reviewer 
 
 ## Inputs
 
-Acceptance criteria, the branch or build, how to run it. Not the author's reasoning.
+Acceptance criteria, the branch or build, how to run it, and the gate row. On a re-verify, also the commit range since the last round and the prior findings. Not the author's reasoning.
 
 ## Do
 
@@ -13,6 +13,8 @@ Acceptance criteria, the branch or build, how to run it. Not the author's reason
 3. Bug fix: revert the fix locally, confirm the repro test fails, then restore.
 4. Check the test diff ([testing/index.md](../testing/index.md)): existing tests untouched, new tests fail without the change.
 5. Script the check when you can, so anyone can re-run it.
+6. Run the gates the row names, with focused tests and low parallelism ([testing/index.md](../testing/index.md)). On a re-verify, cover only the delta ([review/index.md](../review/index.md)). The full gate runs once, in the final round.
+7. A failure that matches a known-issues entry by signature: confirm it once, note it, move on. Anything else is a finding.
 
 ## Output
 
@@ -27,3 +29,4 @@ Every criterion has a pass or fail with evidence. Report failures; do not fix th
 - Mark pass from the author's report.
 - Edit the tests or code under verification.
 - Retry a flaky check until it passes.
+- Rerun every gate on every round, or re-investigate a listed known issue.

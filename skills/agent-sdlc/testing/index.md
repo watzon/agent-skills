@@ -10,14 +10,28 @@ Tests are the feedback loop that stops "looks done" from being accepted. Keep th
 2. **Do not edit existing tests to make them pass.** Agents delete, weaken, or special-case failing tests, especially when spec and tests disagree. If a test looks wrong, stop and report it with evidence. A justified change to an existing test goes in its own commit with the reason.
 3. **Evidence is the command and its output:** what you ran, the exit code, the relevant tail. Never "tests pass".
 4. **A new test must fail when the code is broken.** Would it still pass with the fix reverted, or the core logic inverted? Then it proves nothing.
-5. **Scoped while working, the configured gate at the boundary.** Run the tests for what you changed as you go. Before integration, run the repository's configured integration gate (usually its CI suite), and the wider suite when shared code changes. (Targeted-then-full is inference.)
+5. **Focused while working, the full gate once at the end.** Run only the tests that cover the change: the changed files, their package, or related test files. If the repo has an affected-tests mode, use it. Run the configured integration gate (usually its CI suite) once, before handoff or merge, not per slice or per fix round. Shared code changed: run the wider suite then too.
 6. **Green is not correct.** Check behavior against each acceptance criterion. Exercise the real feature path where you can; mocked tests do not prove the user path works.
+7. **Low parallelism.** Cap test workers at a few (house default: 2 to 4). Never default to all cores or a high fixed count. Several agents often share one machine, and full-parallel runs can exhaust its memory and stall them all.
+
+## Gates by change type
+
+The lead picks the row and states it in the brief; a single agent picks its own. Unsure: take the stricter row. Rows are a house default (inference).
+
+| Change | Gates that run |
+|---|---|
+| Docs, comments (T0) | Link or format check, if the repo has one. No local test run; CI runs as configured. |
+| Styling, tokens, UI copy (T0 to T1) | Lint, typecheck, and build for the touched package; focused tests for touched components; one look at each changed screen. |
+| Small logic (T1) | Typecheck, lint, focused tests, the repro test. |
+| Shared code, interfaces, security-sensitive (T2 to T3) | The above, plus the package or affected suite, an integration test on the changed path, negative tests at T3. |
+| Release or merge to trunk | The full configured gate, once, on the combined result. |
 
 ## For whoever sets up the repo
 
 - Enforce must-run checks (tests, typecheck, lint) in a hook or CI, not by instruction. See [harness/index.md](../harness/index.md).
 - Block agent edits to existing tests with a deny rule or a CI diff check that flags deleted or weakened assertions.
-- Name the scoped test command and the full-suite trigger in the instruction file. Do not write "always run tests" there: generic instructions like that have been reported to backfire.
+- Name the focused test command, any affected-tests mode, the worker cap, and the full-suite trigger in the instruction file.
+- Keep the known-issues list (below) where agents read it: a repo file or the project notes. Do not write "always run tests" there: generic instructions like that have been reported to backfire.
 
 ## Which tests earn their keep
 
@@ -38,9 +52,14 @@ Bugs, contracts, and critical paths are the clearest cases for a new test; other
 
 Do not require test-driven development inside the agent loop. One small experiment found no quality gain at about 3 to 8.5 times the tokens, and agents skipped or faked the red step. Use red/green when a person reviews the failing test, or when acceptance criteria are written as tests ([spec/index.md](../spec/index.md)). Either way, see each new test fail before the implementation exists.
 
-## Flaky tests
+## Flaky and known-failing checks
 
 Quarantine and track a flaky test. Do not retry until green; that hides the signal. (Inference.)
+
+The project keeps a short known-issues list. Each entry: the check, its signature (test name plus error text), how to confirm it, and an owner.
+- A failure that matches a listed signature: confirm it once, note "known: <entry>", and move on. Do not re-investigate it.
+- A failure that matches no entry is a real finding, even if it looks flaky.
+- Report anything new beside a known failure. The list never excuses skipping a check.
 
 ## Done when
 
@@ -48,3 +67,5 @@ Quarantine and track a flaky test. Do not retry until green; that hides the sign
 - [ ] No existing test was deleted, weakened, or skipped; any change has its own commit and reason.
 - [ ] Each new test fails with the change reverted.
 - [ ] Each acceptance criterion has a test or a recorded command, with output captured.
+- [ ] Runs while working were focused and low-parallelism; the full gate ran once, at the end.
+- [ ] Each failure is matched to a known-issues entry by signature or reported as a finding.

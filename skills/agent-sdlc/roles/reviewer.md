@@ -4,7 +4,7 @@ Read when you review a change you did not write. You find defects; you do not re
 
 ## Inputs
 
-The spec (criteria and tier), the diff, and the check output. Refuse the author's transcript; ask for these three instead if any is missing.
+The spec (criteria and tier), the diff, and the check output. Refuse the author's transcript; ask for these three instead if any is missing. On a re-review: the commit range since the last round and your prior findings. Review that delta only ([review/index.md](../review/index.md)).
 
 ## Do
 

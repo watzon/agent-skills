@@ -18,7 +18,7 @@ Read when setting up hooks, CI, permissions, or sandboxing for agents, or before
 The order and items are engineering defaults, not measured findings (inference).
 
 1. Formatter, linter, typechecker: one command each, required in CI. Prove a violation turns CI red.
-2. Tests required on the default branch, with a documented scoped command.
+2. Tests required on the default branch, with a documented focused command, any affected-tests mode, and a worker cap. A known-issues list (check, signature, owner) where agents read it ([testing/index.md](../testing/index.md)).
 3. Anti-gaming: CI config owned by named people; CI changes only in a dedicated change with a reason; a diff check that flags deleted or weakened test assertions.
 4. Secret scanning on every change.
 5. Dependency-direction or import rules as a CI check for layered code. On legacy code, baseline existing violations and fail only on new ones.

@@ -7,7 +7,7 @@ Read when work could be split across agents, or before handing any task to anoth
 1. **One agent by default.** Add workers only when the work is independent, parallel, and too big for one context. Multi-agent setups help on parallel work and hurt on sequential work, and they cost far more tokens. Most coding has fewer parallel parts than research.
 2. **Delegate to protect context.** The main reason to hand off is to keep exploration out of your own context and get back a short result.
 3. **One writer.** One agent writes a given file or module at a time. Parallelize reading, searching, reviewing, and verifying freely. Parallel writers make conflicting hidden choices even when the text merges cleanly. Split writing only along disjoint files, each claimed by one worker.
-4. **Every brief is complete.** The worker sees none of your context. It gets the objective, the output format, the tools and sources to use or avoid, and the task boundary, plus the done-when check and the decisions already made ([brief.md](brief.md)).
+4. **Every brief is complete.** The worker sees none of your context. It gets the objective, the output format, the tools and sources to use or avoid, and the task boundary, plus the done-when check, the gate row, and the decisions already made ([brief.md](brief.md)). Complete is not long: point to project notes instead of restating them.
 5. **Right amount of context.** Writers get the full decision record. Read-only workers get the question and its constraints. (The split is inference.) Point to files and commits for anything that must be exact; summaries lose detail.
 6. **Results come back as files.** Workers write output to a file and return the path and a short summary. Failed attempts: one line each.
 7. **Accept evidence, not claims.** Check the diff, the test output, the repro that now passes.
@@ -15,7 +15,7 @@ Read when work could be split across agents, or before handing any task to anoth
 ## When there are no named roles
 
 - **Generic or identical agents:** put the role in each brief. Give reviewer and verifier a fresh agent with the spec and diff, not the author's context.
-- **One agent only:** play the roles in sequence. Spec, implement, then re-read the diff as a reviewer against the criteria, then run it as a verifier. At T1+, prefer a fresh context for the review.
+- **One agent only:** play the roles in sequence. Spec, implement, then re-read the diff as a reviewer against the criteria, then run it as a verifier. At T1+, prefer a fresh context for the review. Apply the same savings to your own checks: focused tests while working, re-check only what changed since your last check, full gate once at the end ([testing/index.md](../testing/index.md)).
 - A weaker agent often does not know when to escalate. Every brief states its stop rule.
 
 ## Splitting
@@ -32,6 +32,7 @@ Read when work could be split across agents, or before handing any task to anoth
 - Parallel writers on shared code.
 - Assuming the worker shares your state, or that it will report discoveries without being asked.
 - Retry loops with no cap.
+- A cold, full re-verify after every fix round, or verifying each stacked slice while earlier ones still change.
 - A verifier that only reads the author's report.
 
 ## Done when
