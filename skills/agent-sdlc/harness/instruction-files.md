@@ -7,7 +7,7 @@ Agents follow these files even when they are stale and the code disagrees, and t
 ## Rules
 
 1. **Only what the agent cannot learn from the code and would need.** For each line ask: could it find this by reading the code, and would it look? If both are yes, cut it.
-2. **Commands first:** build, scoped test, full-suite trigger, lint, typecheck. Exact and copy-pasteable. No "always run tests" boilerplate.
+2. **Commands first:** build, scoped test, integration gate, lint, typecheck. Exact and copy-pasteable. No "always run tests" boilerplate.
 3. **Point to sources; do not copy them.** Copies go stale.
 4. **No repository overview, inventories, dates, or issue numbers.** Do not auto-generate the file.
 5. **Add a rule only after the same mistake repeats.**
@@ -20,7 +20,7 @@ Agents follow these files even when they are stale and the code disagrees, and t
 
 ```
 ## Commands
-<install> / <build> / <test one file> / <full suite, run when shared code changes> / <lint> / <typecheck>
+<install> / <build> / <test one file> / <affected or package suite> / <integration gate, on the final candidate> / <lint> / <typecheck>
 
 ## Conventions the code does not show
 - <one line per fact, with a pointer to the source file>

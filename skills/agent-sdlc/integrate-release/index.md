@@ -7,10 +7,11 @@ Read when merging a branch, combining work from parallel agents, or shipping a c
 1. **Check authority.** Follow the environment's rules on who may merge or push, and where. If you may not merge, stop at a ready branch or pull request and say so.
 2. **One writer per branch or workspace.** Parallel agents read and review; they do not write the same branch.
 3. **Update onto current trunk.** Resolve conflicts by understanding both sides; never by dropping the other side's tests.
-4. **Combine in dependency order:** shared types and interfaces first, then their users, testing the combined result after each merge. (Inference; no source sets a merge order.)
-5. **Run the repository's configured integration gate on the combined result,** not only on each branch alone. (Inference: no source tested full-suite-at-integration against alternatives.)
-6. **Land only** with green checks and zero open blocking findings.
-7. **Auto-merge only in the lowest-risk tier,** with proof and a rollback path. Otherwise a person approves. (Tier design is inference; practice differs, see [SOURCES.md](../SOURCES.md).)
+4. **Combine in dependency order:** shared types and interfaces first, then their users, with focused checks on each intermediate combination. (Inference; no source sets a merge order.)
+5. **Run the configured integration gate on the exact candidate that will land,** not only on each branch alone. If that candidate differs from the one verified at final handoff, satisfy the applicable final-handoff row on it first; this applies to anything that lands on trunk along the way. Gates and reruns follow [testing/index.md](../testing/index.md#which-gates-run-when). (Inference: no source tested full-suite-at-integration against alternatives.)
+6. **Verify stacked work once it is stable.** Each author runs focused checks on its slice. Review and verify the stable combined candidate in full once its branches stop changing, not each slice while earlier ones still move; a change below invalidates the checks above it. (Owner observation plus inference.)
+7. **Land only** with green checks and zero open blocking findings.
+8. **Auto-merge only in the lowest-risk tier,** with proof and a rollback path. Otherwise a person approves. (Tier design is inference; practice differs, see [SOURCES.md](../SOURCES.md).)
 
 ## Parallel workspaces
 
@@ -36,7 +37,8 @@ Each session does one unit, commits with a clear message, updates the progress f
 ## Done when
 
 - [ ] You had authority to land, or stopped at a ready branch and reported it.
-- [ ] The integration gate passed on the combined result, with output captured.
+- [ ] The integration gate passed on the exact candidate that landed, with output captured; if it differed from the final-handoff candidate, the applicable row passed on it too, and anything landed earlier did the same.
 - [ ] No open blocking findings.
+- [ ] Stacked work was verified in full as a combined candidate after its branches stopped changing.
 - [ ] Workspaces you created are removed or listed, with no unapplied commits lost.
 - [ ] User-facing changes have a changelog line and rollback steps.

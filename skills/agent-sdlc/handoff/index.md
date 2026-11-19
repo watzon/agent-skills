@@ -6,7 +6,7 @@ Read when declaring work done, reporting to a coordinator or person, or judging 
 
 - Each acceptance criterion maps to code and a test or recorded command.
 - Bugs have a repro test that failed before the fix.
-- Tests, typecheck, and lint ran, with the commands and output shown.
+- The selected row's gates ran on the final candidate, plus any required hooks and CI, with the commands and output shown ([testing/index.md](../testing/index.md)).
 - Review done at the tier's depth; no open blocking findings.
 - The diff stays inside the spec. Docs and comments touched by the change are still true.
 - The anti-slop sweep ran on the diff, with output ([anti-slop/index.md](../anti-slop/index.md)).

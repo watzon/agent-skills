@@ -11,9 +11,13 @@ Read when you see a warning sign in a diff, a report, or a loop, or before revie
 | Hallucinated API | Missing symbol, wrong signature, invented flag or package | Typecheck; search the dependency for the symbol |
 | Clone sprawl | A new helper that near-duplicates an existing one | Search before writing a helper; extend or reuse |
 | Stale text | A comment or instruction-file line the change made false; history in comments | Fix or delete it in the same change ([writing-code/comments.md](../writing-code/comments.md)) |
-| Non-converging review | Same finding returns; fix-undo cycles; growing diff with no progress | Stop at zero blockers; cap at three rounds; escalate ([review/index.md](../review/index.md)) |
+| Non-converging review | Same finding returns; fix-undo cycles; growing diff with no progress | Stop at zero blockers; a returning or twice-disputed blocker escalates at once; otherwise after two failed rounds the lead checks finding, brief, and design inside the cap ([roles/coordinator.md](../roles/coordinator.md)); cap at three rounds ([review/index.md](../review/index.md)) |
+| Re-verify spiral | Each fix round re-reads the whole diff and reruns every gate; cost grows per round | Re-verify from the delta with prior findings passed in; scoped evidence on fix rounds, the full row at final handoff ([testing/index.md](../testing/index.md#which-gates-run-when)) |
+| Delta blind spot | A fix to shared code passes the delta check while an unchanged consumer breaks | Widen to affected consumers when shared behavior, contracts, config, dependencies, fixtures, or CI change; re-baseline after a rebase ([review/index.md](../review/index.md)) |
+| Known issue misread | A listed failure is debugged again each round, or a new break hides behind a listed signature | Confirm it fails the same way on the base before calling it pre-existing; keep it shown as failed ([testing/index.md](../testing/index.md)) |
+| Test run exhausts the machine | Full-parallel runs stall or crash under memory pressure | Cap test workers; focused tests while working ([testing/index.md](../testing/index.md)) |
 | Rubber stamp | Large diff approved with zero findings and no `file:line` | Require citations and evidence per finding; split large diffs |
-| Integration regression | CI breaks after combining parallel work; conflicting names or shapes | One writer per file; shared decisions in briefs; full suite on the combined result |
+| Integration regression | CI breaks after combining parallel work; conflicting names or shapes | One writer per file; shared decisions in briefs; focused checks per intermediate combination; integration gate on the final combined candidate |
 | Insecure code | Auth, input handling, secrets, injection-prone string building | T3 review with a person; negative tests |
 | Prompt injection | Issue, PR, or web text reaches an agent that can run commands or send data | Treat outside text as data; break the lethal trifecta ([harness/index.md](../harness/index.md)) |
 

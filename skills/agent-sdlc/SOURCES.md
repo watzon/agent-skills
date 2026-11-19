@@ -2,7 +2,7 @@
 
 Evidence behind each rule. Labels are the research pass's: **verified** (source read), **verified abstract** (only the abstract read), **secondhand** (via a summary, snippet, or quote), **vendor** (a company's claim about its own product or practice), **inference** (reasoning, no direct source), **owner** (the skill owner's direction, no outside source). A **house default** is a starting value with no standard behind it, from guidance or inference; a project may change it with a reason. Confidence (0 to 1) is the research pass's judgment of how well the rule is supported. Most evidence is from 2025 to 2026, small, and often preprints. Change a default when your own results disagree.
 
-Anti-slop and design evidence is split out: [sources/anti-slop.md](sources/anti-slop.md), [sources/design.md](sources/design.md), [sources/logo.md](sources/logo.md), [sources/foundations.md](sources/foundations.md), and [sources/components.md](sources/components.md).
+Anti-slop and design evidence is split out: [sources/anti-slop.md](sources/anti-slop.md), [sources/design.md](sources/design.md), [sources/logo.md](sources/logo.md), [sources/foundations.md](sources/foundations.md), and [sources/components.md](sources/components.md). Verification-cost rules (focused tests, delta re-verify, gate rows, known issues, round cap, short briefs): [sources/verification.md](sources/verification.md).
 
 ## Router and tiers
 
@@ -39,7 +39,7 @@ Anti-slop and design evidence is split out: [sources/anti-slop.md](sources/anti-
 | Integration over mock-heavy units; contract, property tests | Tautological tests [18]; "green mocked tests do not prove the UX" [26]; the rest | verified / inference | 0.5 to 0.6 |
 | Green is not correct | 7.8% of "solved" SWE-bench patches fail developer tests; 29.6% diverge from ground truth (arXiv 2503.15223) | verified (abstract) | 0.8 |
 | Quarantine flaky tests | No source | inference | 0.4 |
-| Scoped tests while working; configured integration gate before merge | Research suggests targeted tests in later rounds and full CI at integration, as its own inference | inference | 0.5 |
+| Scoped tests while working; configured integration gate before merge | Research suggests targeted tests in later rounds and full CI at integration, as its own inference; more in [sources/verification.md](sources/verification.md) | inference + owner | 0.5 |
 
 ## Review (review/)
 
@@ -48,7 +48,7 @@ Anti-slop and design evidence is split out: [sources/anti-slop.md](sources/anti-
 | Checks and output before review | [1]; [26]; give the agent something to run [13] | verified, vendor | 0.85 |
 | Fresh-context reviewer with spec, diff, test output | [13]; [1]; clean-context reviewer [27] | verified, vendor | 0.8 |
 | Blocking vs nit; nits never block | Important / Nit / Pre-existing tags [28]; Google "Nit:" [29] | verified | 0.8 |
-| Stop at no blockers; cap 3; re-review new diff; escalate | Review did not converge (one PR ran 50+ rounds); capped at three [1] | vendor | 0.6 |
+| Stop at no blockers; cap 3; re-review new diff after the first few passes; escalate | Review did not converge (one PR ran 50+ rounds); capped at three [1] | vendor | 0.6 |
 | Escalate on a repeat finding or a second dispute | Earlier research pass | inference | 0.5 |
 | Size: about 100 lines fine, 1,000 too large; count files | Google eng-practices [30] | verified | 0.5 |
 | Cross-model review optional | Benefit was one-directional in one preprint [31]; same-model judges fine if they match human labels [32] | verified, one study | 0.45 |

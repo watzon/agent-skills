@@ -31,7 +31,7 @@ principles/              design.md, operations.md
 failure-modes/           index.md
 anti-slop/               index.md (pre-handoff sweep), copy.md, product.md
 design/                  index.md (process, scope, report), floor-checks.md, brand.md, logo.md, logo-deliverables.md, mascot.md, foundations.md, components.md
-sources/                 anti-slop.md, design.md, logo.md, foundations.md, components.md (evidence split out of SOURCES.md)
+sources/                 anti-slop.md, design.md, logo.md, foundations.md, components.md, verification.md (evidence split out of SOURCES.md)
 ```
 
 ## Evidence

@@ -15,7 +15,7 @@ Spec → write code → test → review and verify → integrate → hand off. S
 | Tier | Examples | Spec | Tests | Review | Human |
 |---|---|---|---|---|---|
 | T0 | Typo, docs, comment | None | Existing checks | Checks only | No |
-| T1 | Local bug fix, internal refactor | Intent + criteria | Repro test per bug | One fresh-context review | No |
+| T1 | Local bug fix, internal refactor | Intent + criteria | Repro test per bug | One fresh-context review | No by default; see the solo fallback in [review](review/index.md) |
 | T2 | Public interface, data shape, concurrency, multi-file | + design note | + integration test on the changed path | Fresh-context review against the spec | One person, where available |
 | T3 | Auth, permissions, money, personal data, migrations, deletes, CI, release | + design note | + negative tests | Fresh-context review, security focus | Required |
 
@@ -60,6 +60,7 @@ Unsure: go one tier up. The tiers are inference built on one vendor's practice (
 | Writing UI text, docs, or reports | [anti-slop/copy.md](anti-slop/copy.md) |
 | Adding compatibility code, flags, settings, placeholders, or shown numbers | [anti-slop/product.md](anti-slop/product.md) |
 | Writing tests or proving a change works | [testing/index.md](testing/index.md) |
+| Choosing which gates run, or re-verifying after a fix | [testing/index.md](testing/index.md), [review/index.md](review/index.md) |
 | Reviewing a diff, or deciding review is done | [review/index.md](review/index.md), [review/checklist.md](review/checklist.md) |
 | Splitting work or briefing another agent | [delegation/index.md](delegation/index.md), [delegation/brief.md](delegation/brief.md) |
 | Merging, combining parallel work, or releasing | [integrate-release/index.md](integrate-release/index.md) |
@@ -69,4 +70,4 @@ Unsure: go one tier up. The tiers are inference built on one vendor's practice (
 | Writing or fixing the project instruction file (always-loaded agent instructions) | [harness/instruction-files.md](harness/instruction-files.md) |
 | Auditing a repo for agent work | [harness/audit.md](harness/audit.md) |
 
-Every claim behind these files, with its label and confidence: [SOURCES.md](SOURCES.md), [sources/anti-slop.md](sources/anti-slop.md), [sources/design.md](sources/design.md), [sources/logo.md](sources/logo.md), [sources/foundations.md](sources/foundations.md), [sources/components.md](sources/components.md).
+Every claim behind these files, with its label and confidence: [SOURCES.md](SOURCES.md), [sources/anti-slop.md](sources/anti-slop.md), [sources/design.md](sources/design.md), [sources/logo.md](sources/logo.md), [sources/foundations.md](sources/foundations.md), [sources/components.md](sources/components.md), [sources/verification.md](sources/verification.md).

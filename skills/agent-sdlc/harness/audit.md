@@ -4,7 +4,7 @@ Read when asked to audit a repository's readiness for agent-written changes. Not
 
 ## Gather facts first
 
-Build commands; CI system and required checks; branch protection; how to run a scoped test; agent instruction files; ownership files; dependency rules; secret scanning; recent agent-heavy pull requests (size, test diffs, CI edits).
+Build commands; CI system and required checks; branch protection; how to run a focused test, any affected-tests mode, and the test worker cap; the known-issues list; agent instruction files; ownership files; dependency rules; secret scanning; recent agent-heavy pull requests (size, test diffs, CI edits).
 
 ## Scorecard
 
@@ -27,6 +27,7 @@ Score each area **M** missing, **W** weak, **S** solid. Cite a path or evidence 
 - Can a feature change weaken CI without a separate, approved change?
 - Do tests fail when the production logic is inverted?
 - Does the instruction file claim rules that CI does not enforce?
+- Can an agent run only the tests for its change, at low parallelism, and find the known-failing checks without asking?
 - Can an agent that reads issues or web pages also reach secrets and send data out?
 
 ## Severity

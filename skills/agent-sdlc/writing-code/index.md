@@ -32,5 +32,5 @@ Read when writing or changing code. Written for the implementer. Comments have t
 - [ ] Every acceptance criterion has code that implements it, and nothing else was added.
 - [ ] No new helper duplicates an existing one; no orphaned code is left.
 - [ ] No unrelated edits; cleanup, if any, is in its own commit.
-- [ ] Build, lint, and typecheck pass, with output captured.
+- [ ] The applicable checks from the selected gate row pass, with output captured.
 - [ ] You re-read the whole diff, including comments, before handing off.
